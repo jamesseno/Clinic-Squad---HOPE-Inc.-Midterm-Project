@@ -1,0 +1,1 @@
+# Clinic-Squad---HOPE-Inc.-Midterm-Project
