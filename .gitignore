@@ -1,0 +1,17 @@
+node_modules/
+.next/
+next-env.d.ts
+out/
+build/
+coverage/
+*.tsbuildinfo
+
+# Keep local credentials out of version control; commit only .env.example.
+.env*
+!.env.example
+
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+.vercel/
