@@ -7,6 +7,15 @@ This project uses the team's hosted Supabase project. Docker and a local Supabas
 - Node.js 20 or newer
 - Access to the team's Supabase project
 
+## Database migrations
+
+Supabase migration files are in `supabase/migrations/` and are applied in timestamp order. The initial migrations establish the HOPE business tables and the access-control schema:
+
+- `20261118_hope_base_tables_and_sample_data.sql` creates the base business tables and sample records.
+- `20261119084800_app_user_roles_modules_and_permissions.sql` creates auth-linked user profiles, roles, modules, the rights catalogue, and soft-deletable user permissions. It enables Row Level Security on these tables.
+
+Role, module, and right catalogue records are provided by a separate seed migration. Review migrations before applying them to the shared Supabase project.
+
 ## First-time setup
 
 From the repository root:
