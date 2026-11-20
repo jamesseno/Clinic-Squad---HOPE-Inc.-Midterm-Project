@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#faf8f3">
+    <meta name="description" content="Sprint 1 high-fidelity mockups and developer handoff preview for the Hope ERP login, register, main page, user management, and rights dialog.">
+    <title>S1-UIX-04 Hi-fi Mockups | Hope ERP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="s1-uix-04.css">
+    <script src="s1-uix-04.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to mockup content</a>
+
+    <!-- Prototype chrome. Deliberately distinct from the product UI; not a production component. -->
+    <div class="preview-bar" role="group" aria-label="Prototype preview controls">
+      <span class="preview-bar__brand">S1-UIX-04 <span>hi-fi preview</span></span>
+      <nav class="preview-bar__views" aria-label="Mockup views">
+        <button type="button" data-preview-view="login" aria-current="true">Login</button>
+        <button type="button" data-preview-view="register">Register</button>
+        <button type="button" data-preview-view="mainpage">Main page</button>
+        <button type="button" data-preview-view="users">User management</button>
+        <button type="button" data-preview-view="rights">Rights dialog</button>
+      </nav>
+      <label class="preview-bar__role" for="preview-role">Role
+        <select id="preview-role">
+          <option value="superadmin" selected>Superadmin</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+      </label>
+      <div class="preview-bar__states" id="preview-states">
+        <div class="state-group" data-state-for="login" aria-label="Login states">
+          <button type="button" data-preview-state="default" aria-pressed="true">Default</button>
+          <button type="button" data-preview-state="invalid" aria-pressed="false">Error</button>
+          <button type="button" data-preview-state="pending" aria-pressed="false">Pending</button>
+          <button type="button" data-preview-state="blocked" aria-pressed="false">Blocked</button>
+          <button type="button" data-preview-state="loading" aria-pressed="false">Loading</button>
+        </div>
+        <div class="state-group" data-state-for="register" aria-label="Register states" hidden>
+          <button type="button" data-preview-state="default" aria-pressed="true">Default</button>
+          <button type="button" data-preview-state="validation" aria-pressed="false">Validation</button>
+          <button type="button" data-preview-state="duplicate" aria-pressed="false">Duplicate</button>
+          <button type="button" data-preview-state="loading" aria-pressed="false">Loading</button>
+          <button type="button" data-preview-state="success" aria-pressed="false">Success</button>
+        </div>
+        <div class="state-group" data-state-for="mainpage" aria-label="Main page states" hidden>
+          <button type="button" data-preview-state="default" aria-pressed="true">Default</button>
+          <button type="button" data-preview-state="no-modules" aria-pressed="false">No modules</button>
+        </div>
+        <div class="state-group" data-state-for="users" aria-label="User management states" hidden>
+          <button type="button" data-preview-state="default" aria-pressed="true">Default</button>
+          <button type="button" data-preview-state="loading" aria-pressed="false">Loading</button>
+          <button type="button" data-preview-state="empty" aria-pressed="false">Empty</button>
+        </div>
+        <div class="state-group" data-state-for="rights" aria-label="Rights dialog states" hidden>
+          <button type="button" data-preview-state="default" aria-pressed="true">Default</button>
+          <button type="button" data-preview-state="partial" aria-pressed="false">Partial</button>
+          <button type="button" data-preview-state="saving" aria-pressed="false">Saving</button>
+          <button type="button" data-preview-state="error" aria-pressed="false">Error</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="prototype-main" id="main-content">
+      <!-- 1. LOGIN -->
+      <section class="auth-view" id="view-login" data-panel="login" aria-labelledby="login-title">
+        <div class="auth-layout">
+          <div class="auth-story">
+            <a class="brand" href="#main-content" aria-label="Hope, Inc. home">
+              <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none">
+                  <rect x="4.5" y="4.5" width="39" height="39" rx="14" fill="#F6F2E9" stroke="#D8C49B"/>
+                  <path d="M16 31V20m16 11V20M16 26h16m-8-6v-2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M24 18c-2.8-4.1-6.2-4.4-8.1-4.1.3 3.5 3.2 5.9 8.1 6.1m0-2c2.8-4.1 6.2-4.4 8.1-4.1-.3 3.5-3.2 5.9-8.1 6.1" stroke="#71896D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="24" cy="11.5" r="1.2" fill="#B88D53"/>
+                </svg>
+              </span>
+              <span class="brand-name">hope<span>.</span></span>
+            </a>
+            <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> YOUR WORKSPACE IS WAITING</p>
+            <h1>Good work starts with <span>a clear view.</span></h1>
+            <p class="auth-story__copy">Sign in to pick up where your team left off. Access is managed by your organization.</p>
+            <div class="assurance">
+              <span class="assurance__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.9 8.1 7 10 4.1-1.9 7-5.3 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+              </span>
+              <span><strong>Secure access for your team</strong><small>Pending and blocked accounts cannot sign in.</small></span>
+            </div>
+            <p class="auth-story__footnote">HOPE ERP · Sprint 1 · Hi-fi mockup S1-UIX-04</p>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-card__head">
+              <span class="auth-step">WELCOME BACK</span>
+              <span class="auth-card__lock" aria-hidden="true">◈</span>
+            </div>
+            <h2 id="login-title" tabindex="-1">Sign in to Hope</h2>
+            <p class="auth-intro">Welcome back. Let's get you to work.</p>
+            <form class="auth-form" id="login-form" novalidate>
+              <div class="field">
+                <label class="field-label" for="login-email">Email address or username</label>
+                <div class="input-wrap">
+                  <input id="login-email" name="email" type="text" autocomplete="username" placeholder="name@example.com or username" aria-describedby="login-email-error" required>
+                </div>
+                <p class="field-error" id="login-email-error" hidden></p>
+              </div>
+              <div class="field">
+                <div class="field-row">
+                  <label class="field-label" for="login-password">Password</label>
+                  <button class="link-button" type="button" data-toast="Password reset is covered by the S1-UIX-02 wireframes.">Forgot password?</button>
+                </div>
+                <div class="input-wrap">
+                  <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" aria-describedby="login-password-error" required>
+                  <button class="password-toggle" type="button" data-toggle-password="login-password" aria-label="Show password" aria-pressed="false">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10c2-3.1 4.6-4.7 7.5-4.7S15.5 6.9 17.5 10c-2 3.1-4.6 4.7-7.5 4.7S4.5 13.1 2.5 10Z"/><circle cx="10" cy="10" r="2"/></svg>
+                  </button>
+                </div>
+                <p class="field-error" id="login-password-error" hidden></p>
+              </div>
+              <label class="check-option"><input type="checkbox" name="remember"><span class="check-box" aria-hidden="true"></span><span>Remember me</span></label>
+              <button class="button button-primary button-block" type="submit">
+                <span class="button-label">Log in</span><span class="button-spinner" aria-hidden="true"></span><span class="button-arrow" aria-hidden="true">→</span>
+              </button>
+              <p class="form-feedback" id="login-feedback" role="status" aria-live="polite" hidden></p>
+            </form>
+            <p class="auth-switch">New to Hope? <button type="button" class="link-button" data-preview-view="register">Create an account</button></p>
+            <p class="auth-footnote">Account access is managed by your organization.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. REGISTER -->
+      <section class="auth-view" id="view-register" data-panel="register" aria-labelledby="register-title" hidden>
+        <div class="auth-layout">
+          <div class="auth-story">
+            <a class="brand" href="#main-content" aria-label="Hope, Inc. home">
+              <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none">
+                  <rect x="4.5" y="4.5" width="39" height="39" rx="14" fill="#F6F2E9" stroke="#D8C49B"/>
+                  <path d="M16 31V20m16 11V20M16 26h16m-8-6v-2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M24 18c-2.8-4.1-6.2-4.4-8.1-4.1.3 3.5 3.2 5.9 8.1 6.1m0-2c2.8-4.1 6.2-4.4 8.1-4.1-.3 3.5-3.2 5.9-8.1 6.1" stroke="#71896D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="24" cy="11.5" r="1.2" fill="#B88D53"/>
+                </svg>
+              </span>
+              <span class="brand-name">hope<span>.</span></span>
+            </a>
+            <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> REQUEST ACCESS</p>
+            <h1>Bring your team into <span>one workspace.</span></h1>
+            <p class="auth-story__copy">Start with your details. An administrator reviews each request before access is granted.</p>
+            <div class="assurance">
+              <span class="assurance__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.9 8.1 7 10 4.1-1.9 7-5.3 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+              </span>
+              <span><strong>New accounts start as pending</strong><small>Roles and rights are assigned after approval.</small></span>
+            </div>
+            <p class="auth-story__footnote">HOPE ERP · Sprint 1 · Hi-fi mockup S1-UIX-04</p>
+          </div>
+
+          <div class="auth-card auth-card--tall">
+            <div class="auth-card__head">
+              <span class="auth-step">GET STARTED</span>
+              <span class="auth-card__lock" aria-hidden="true">◈</span>
+            </div>
+            <h2 id="register-title" tabindex="-1">Create your account</h2>
+            <p class="auth-intro">Tell us who you are. Your organization will confirm access.</p>
+            <form class="auth-form" id="register-form" novalidate>
+              <div class="field">
+                <label class="field-label" for="register-name">Full name</label>
+                <div class="input-wrap">
+                  <input id="register-name" name="name" type="text" autocomplete="name" placeholder="Your full name" aria-describedby="register-name-error" required>
+                </div>
+                <p class="field-error" id="register-name-error" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="register-email">Email address</label>
+                <div class="input-wrap">
+                  <input id="register-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" aria-describedby="register-email-hint register-email-error" required>
+                </div>
+                <p class="field-hint" id="register-email-hint">Use your work email so an administrator can recognize you.</p>
+                <p class="field-error" id="register-email-error" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="register-phone">Phone number <span class="field-optional">(optional)</span></label>
+                <div class="input-wrap">
+                  <input id="register-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 (555) 000-0000">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label" for="register-password">Create a password</label>
+                <div class="input-wrap">
+                  <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" aria-describedby="register-password-hint register-password-error" minlength="8" required>
+                  <button class="password-toggle" type="button" data-toggle-password="register-password" aria-label="Show password" aria-pressed="false">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10c2-3.1 4.6-4.7 7.5-4.7S15.5 6.9 17.5 10c-2 3.1-4.6 4.7-7.5 4.7S4.5 13.1 2.5 10Z"/><circle cx="10" cy="10" r="2"/></svg>
+                  </button>
+                </div>
+                <p class="field-hint" id="register-password-hint">Use at least 8 characters.</p>
+                <p class="field-error" id="register-password-error" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="register-confirm">Confirm password</label>
+                <div class="input-wrap">
+                  <input id="register-confirm" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Re-enter your password" aria-describedby="register-confirm-error" required>
+                  <button class="password-toggle" type="button" data-toggle-password="register-confirm" aria-label="Show password" aria-pressed="false">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10c2-3.1 4.6-4.7 7.5-4.7S15.5 6.9 17.5 10c-2 3.1-4.6 4.7-7.5 4.7S4.5 13.1 2.5 10Z"/><circle cx="10" cy="10" r="2"/></svg>
+                  </button>
+                </div>
+                <p class="field-error" id="register-confirm-error" hidden></p>
+              </div>
+              <label class="check-option check-option--terms"><input type="checkbox" id="register-terms" name="terms" aria-describedby="register-terms-error" required><span class="check-box" aria-hidden="true"></span><span>I agree to the Terms and Privacy Policy.</span></label>
+              <p class="field-error" id="register-terms-error" hidden></p>
+              <button class="button button-primary button-block" type="submit">
+                <span class="button-label">Request account</span><span class="button-spinner" aria-hidden="true"></span><span class="button-arrow" aria-hidden="true">→</span>
+              </button>
+              <p class="form-feedback" id="register-feedback" role="status" aria-live="polite" hidden></p>
+            </form>
+            <p class="auth-switch">Already have an account? <button type="button" class="link-button" data-preview-view="login">Log in</button></p>
+            <p class="auth-footnote">No role or rights are self-assigned at registration.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 + 4. AUTHENTICATED APP SHELL (Main page and User management) -->
+      <div class="app-shell" id="app-shell" hidden>
+        <aside class="sidebar" aria-label="Workspace sidebar">
+          <a class="brand brand--side" href="#main-content" aria-label="Hope dashboard">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <rect x="4.5" y="4.5" width="39" height="39" rx="14" fill="#F6F2E9" stroke="#D8C49B"/>
+                <path d="M16 31V20m16 11V20M16 26h16m-8-6v-2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M24 18c-2.8-4.1-6.2-4.4-8.1-4.1.3 3.5 3.2 5.9 8.1 6.1m0-2c2.8-4.1 6.2-4.4 8.1-4.1-.3 3.5-3.2 5.9-8.1 6.1" stroke="#71896D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="24" cy="11.5" r="1.2" fill="#B88D53"/>
+              </svg>
+            </span>
+            <span class="brand-name">hope<span>.</span></span>
+          </a>
+
+          <nav class="side-nav" aria-label="Workspace navigation">
+            <p class="side-label">WORKSPACE</p>
+            <button class="side-link is-current" type="button" data-preview-view="mainpage" aria-current="page"><span class="side-icon" aria-hidden="true">◫</span> Overview</button>
+            <div class="side-modules" id="side-modules">
+              <button class="side-link" type="button" data-module="customers" data-toast="Customers is a Sprint 2 module destination."><span class="side-icon" aria-hidden="true">CU</span> Customers</button>
+              <button class="side-link" type="button" data-module="products" data-toast="Products is a Sprint 2 module destination."><span class="side-icon" aria-hidden="true">PR</span> Products</button>
+              <button class="side-link" type="button" data-module="human-resources" data-toast="Human Resources is a Sprint 3 module destination."><span class="side-icon" aria-hidden="true">HR</span> Human Resources</button>
+              <button class="side-link" type="button" data-module="sales" data-toast="Sales is a Sprint 4 module destination."><span class="side-icon" aria-hidden="true">SA</span> Sales</button>
+              <button class="side-link" type="button" data-module="reports" data-toast="Reports is a Sprint 4 module destination."><span class="side-icon" aria-hidden="true">RE</span> Reports</button>
+            </div>
+            <p class="side-label side-label--admin" id="admin-nav-label">ADMINISTRATION</p>
+            <button class="side-link admin-only" type="button" data-preview-view="users"><span class="side-icon" aria-hidden="true">◎</span> User management</button>
+            <button class="side-link admin-only" type="button" data-toast="Audit log is a later destination; Sprint 1 only specifies the audit write."><span class="side-icon" aria-hidden="true">≡</span> Audit log</button>
+          </nav>
+
+          <div class="side-footer">
+            <div class="side-user">
+              <span class="avatar" aria-hidden="true">JL</span>
+              <span><strong>Jordan Lee</strong><small id="side-role">Superadmin</small></span>
+            </div>
+            <button class="side-logout" type="button" data-toast="Preview: sign out would end the session and return to Log in.">Log out</button>
+          </div>
+        </aside>
+
+        <div class="app-body">
+          <header class="app-topbar">
+            <p class="breadcrumb" id="breadcrumb">Workspace <span aria-hidden="true">/</span> <strong>Overview</strong></p>
+            <div class="topbar-right">
+              <span class="status-pill"><i aria-hidden="true"></i> All systems operational</span>
+              <span class="topbar-divider" aria-hidden="true"></span>
+              <span class="avatar avatar--top" aria-hidden="true">JL</span>
+              <span class="topbar-name">Jordan Lee <small id="topbar-role">Superadmin</small></span>
+            </div>
+          </header>
+
+          <div class="app-content">
+            <!-- 3. MAIN PAGE -->
+            <section class="page-panel" id="page-main" data-page="mainpage" aria-labelledby="main-title">
+              <div class="page-heading">
+                <div>
+                  <p class="eyebrow">WORKSPACE / OVERVIEW</p>
+                  <h1 id="main-title">Good morning, Jordan</h1>
+                  <p class="subheading">A quick view of your workspace and the work that needs attention.</p>
+                </div>
+                <p class="date-label">SATURDAY, NOVEMBER 21</p>
+              </div>
+
+              <section class="summary-grid" aria-label="Workspace summary">
+                <article class="summary-card">
+                  <span class="summary-label">Active users</span>
+                  <strong>36</strong>
+                  <span class="summary-note">Across your organization</span>
+                </article>
+                <article class="summary-card summary-card--attention admin-only">
+                  <span class="summary-label">Pending approvals</span>
+                  <strong>04</strong>
+                  <span class="summary-note">Users waiting for access</span>
+                </article>
+                <article class="summary-card">
+                  <span class="summary-label">Modules available</span>
+                  <strong id="module-count">05</strong>
+                  <span class="summary-note">Based on your assigned rights</span>
+                </article>
+                <article class="summary-card">
+                  <span class="summary-label">Last data sync</span>
+                  <strong class="summary-time">9:42 <small>AM</small></strong>
+                  <span class="summary-note">Today · just now</span>
+                </article>
+              </section>
+
+              <div class="dashboard-layout">
+                <section class="content-card" aria-labelledby="modules-title">
+                  <div class="card-heading">
+                    <div>
+                      <p class="eyebrow">YOUR WORKSPACE</p>
+                      <h2 id="modules-title">Modules</h2>
+                    </div>
+                    <button class="text-button" type="button" data-toast="Tiles are filtered by server-side rights in the connected app." >Rights-aware</button>
+                  </div>
+                  <div class="module-grid" id="module-grid">
+                    <a class="module-tile" href="#main-content" data-module="customers" data-toast="Customers is a Sprint 2 module destination."><span class="module-tile__icon" aria-hidden="true">CU</span><span><strong>Customers</strong><small>People and account records</small></span><span class="module-tile__arrow" aria-hidden="true">→</span></a>
+                    <a class="module-tile" href="#main-content" data-module="products" data-toast="Products is a Sprint 2 module destination."><span class="module-tile__icon" aria-hidden="true">PR</span><span><strong>Products</strong><small>Catalog and inventory</small></span><span class="module-tile__arrow" aria-hidden="true">→</span></a>
+                    <a class="module-tile" href="#main-content" data-module="human-resources" data-toast="Human Resources is a Sprint 3 module destination."><span class="module-tile__icon" aria-hidden="true">HR</span><span><strong>Human Resources</strong><small>Employee information</small></span><span class="module-tile__arrow" aria-hidden="true">→</span></a>
+                    <a class="module-tile" href="#main-content" data-module="sales" data-toast="Sales is a Sprint 4 module destination."><span class="module-tile__icon" aria-hidden="true">SA</span><span><strong>Sales</strong><small>Sales activity and results</small></span><span class="module-tile__arrow" aria-hidden="true">→</span></a>
+                    <a class="module-tile" href="#main-content" data-module="reports" data-toast="Reports is a Sprint 4 module destination."><span class="module-tile__icon" aria-hidden="true">RE</span><span><strong>Reports</strong><small>Shared business reporting</small></span><span class="module-tile__arrow" aria-hidden="true">→</span></a>
+                  </div>
+                  <div class="empty-state" id="no-modules-state" hidden>
+                    <span class="empty-icon" aria-hidden="true">—</span>
+                    <h3>No modules assigned</h3>
+                    <p>Ask an administrator to review your account rights. This is a valid state, not an error.</p>
+                    <button class="button button-secondary" type="button" data-preview-state="default">Restore preview modules</button>
+                  </div>
+                </section>
+
+                <aside class="content-card utility-card admin-only" aria-labelledby="attention-title">
+                  <div class="card-heading">
+                    <div>
+                      <p class="eyebrow">QUICK ACTIONS</p>
+                      <h2 id="attention-title">Needs your attention</h2>
+                    </div>
+                  </div>
+                  <div class="utility-item">
+                    <span class="utility-count">04</span>
+                    <span><strong>Pending user approvals</strong><small>Review new account requests</small></span>
+                    <button class="row-arrow" type="button" data-preview-view="users" aria-label="Review pending users">→</button>
+                  </div>
+                  <div class="utility-item">
+                    <span class="utility-count utility-count--neutral">02</span>
+                    <span><strong>Recent access changes</strong><small>Rights updated this week</small></span>
+                    <button class="row-arrow" type="button" data-toast="Access history is recorded in audit_log in the connected app." aria-label="View recent access changes">→</button>
+                  </div>
+                  <div class="system-status">
+                    <span class="system-status__dot" aria-hidden="true"></span>
+                    <span><strong>Workspace status</strong><small>Data and permissions are up to date</small></span>
+                  </div>
+                  <button class="button button-primary button-block" type="button" data-preview-view="users">Manage users <span aria-hidden="true">→</span></button>
+                </aside>
+              </div>
+              <p class="prototype-note">Hi-fi preview · sample content only · no authentication, authorization, or persistence is performed.</p>
+            </section>
+
+            <!-- 4. USER MANAGEMENT -->
+            <section class="page-panel" id="page-users" data-page="users" aria-labelledby="users-title" hidden>
+              <div class="page-heading">
+                <div>
+                  <p class="eyebrow">WORKSPACE / ADMINISTRATION</p>
+                  <h1 id="users-title">User management</h1>
+                  <p class="subheading">Review account status and manage access for your organization.</p>
+                </div>
+                <button class="button button-primary" type="button" data-toast="Add User would open the account creation form in the connected app.">+ Add User</button>
+              </div>
+
+              <section class="content-card user-list" aria-label="User list">
+                <div class="list-summary">
+                  <div>
+                    <strong id="result-count">Users</strong>
+                    <span class="list-hint">Manage account status and module rights</span>
+                  </div>
+                  <div class="preview-tools" aria-label="List state previews">
+                    <button class="text-button" type="button" data-preview-state="loading">Preview loading</button>
+                    <button class="text-button" type="button" data-preview-state="empty">Preview empty</button>
+                    <button class="text-button" type="button" id="reset-list">Reset list</button>
+                  </div>
+                </div>
+
+                <div class="status-tabs" role="group" aria-label="Filter users by status">
+                  <button class="status-tab is-selected" type="button" data-status="all" aria-pressed="true">All <span>8</span></button>
+                  <button class="status-tab" type="button" data-status="pending" aria-pressed="false">Pending <span>1</span></button>
+                  <button class="status-tab" type="button" data-status="active" aria-pressed="false">Active <span>5</span></button>
+                  <button class="status-tab" type="button" data-status="blocked" aria-pressed="false">Blocked <span>2</span></button>
+                </div>
+
+                <div class="filter-row">
+                  <label class="search-field">
+                    <span class="sr-only">Search users by name or email</span>
+                    <span aria-hidden="true">⌕</span>
+                    <input id="user-search" type="search" placeholder="Search name or email">
+                  </label>
+                  <label class="filter-control">Role
+                    <select id="role-filter">
+                      <option value="all">All roles</option>
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                      <option value="superadmin">Superadmin</option>
+                    </select>
+                  </label>
+                  <label class="filter-control">Sort by
+                    <select id="sort-order">
+                      <option value="name">Name A–Z</option>
+                      <option value="recent">Recently added</option>
+                      <option value="role">Role</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="table-wrap" id="table-wrap">
+                  <table>
+                    <caption class="sr-only">Organization user accounts</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Last active</th>
+                        <th scope="col"><span class="sr-only">Actions</span></th>
+                      </tr>
+                    </thead>
+                    <tbody id="user-table-body"></tbody>
+                  </table>
+                  <div class="empty-state list-empty-state" id="list-empty-state" hidden>
+                    <span class="empty-icon" aria-hidden="true">⌕</span>
+                    <h3>No users found</h3>
+                    <p id="empty-message">Try another search or clear the selected filters.</p>
+                    <button class="button button-secondary" type="button" id="clear-filters">Clear filters</button>
+                  </div>
+                  <div class="loading-state" id="list-loading-state" hidden role="status" aria-live="polite">
+                    <span class="loading-spinner" aria-hidden="true"></span>
+                    <span>Loading users…</span>
+                    <span class="loading-line" aria-hidden="true"></span>
+                  </div>
+                </div>
+
+                <div class="table-footer">
+                  <label class="page-size">Rows per page
+                    <select id="page-size"><option value="5">5</option><option value="10">10</option></select>
+                  </label>
+                  <span id="pagination-summary">Showing 1–5 of 8 users</span>
+                  <nav class="pagination" id="pagination" aria-label="User list pages"></nav>
+                </div>
+                <p class="scope-note" id="scope-note">Superadmins can manage all accounts. Admins see standard User accounts only; Admin and Superadmin accounts are excluded.</p>
+              </section>
+              <p class="prototype-note">Hi-fi preview · rows and changes are local sample data only.</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 5. RIGHTS DIALOG -->
+    <dialog class="rights-dialog" id="rights-dialog" aria-labelledby="rights-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div>
+            <p class="eyebrow">USER ACCESS</p>
+            <h2 id="rights-title">Manage rights</h2>
+            <p class="dialog-context" id="rights-context">Rights for selected user</p>
+          </div>
+          <button class="icon-button" type="button" aria-label="Close rights dialog" data-close-dialog>×</button>
+        </header>
+
+        <div class="rights-toolbar">
+          <span><strong>Module permissions</strong><small>Choose the actions this user can perform.</small></span>
+          <div class="toolbar-actions">
+            <button class="text-button" type="button" id="select-all-rights">Select all</button>
+            <button class="text-button" type="button" id="clear-all-rights">Clear all</button>
+            <button class="text-button" type="button" id="reset-rights">Reset</button>
+          </div>
+        </div>
+
+        <div class="permission-groups" id="permission-groups"></div>
+
+        <div class="guardrail-notes">
+          <strong>Access guardrails</strong>
+          <ul>
+            <li>Admins can manage standard User accounts only; Admin and Superadmin accounts are not editable.</li>
+            <li>Pending or blocked accounts cannot use module access until active.</li>
+            <li>Zero assigned rights is allowed; the user sees a no-modules message.</li>
+            <li>Every saved change is attributed to the acting manager in <code>audit_log</code>.</li>
+          </ul>
+          <p class="rights-validation" id="rights-validation" role="status" aria-live="polite"></p>
+        </div>
+
+        <footer class="dialog-actions">
+          <button class="button button-secondary" type="button" data-close-dialog>Cancel</button>
+          <button class="button button-primary" type="button" id="save-rights"><span class="button-label">Save rights</span><span class="button-spinner" aria-hidden="true"></span></button>
+        </footer>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>
