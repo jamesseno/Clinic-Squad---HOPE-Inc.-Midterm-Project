@@ -13,8 +13,18 @@ Supabase migration files are in `supabase/migrations/` and are applied in timest
 
 - `20261118_hope_base_tables_and_sample_data.sql` creates the base business tables and sample records.
 - `20261119084800_app_user_roles_modules_and_permissions.sql` creates auth-linked user profiles, roles, modules, the rights catalogue, and soft-deletable user permissions. It enables Row Level Security on these tables.
+- `20261121002205_password_reset_token.sql` adds server-managed, hashed password reset tokens linked to application users.
 
 Role, module, and right catalogue records are provided by a separate seed migration. Review migrations before applying them to the shared Supabase project.
+
+To apply and verify all migrations against a local Supabase database, start the local stack and reset its database from the repository root:
+
+```powershell
+npx --yes supabase@latest start
+npx --yes supabase@latest db reset
+```
+
+`db reset` is destructive to the local database and reapplies every migration. It requires Docker; it does not change the hosted team project.
 
 ## First-time setup
 
