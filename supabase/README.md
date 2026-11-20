@@ -14,8 +14,38 @@ Supabase migration files are in `supabase/migrations/` and are applied in timest
 - `20261118_hope_base_tables_and_sample_data.sql` creates the base business tables and sample records.
 - `20261119084800_app_user_roles_modules_and_permissions.sql` creates auth-linked user profiles, roles, modules, the rights catalogue, and soft-deletable user permissions. It enables Row Level Security on these tables.
 - `20261121002205_password_reset_token.sql` adds server-managed, hashed password reset tokens linked to application users.
+- `20261121005600_role_permission_mapping.sql` adds the role-to-right mapping table.
 
-Role, module, and right catalogue records are provided by a separate seed migration. Review migrations before applying them to the shared Supabase project.
+`seed.sql` is configured as the Supabase seed file. It converges on rerun: it upserts the five core modules, three default roles, and the exact 36-right catalogue, then prunes stale default-role grants. Individual `user_permission` rows are never modified by the seed.
+
+The action names come from the *HOPE Sprint 1 From-Scratch Guide*, section 3.8 (printed pages 12-13): Customer 3, Product 6, Human Resources 13, Sales 7, Reports 7. The guide does not enumerate a default Admin/User role-to-right matrix. The seed therefore grants all 36 rights to Superadmin and no module rights to Admin or User by default; module rights are assigned per user through the Rights dialog. That role-default decision should still be confirmed by the team.
+
+The supplied guide requires deliberately provisioned team Superadmins and one-time password setup, while keeping public signup behavior a separate decision. The team roster has been supplied separately and should be provided to the trusted provisioning script at runtime rather than committed to seed files. Do not put credentials, token values, or service-role keys in seed files or source control.
+
+## Team Superadmin invitations
+
+The repository includes a minimal Next.js invitation callback and password-setting page, plus a trusted, operator-run invitation script. Invitations use Supabase Auth's one-time invite link; the separate `password_reset_token` table is not used for initial account setup. The script uses the service-role key only in the local Node process, sends the invitation via Supabase Auth, and never prints the link or token. It skips any email that already has an Auth user or profile so existing accounts require explicit manual review.
+
+1. Copy `.env.example` to `.env.local` and fill in the project's Supabase URL, anon key, service-role key, and app origin. `.env.local` is ignored by Git. Never use a production service-role key for this workflow unless the team has explicitly approved production provisioning.
+2. Apply the reviewed migrations and seed to an authorized non-production project. Set the Supabase Auth **Site URL** to the app origin and add that origin's `/auth/callback` path to the Auth redirect allow list. For local development, `supabase/config.toml` allows localhost and 127.0.0.1 on port 3000.
+3. Install dependencies and start the app:
+
+   ```powershell
+   npm install
+   npm run dev
+   ```
+
+4. In a separate PowerShell terminal, set the roster only in the current process and run the invitation script. Replace the illustrative entries with the approved team roster; do not save it in a tracked file:
+
+   ```powershell
+   $env:TEAM_SUPERADMINS_JSON = '[{"first_name":"First","last_name":"Member","email":"member@example.com"}]'
+   node --env-file=.env.local scripts/invite-superadmins.mjs
+   Remove-Item Env:\TEAM_SUPERADMINS_JSON
+   ```
+
+5. Supabase Auth emails the one-time invitation link. The recipient opens it, reaches `/auth/callback`, and sets a password at `/set-password`. The link's validity and one-use behavior are managed by Supabase Auth. Configure SMTP and the invite email template in the Supabase project as needed; the default confirmation URL must preserve the redirect URL supplied by the script.
+
+The invitation script sends real emails and creates Auth/profile records. Review the target project and roster before running it. Do not run it against Production merely to test. No invitation has been sent as part of this code change.
 
 To apply and verify all migrations against a local Supabase database, start the local stack and reset its database from the repository root:
 
@@ -25,6 +55,56 @@ npx --yes supabase@latest db reset
 ```
 
 `db reset` is destructive to the local database and reapplies every migration. It requires Docker; it does not change the hosted team project.
+
+For an authorized non-production database where migrations have already been applied, run the seed from PowerShell with a securely configured `SUPABASE_DB_URL` and `psql` installed:
+
+```powershell
+psql "$env:SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f supabase/seed.sql
+```
+
+Run the read-only database verifier against that same authorized database:
+
+```powershell
+psql "$env:SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -f supabase/verify-seed.sql
+```
+
+It raises an exception if the roles, modules, 36 module/action pairs, or default role matrix differ from `seed.sql`, then prints profile counts so the Superadmin roster can be compared with the approved team list. The verifier does not modify data or send emails.
+
+You can also inspect the seeded records in the SQL Editor:
+
+```sql
+SELECT module_code, module_name
+FROM public.module
+ORDER BY display_order;
+
+SELECT m.module_name, count(rc.right_id) AS right_count
+FROM public.module AS m
+LEFT JOIN public.rights_catalog AS rc ON rc.module_id = m.module_id
+GROUP BY m.module_id, m.module_name, m.display_order
+ORDER BY m.display_order;
+
+SELECT r.role_code, count(rp.right_id) AS right_count
+FROM public.app_role AS r
+LEFT JOIN public.role_permission AS rp ON rp.role_id = r.role_id
+GROUP BY r.role_code
+ORDER BY r.role_code;
+
+SELECT count(*) AS total_rights FROM public.rights_catalog;
+```
+
+Expected counts are 36 total rights, 36 for Superadmin, 0 for Admin, and 0 for User by default. Only run this against a database you are authorized to modify; `db push --remote` targets the linked database and can change production.
+
+## Offline verification
+
+The seed catalogue can also be checked without Docker, credentials, or a database:
+
+```powershell
+npm install
+npm run verify:seed
+npm run typecheck
+```
+
+`verify:seed` parses `supabase/seed.sql` and confirms the three roles, five modules, 36 rights, derived role counts, absence of roster/credential material, and the presence of the stale-grant cleanup. It prints `S1-DBA-05 seed verification: PASS` when all checks succeed. See `docs/dba/s1-dba-05-verification.md` for the recorded results of this check.
 
 ## First-time setup
 
