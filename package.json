@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "verify:seed": "node scripts/verify-seed.mjs"
+    "verify:seed": "node scripts/verify-seed.mjs",
+    "verify:registration": "node --env-file=.env.local scripts/verify-registration.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

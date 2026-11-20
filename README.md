@@ -45,4 +45,22 @@ npm run typecheck
 npm run build
 ```
 
+### Registration API
+
+`POST /api/auth/register` creates a Supabase Auth user and a matching
+`public.app_user` row. The row always uses the standard `user` role and
+`account_status = 'pending'`; those values cannot be supplied by the caller.
+
+Set `SUPABASE_SERVICE_ROLE_KEY` in `.env.local` (server-only) before running the
+API or verification script. With the dev server running:
+
+```powershell
+npm run verify:registration
+```
+
+The script registers a throwaway user, checks the pending status, verifies that
+duplicates and unauthorized status changes are rejected, then removes the test
+account. Verification evidence for S1-DEV-02 is in
+[`docs/dev/s1-dev-02-verification.md`](./docs/dev/s1-dev-02-verification.md).
+
 Database migrations and team Supabase setup instructions are in [`supabase/README.md`](./supabase/README.md). Do not push migrations to the hosted database without team review and approval.
