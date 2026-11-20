@@ -1,15 +1,28 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "HOPE account setup",
-  description: "Set a password for your invited HOPE account.",
+  title: "Hope, Inc. | One workspace. Better work.",
+  description:
+    "Bring products, people, sales, and customer relationships together in one clear workspace.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body data-theme="light">{children}</body>
     </html>
   );
 }
