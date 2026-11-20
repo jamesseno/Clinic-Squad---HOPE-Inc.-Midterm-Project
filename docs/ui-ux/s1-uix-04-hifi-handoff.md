@@ -310,7 +310,8 @@ Enforcement follows `app_private.current_role_code()` and `can_manage_user()` pl
 - [x] Lighthouse: accessibility 1.00, best practices 1.00, SEO 1.00 on all five views. Initial contrast and permission-checkbox target-size findings were fixed with `--muted-text` and 24px checkbox targets.
 - [x] `node --check UI/UX/hi-fi/s1-uix-04.js`, `npm run typecheck`, and `npm run lint` pass. Lint reports one pre-existing `no-page-custom-font` warning in `app/layout.tsx`, unrelated to these deliverables.
 - [ ] Responsive breakpoints visually verified at 1120/980/820/400px widths in a resizable browser. The 680px breakpoint was exercised in the available viewport; all six media-query blocks are parsed in the stylesheet.
-- [ ] Linked, non-trivial PR reviewed and approved by a teammate.
+- [x] Non-trivial PR opened: [#138](https://github.com/jamesseno/Clinic-Squad---HOPE-Inc.-Midterm-Project/pull/138) from `feat/issue-17-hifi-handoff` (commit `c210c52`).
+- [ ] PR reviewed and approved by a teammate.
 - [ ] PR merged into `main` after approval.
 
 ### Suggested PR body
