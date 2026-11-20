@@ -1,65 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise Design System - Showcase</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Enterprise Design System</h1>
-    <p>Sprint 1 UI/UX Deliverable: Elegant Color Palette & Core Components</p>
-
-    <!-- Colors Section -->
-    <div class="section">
-      <h2>1. Elegant Color Palette</h2>
-      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
-        <div style="background: var(--purple-primary); color: white; padding: 16px; border-radius: 8px; flex: 1; min-width: 130px; font-weight: 600;">Royal Purple</div>
-        <div style="background: var(--sage-green); color: white; padding: 16px; border-radius: 8px; flex: 1; min-width: 130px; font-weight: 600;">Sage Green</div>
-        <div style="background: var(--gold); color: white; padding: 16px; border-radius: 8px; flex: 1; min-width: 130px; font-weight: 600;">Gold Accent</div>
-        <div style="background: var(--pink-accent); color: white; padding: 16px; border-radius: 8px; flex: 1; min-width: 130px; font-weight: 600;">Pink Accent</div>
-      </div>
-    </div>
-
-    <!-- Typography Section -->
-    <div class="section">
-      <h2>2. Typography Scale</h2>
-      <h1>Enterprise Heading 1</h1>
-      <h2>Enterprise Heading 2</h2>
-      <h3>Enterprise Heading 3</h3>
-      <p>Body text: Clean, professional typography optimized for enterprise dashboards, client portals, and administrative workflows.</p>
-    </div>
-
-    <!-- Core Components Section -->
-    <div class="section">
-      <h2>3. Core Components</h2>
-      
-      <h3>Buttons</h3>
-      <div style="margin-bottom: 24px;">
-        <button class="btn btn-primary">Primary Action</button>
-        <button class="btn btn-gold" style="margin-left: 10px;">Gold Action</button>
-        <button class="btn btn-outline" style="margin-left: 10px;">Outline Action</button>
-      </div>
-
-      <h3>Form Inputs</h3>
-      <div class="form-group">
-        <label class="form-label">Enterprise Account / User Name</label>
-        <input type="text" class="form-input" placeholder="Enter corporate username...">
-      </div>
-
-      <h3>Status & Thematic Badges</h3>
-      <div style="margin-bottom: 24px;">
-        <span class="badge badge-purple">Active Module</span>
-        <span class="badge badge-sage">Verified</span>
-        <span class="badge badge-gold">Pending Review</span>
-        <span class="badge badge-pink">Priority Beta</span>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf8f3">
+    <meta
+      name="description"
+      content="Hope, Inc. brings products, people, sales, and customer relationships together in one clear workspace."
+    >
+    <title>Hope, Inc. | One workspace. Better work.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body data-theme="light">
+    <header class="site-header">
+      <div class="brand-group">
+        <a class="brand" href="#" aria-label="Hope, Inc. home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="4.5" y="4.5" width="39" height="39" rx="14" fill="#F6F2E9" stroke="#D8C49B" />
+              <path d="M16 31V20m16 11V20M16 26h16m-8-6v-2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M24 18c-2.8-4.1-6.2-4.4-8.1-4.1.3 3.5 3.2 5.9 8.1 6.1m0-2c2.8-4.1 6.2-4.4 8.1-4.1-.3 3.5-3.2 5.9-8.1 6.1" stroke="#71896D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="24" cy="11.5" r="1.2" fill="#B88D53" />
+            </svg>
+          </span>
+          <span class="brand-name">hope<span>.</span></span>
+        </a>
+        <div class="theme-switch" role="group" aria-label="Color theme">
+          <button class="theme-option" type="button" data-theme-value="light" aria-pressed="true">
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <circle cx="10" cy="10" r="3.2" />
+              <path d="M10 2.2v1.5m0 12.6v1.5M2.2 10h1.5m12.6 0h1.5M4.5 4.5l1.1 1.1m8.8 8.8 1.1 1.1m0-11-1.1 1.1m-8.8 8.8-1.1 1.1" />
+            </svg>
+            <span>Light</span>
+          </button>
+          <button class="theme-option" type="button" data-theme-value="dark" aria-pressed="false">
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M16.5 12.3A7 7 0 0 1 7.7 3.5a7.1 7.1 0 1 0 8.8 8.8Z" />
+            </svg>
+            <span>Dark</span>
+          </button>
+        </div>
       </div>
 
-      <h3>Alert Banners</h3>
-      <div class="alert alert-purple">System notification: Enterprise token architecture successfully updated.</div>
-      <div class="alert alert-gold">Warning: Quarterly compliance review pending approval.</div>
-    </div>
-  </div>
-</body>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#modules">Platform</a>
+        <a href="#how-it-works">Why Hope</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-login" href="#workspace-access">Log in</a>
+        <button class="button button-small button-dark" type="button" data-open-register>
+          Get started
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M4.5 10h11m-4.5-4.5L15.5 10 11 14.5" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            A BETTER WAY TO WORK
+          </div>
+          <h1 id="hero-title">One clear view of your <span>entire business.</span></h1>
+          <p class="hero-description">
+            Bring your products, people, sales, and customer relationships together.
+            Hope gives your team the clarity to do their best work.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#workspace-access">
+              Explore your workspace
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M4.5 10h11m-4.5-4.5L15.5 10 11 14.5" />
+              </svg>
+            </a>
+            <a class="text-link" href="#modules">
+              Discover the platform
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M10 4.5v11m-4.5-4.5L10 15.5l4.5-4.5" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="hero-proof">
+            <div class="avatar-stack" aria-hidden="true">
+              <span class="avatar avatar-one">J</span>
+              <span class="avatar avatar-two">M</span>
+              <span class="avatar avatar-three">A</span>
+              <span class="avatar avatar-four">S</span>
+            </div>
+            <p><strong>One team, moving forward.</strong><br>Everything important, working together.</p>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Preview of the Hope workspace">
+          <div class="visual-glow"></div>
+          <div class="floating-note note-top">
+            <span class="note-icon note-icon-green" aria-hidden="true">
+              <svg viewBox="0 0 20 20"><path d="m5 10 3.2 3.2L15.5 6" /></svg>
+            </span>
+            <span><strong>All in sync</strong><small>Work moves forward</small></span>
+          </div>
+          <div class="workspace-preview">
+            <div class="preview-topbar">
+              <div class="preview-brand">
+                <span class="preview-mark" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none">
+                    <rect x="4.5" y="4.5" width="39" height="39" rx="14" fill="#F6F2E9" stroke="#D8C49B" />
+                    <path d="M16 31V20m16 11V20M16 26h16m-8-6v-2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M24 18c-2.8-4.1-6.2-4.4-8.1-4.1.3 3.5 3.2 5.9 8.1 6.1m0-2c2.8-4.1 6.2-4.4 8.1-4.1-.3 3.5-3.2 5.9-8.1 6.1" stroke="#71896D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="24" cy="11.5" r="1.2" fill="#B88D53" />
+                  </svg>
+                </span>
+                <span>hope<span class="preview-period">.</span></span>
+              </div>
+              <div class="preview-top-actions">
+                <span class="preview-search">⌕ <span>Search anything</span></span>
+                <span class="preview-user">JD</span>
+              </div>
+            </div>
+            <div class="preview-body">
+              <aside class="preview-sidebar" aria-hidden="true">
+                <span class="sidebar-label">WORKSPACE</span>
+                <span class="sidebar-item sidebar-active"><i class="sidebar-dot dot-purple"></i>Overview</span>
+                <span class="sidebar-item"><i class="sidebar-dot dot-blue"></i>Products</span>
+                <span class="sidebar-item"><i class="sidebar-dot dot-orange"></i>People</span>
+                <span class="sidebar-item"><i class="sidebar-dot dot-pink"></i>Sales</span>
+                <span class="sidebar-item"><i class="sidebar-dot dot-green"></i>Customers</span>
+                <div class="sidebar-bottom">
+                  <span class="sidebar-label">YOUR TEAM</span>
+                  <span class="team-person"><b class="team-avatar team-purple">JD</b> Jordan Davis</span>
+                  <span class="team-person"><b class="team-avatar team-blue">AK</b> Alex Kim</span>
+                </div>
+              </aside>
+              <div class="preview-content">
+                <div class="preview-greeting">
+                  <div>
+                    <span class="preview-date">MONDAY, MAY 19</span>
+                    <h2>Good morning, Jordan <span aria-hidden="true">✦</span></h2>
+                    <p>Here’s what’s happening across your workspace.</p>
+                  </div>
+                  <span class="preview-period-select">This month <span aria-hidden="true">⌄</span></span>
+                </div>
+                <div class="metric-grid">
+                  <div class="metric-card">
+                    <span class="metric-label">Active products</span>
+                    <strong>248</strong>
+                    <span class="metric-change"><b>↗ 12%</b> vs last month</span>
+                    <span class="metric-symbol symbol-purple" aria-hidden="true">▦</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Team members</span>
+                    <strong>36</strong>
+                    <span class="metric-change"><b>↗ 4%</b> vs last month</span>
+                    <span class="metric-symbol symbol-orange" aria-hidden="true">♙</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Sales this month</span>
+                    <strong>$84.2k</strong>
+                    <span class="metric-change"><b>↗ 18%</b> vs last month</span>
+                    <span class="metric-symbol symbol-pink" aria-hidden="true">↗</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Happy customers</span>
+                    <strong>1,204</strong>
+                    <span class="metric-change"><b>↗ 8%</b> vs last month</span>
+                    <span class="metric-symbol symbol-green" aria-hidden="true">♡</span>
+                  </div>
+                </div>
+                <div class="preview-lower">
+                  <div class="chart-card">
+                    <div class="chart-heading">
+                      <div><strong>Business overview</strong><span>Revenue across the year</span></div>
+                      <span class="chart-legend"><i></i>Revenue</span>
+                    </div>
+                    <div class="chart-area" aria-label="Revenue trend chart rising through the year">
+                      <div class="chart-y-labels" aria-hidden="true"><span>$80k</span><span>$60k</span><span>$40k</span><span>$20k</span></div>
+                      <svg viewBox="0 0 360 112" role="img" aria-label="Revenue is trending upward from January to June">
+                        <defs>
+                          <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
+                            <stop offset="0%" stop-color="#725676" stop-opacity=".2" />
+                            <stop offset="100%" stop-color="#725676" stop-opacity="0" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M0 86 C25 77 30 88 58 70 S94 75 119 58 S158 71 181 47 S220 52 241 36 S276 49 300 25 S337 31 360 10 V112 H0Z" fill="url(#chartFill)" />
+                        <path d="M0 86 C25 77 30 88 58 70 S94 75 119 58 S158 71 181 47 S220 52 241 36 S276 49 300 25 S337 31 360 10" fill="none" stroke="#725676" stroke-width="3" stroke-linecap="round" />
+                        <circle cx="360" cy="10" r="4" fill="white" stroke="#725676" stroke-width="3" />
+                      </svg>
+                      <div class="chart-months" aria-hidden="true"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+                    </div>
+                  </div>
+                  <div class="activity-card">
+                    <div class="activity-heading"><strong>Recent activity</strong><span>•••</span></div>
+                    <div class="activity-item">
+                      <b class="activity-avatar activity-avatar-purple">JD</b>
+                      <span><strong>Jordan Davis</strong><small>added a new product</small><time>10 min ago</time></span>
+                    </div>
+                    <div class="activity-item">
+                      <b class="activity-avatar activity-avatar-orange">AK</b>
+                      <span><strong>Alex Kim</strong><small>welcomed a new teammate</small><time>1 hour ago</time></span>
+                    </div>
+                    <div class="activity-item">
+                      <b class="activity-avatar activity-avatar-green">MR</b>
+                      <span><strong>Morgan Reed</strong><small>closed a new sale</small><time>2 hours ago</time></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-note note-bottom">
+            <span class="note-icon note-icon-purple" aria-hidden="true">
+              <svg viewBox="0 0 20 20"><path d="M4 14.5 8 10l3 2 5-6.5" /><path d="M12.5 5.5H16V9" /></svg>
+            </span>
+            <span><strong>Good things add up</strong><small>Your work, at a glance</small></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="modules-section" id="modules" aria-labelledby="modules-title">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">ONE CONNECTED PLATFORM</span>
+            <h2 id="modules-title">Everything has its place.</h2>
+          </div>
+          <p>Four essential systems. One simpler way to see how your business is doing.</p>
+        </div>
+        <div class="module-grid">
+          <article class="module-card">
+            <span class="module-icon module-products" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" /><path d="m4.5 7.7 7.5 4.2 7.5-4.2M12 12v9" /></svg>
+            </span>
+            <span class="module-number">01 / PRODUCT</span>
+            <h3>Product management</h3>
+            <p>Keep your catalog, inventory, and product details organized in one place.</p>
+            <a href="#workspace-access" aria-label="Explore Product Management">Explore module <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="module-card">
+            <span class="module-icon module-people" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M16 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H6.4A3.4 3.4 0 0 0 3 18.4V20" /><circle cx="9.5" cy="7" r="3.5" /><path d="M17 11a3.5 3.5 0 0 0 0-7m4 16v-1.6a3.4 3.4 0 0 0-2.8-3.3" /></svg>
+            </span>
+            <span class="module-number">02 / PEOPLE</span>
+            <h3>Human resources</h3>
+            <p>Support your team with clear employee records and people operations.</p>
+            <a href="#workspace-access" aria-label="Explore Human Resources">Explore module <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="module-card">
+            <span class="module-icon module-sales" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h17" /><path d="m7 15 4-4 3 2 6-7" /><path d="M16 6h4v4" /></svg>
+            </span>
+            <span class="module-number">03 / GROWTH</span>
+            <h3>Sales management</h3>
+            <p>Follow sales activity and bring the numbers behind your growth together.</p>
+            <a href="#workspace-access" aria-label="Explore Sales Management">Explore module <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="module-card">
+            <span class="module-icon module-customers" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.1-8.8 10.1-8.8 10.1S3.2 12.7 3.2 8.6A4.6 4.6 0 0 1 12 6.2a4.6 4.6 0 0 1 8.8 2.4Z" /></svg>
+            </span>
+            <span class="module-number">04 / RELATIONSHIPS</span>
+            <h3>Customer management</h3>
+            <p>Keep customer information and conversations easy for your team to find.</p>
+            <a href="#workspace-access" aria-label="Explore Customer Management">Explore module <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="story-section" aria-labelledby="story-title">
+        <div class="story-heading">
+          <div>
+            <span class="section-kicker">PEOPLE + POSSIBILITIES</span>
+            <h2 id="story-title">Good work begins with people.</h2>
+          </div>
+          <p>From shared workspaces to the first spark of an idea, Hope helps bring it all together.</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card">
+            <div class="story-media">
+              <img
+                class="story-photo"
+                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                alt="Colleagues collaborating around a shared table in a bright workplace"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="story-copy">
+              <span class="story-label">THE WORKPLACE</span>
+              <h3>Better work happens together.</h3>
+              <p>Make room for collaboration, focus, and the people behind every idea.</p>
+            </div>
+          </article>
+          <article class="story-card">
+            <div class="story-media">
+              <img
+                class="story-photo"
+                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                alt="Entrepreneur reviewing business plans and notes at a desk"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="story-copy">
+              <span class="story-label">ENTREPRENEURSHIP</span>
+              <h3>Ideas deserve room to grow.</h3>
+              <p>Bring the people, plans, and everyday details behind a business into focus.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="why-section" id="how-it-works" aria-labelledby="why-title">
+        <div class="why-mark" aria-hidden="true">
+          <span class="why-mark-shape">h</span>
+          <span class="why-mark-orbit orbit-one"></span>
+          <span class="why-mark-orbit orbit-two"></span>
+          <span class="why-spark spark-one">✦</span>
+          <span class="why-spark spark-two">✳</span>
+        </div>
+        <div class="why-copy">
+          <span class="section-kicker">MADE FOR THE WAY YOU WORK</span>
+          <h2 id="why-title">Less switching.<br><span>More moving forward.</span></h2>
+          <p>
+            When your essential business tools work together, your team can spend less time
+            searching and more time making progress. Hope brings the big picture into focus.
+          </p>
+          <a class="text-link" href="#workspace-access">Take a look inside <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="why-points">
+          <div><span class="check-circle" aria-hidden="true">✓</span><span><strong>One place to start</strong><small>See the work that matters from one shared workspace.</small></span></div>
+          <div><span class="check-circle" aria-hidden="true">✓</span><span><strong>Connected by design</strong><small>Bring business functions together, not farther apart.</small></span></div>
+          <div><span class="check-circle" aria-hidden="true">✓</span><span><strong>Built around your team</strong><small>Clear, approachable tools that help people do their best work.</small></span></div>
+        </div>
+      </section>
+
+      <section class="access-section" id="workspace-access" aria-labelledby="access-title">
+        <div class="access-copy">
+          <span class="section-kicker">YOUR WORKSPACE IS WAITING</span>
+          <h2 id="access-title">Good work starts with a clear view.</h2>
+          <p>Sign in to pick up where your team left off, or request an account to get started with Hope.</p>
+          <div class="access-assurance">
+            <span class="assurance-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.9 8.1 7 10 4.1-1.9 7-5.3 7-10V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></svg>
+            </span>
+            <span><strong>A workspace for your team</strong><small>Account access is managed by your organization.</small></span>
+          </div>
+        </div>
+
+        <div class="auth-card">
+          <div class="auth-heading">
+            <a class="auth-back" href="#hero-title" aria-label="Back to top">←</a>
+            <span class="auth-step" id="auth-step">WELCOME BACK</span>
+            <span class="auth-heading-spacer"></span>
+          </div>
+
+          <section class="auth-view" id="login-view" aria-labelledby="auth-title">
+            <h3 id="auth-title" tabindex="-1">Sign in to Hope</h3>
+            <p class="auth-intro">Welcome back. Let’s get you to work.</p>
+            <form class="auth-form" data-form="login" novalidate>
+              <label class="field-label" for="login-email">Email address or username</label>
+              <div class="input-wrap">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2" /><path d="m3.5 5.5 6.5 5 6.5-5" /></svg>
+                <input id="login-email" name="email" type="text" placeholder="name@example.com or username" autocomplete="username" required>
+              </div>
+
+              <div class="field-row">
+                <label class="field-label" for="login-password">Password</label>
+                <button class="field-link" type="button" data-show-view="reset">Forgot password?</button>
+              </div>
+              <div class="input-wrap">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="8.5" width="13" height="9" rx="2" /><path d="M6.5 8.5V6a3.5 3.5 0 1 1 7 0v2.5m-3.5 4v1.5" /></svg>
+                <input id="login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+                <button class="password-toggle" type="button" data-toggle-password="login-password" aria-label="Show password">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10s2.7-5 7.5-5 7.5 5 7.5 5-2.7 5-7.5 5-7.5-5-7.5-5Z" /><circle cx="10" cy="10" r="2" /></svg>
+                </button>
+              </div>
+
+              <label class="remember-option"><input type="checkbox" name="remember"><span class="custom-checkbox" aria-hidden="true"></span><span>Remember me</span></label>
+              <button class="button button-primary auth-submit" type="submit">Log In <span aria-hidden="true">→</span></button>
+              <p class="form-message" role="status" aria-live="polite"></p>
+            </form>
+            <p class="auth-switch">New to Hope? <button type="button" data-show-view="register">Create an account</button></p>
+          </section>
+
+          <section class="auth-view" id="register-view" aria-labelledby="register-title" hidden>
+            <h3 id="register-title" tabindex="-1">Create your account</h3>
+            <p class="auth-intro">Start with your details. Your organization will confirm access.</p>
+            <form class="auth-form" data-form="register" novalidate>
+              <label class="field-label" for="register-name">Full name</label>
+              <div class="input-wrap">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="6.5" r="3" /><path d="M3.5 17a6.5 6.5 0 0 1 13 0" /></svg>
+                <input id="register-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required>
+              </div>
+              <label class="field-label" for="register-email">Email address</label>
+              <div class="input-wrap">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2" /><path d="m3.5 5.5 6.5 5 6.5-5" /></svg>
+                <input id="register-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+              </div>
+              <label class="field-label" for="register-phone">Phone number <span class="field-optional">(optional)</span></label>
+              <div class="input-wrap">
+                <input id="register-phone" name="phone" type="tel" placeholder="+1 (555) 000-0000" autocomplete="tel">
+              </div>
+              <label class="field-label" for="register-password">Create a password</label>
+              <div class="input-wrap">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="8.5" width="13" height="9" rx="2" /><path d="M6.5 8.5V6a3.5 3.5 0 1 1 7 0v2.5m-3.5 4v1.5" /></svg>
+                <input id="register-password" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" aria-describedby="register-password-hint" minlength="8" required>
+                <button class="password-toggle" type="button" data-toggle-password="register-password" aria-label="Show password">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10s2.7-5 7.5-5 7.5 5 7.5 5-2.7 5-7.5 5-7.5-5-7.5-5Z" /><circle cx="10" cy="10" r="2" /></svg>
+                </button>
+              </div>
+              <p class="field-hint" id="register-password-hint">Use at least 8 characters.</p>
+              <label class="field-label" for="register-confirm-password">Confirm password</label>
+              <div class="input-wrap">
+                <input id="register-confirm-password" name="confirmPassword" type="password" placeholder="Re-enter your password" autocomplete="new-password" required>
+                <button class="password-toggle" type="button" data-toggle-password="register-confirm-password" aria-label="Show password">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10s2.7-5 7.5-5 7.5 5 7.5 5-2.7 5-7.5 5-7.5-5-7.5-5Z" /><circle cx="10" cy="10" r="2" /></svg>
+                </button>
+              </div>
+              <label class="remember-option terms-option"><input type="checkbox" name="terms" required><span class="custom-checkbox" aria-hidden="true"></span><span>I agree to the Terms and Privacy Policy.</span></label>
+              <p class="field-hint">Your organization manages account access and role assignment.</p>
+              <button class="button button-primary auth-submit" type="submit">Register <span aria-hidden="true">→</span></button>
+              <p class="form-message" role="status" aria-live="polite"></p>
+            </form>
+            <p class="auth-switch">Already have an account? <button type="button" data-show-view="login">Log in</button></p>
+          </section>
+
+          <section class="auth-view" id="reset-view" aria-labelledby="reset-title" hidden>
+            <h3 id="reset-title" tabindex="-1">Reset your password</h3>
+            <p class="auth-intro">Enter your email and we’ll send instructions to reset your password.</p>
+            <form class="auth-form reset-form" data-form="reset" novalidate>
+              <label class="field-label" for="reset-email">Email address</label>
+              <div class="input-wrap">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2" /><path d="m3.5 5.5 6.5 5 6.5-5" /></svg>
+                <input id="reset-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+              </div>
+              <button class="button button-primary auth-submit" type="submit">Send Reset Link <span aria-hidden="true">→</span></button>
+              <p class="form-message" role="status" aria-live="polite"></p>
+            </form>
+            <p class="auth-switch"><button type="button" data-show-view="login">← Back to Log In</button></p>
+          </section>
+
+          <section class="auth-view" id="reset-sent-view" aria-labelledby="reset-sent-title" hidden>
+            <h3 id="reset-sent-title" tabindex="-1">Check your email</h3>
+            <p class="auth-intro">If an account matches that email, reset instructions are on the way. Check your inbox.</p>
+            <p class="form-message is-visible" role="status">Prototype only: no email has been sent.</p>
+            <button class="button button-primary auth-submit prototype-action" type="button" data-show-view="set-password">Preview set password screen <span aria-hidden="true">→</span></button>
+            <p class="auth-switch"><button type="button" data-show-view="reset">Request another link</button></p>
+            <p class="auth-switch"><button type="button" data-show-view="login">← Back to Log In</button></p>
+          </section>
+
+          <section class="auth-view" id="set-password-view" aria-labelledby="set-password-title" hidden>
+            <h3 id="set-password-title" tabindex="-1">Create a new password</h3>
+            <p class="auth-intro">Choose a new password for your account.</p>
+            <form class="auth-form" data-form="set-password" novalidate>
+              <label class="field-label" for="new-password">New password</label>
+              <div class="input-wrap">
+                <input id="new-password" name="newPassword" type="password" placeholder="At least 8 characters" autocomplete="new-password" aria-describedby="new-password-hint" minlength="8" required>
+                <button class="password-toggle" type="button" data-toggle-password="new-password" aria-label="Show password">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10s2.7-5 7.5-5 7.5 5 7.5 5-2.7 5-7.5 5-7.5-5-7.5-5Z" /><circle cx="10" cy="10" r="2" /></svg>
+                </button>
+              </div>
+              <p class="field-hint" id="new-password-hint">Use at least 8 characters.</p>
+              <label class="field-label" for="new-password-confirm">Confirm new password</label>
+              <div class="input-wrap">
+                <input id="new-password-confirm" name="confirmNewPassword" type="password" placeholder="Re-enter your password" autocomplete="new-password" required>
+                <button class="password-toggle" type="button" data-toggle-password="new-password-confirm" aria-label="Show password">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10s2.7-5 7.5-5 7.5 5 7.5 5-2.7 5-7.5 5-7.5-5-7.5-5Z" /><circle cx="10" cy="10" r="2" /></svg>
+                </button>
+              </div>
+              <button class="button button-primary auth-submit" type="submit">Update Password <span aria-hidden="true">→</span></button>
+              <p class="form-message" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section class="auth-view" id="password-updated-view" aria-labelledby="password-updated-title" hidden>
+            <h3 id="password-updated-title" tabindex="-1">Password update confirmation</h3>
+            <p class="auth-intro">In the connected version, your new password will be ready to use.</p>
+            <p class="form-message is-visible" role="status">Prototype only: your password hasn’t been changed.</p>
+            <button class="button button-primary auth-submit prototype-action" type="button" data-show-view="login">Back to Log In <span aria-hidden="true">→</span></button>
+          </section>
+
+          <p class="auth-footnote"><span aria-hidden="true">◈</span> Secure access for your organization</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <a class="brand footer-brand" href="#" aria-label="Hope, Inc. home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="4.5" y="4.5" width="39" height="39" rx="14" fill="#F6F2E9" stroke="#D8C49B" />
+            <path d="M16 31V20m16 11V20M16 26h16m-8-6v-2" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M24 18c-2.8-4.1-6.2-4.4-8.1-4.1.3 3.5 3.2 5.9 8.1 6.1m0-2c2.8-4.1 6.2-4.4 8.1-4.1-.3 3.5-3.2 5.9-8.1 6.1" stroke="#71896D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="24" cy="11.5" r="1.2" fill="#B88D53" />
+          </svg>
+        </span>
+        <span class="brand-name">hope<span>.</span></span>
+      </a>
+      <span class="footer-caption">A little more clarity for all the good you do.</span>
+      <span class="footer-legal">© 2026 Hope, Inc. All rights reserved.</span>
+    </footer>
+  </body>
 </html>
