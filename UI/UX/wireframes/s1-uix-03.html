@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Low- to mid-fidelity Sprint 1 wireframes for the Hope ERP dashboard, user list, and rights dialog.">
+    <title>Sprint 1 Wireframes | Hope ERP</title>
+    <link rel="stylesheet" href="s1-uix-03.css">
+    <script src="s1-uix-03.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="#dashboard" data-view="dashboard" aria-label="Hope dashboard">
+        <span class="wordmark-icon" aria-hidden="true">H</span>
+        <span>HOPE <small>OPERATIONS</small></span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <button class="nav-link is-current" type="button" data-view="dashboard" aria-current="page">Dashboard</button>
+        <button class="nav-link" type="button" data-view="users">User management</button>
+        <button class="nav-link" type="button" data-view="dashboard" data-toast="Audit log is a later Sprint 1 destination.">Audit log</button>
+      </nav>
+      <div class="user-context">
+        <label class="sr-only" for="role-context">Preview role</label>
+        <select id="role-context" aria-label="Preview role">
+          <option value="superadmin" selected>Superadmin</option>
+          <option value="admin">Admin</option>
+        </select>
+        <span class="user-avatar" aria-hidden="true">JL</span>
+        <span class="user-name">Jordan Lee<small id="role-label">Superadmin</small></span>
+        <button class="icon-button" type="button" aria-label="Account options" data-toast="Account menu preview">⋯</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="view-panel" id="dashboard-view" aria-labelledby="dashboard-title">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">WORKSPACE / OVERVIEW</p>
+            <h1 id="dashboard-title">Good morning, Jordan</h1>
+            <p class="subheading">A quick view of your workspace and the work that needs attention.</p>
+          </div>
+          <div class="heading-meta">
+            <span class="date-label">TUESDAY, NOVEMBER 17</span>
+            <span class="status-pill status-good"><i aria-hidden="true"></i> All systems operational</span>
+          </div>
+        </div>
+
+        <section class="summary-grid" aria-label="Workspace summary">
+          <article class="summary-card">
+            <span class="summary-label">Active users</span>
+            <strong>36</strong>
+            <span class="summary-note">Across your organization</span>
+          </article>
+          <article class="summary-card summary-attention">
+            <span class="summary-label">Pending approvals</span>
+            <strong>04</strong>
+            <span class="summary-note">Users waiting for access</span>
+          </article>
+          <article class="summary-card">
+            <span class="summary-label">Modules available</span>
+            <strong id="module-count">05</strong>
+            <span class="summary-note">Based on your assigned rights</span>
+          </article>
+          <article class="summary-card">
+            <span class="summary-label">Last data sync</span>
+            <strong class="summary-time">9:42 <small>AM</small></strong>
+            <span class="summary-note">Today · just now</span>
+          </article>
+        </section>
+
+        <div class="dashboard-layout">
+          <section class="content-card module-section" id="modules" aria-labelledby="modules-title">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow">YOUR WORKSPACE</p>
+                <h2 id="modules-title">Modules</h2>
+              </div>
+              <button class="text-button" type="button" id="toggle-module-access">Preview no-access state</button>
+            </div>
+            <div class="module-grid" id="module-grid">
+              <a class="module-card" href="#modules" data-toast="Module destination is a later Sprint 1 screen.">
+                <span class="module-icon" aria-hidden="true">CU</span>
+                <span><strong>Customers</strong><small>People and account records</small></span>
+                <span class="module-arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="module-card" href="#modules" data-toast="Module destination is a later Sprint 1 screen.">
+                <span class="module-icon" aria-hidden="true">PR</span>
+                <span><strong>Products</strong><small>Catalog and inventory</small></span>
+                <span class="module-arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="module-card" href="#modules" data-toast="Module destination is a later Sprint 1 screen.">
+                <span class="module-icon" aria-hidden="true">HR</span>
+                <span><strong>Human Resources</strong><small>Employee information</small></span>
+                <span class="module-arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="module-card" href="#modules" data-toast="Module destination is a later Sprint 1 screen.">
+                <span class="module-icon" aria-hidden="true">SA</span>
+                <span><strong>Sales</strong><small>Sales activity and results</small></span>
+                <span class="module-arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="module-card" href="#modules" data-toast="Module destination is a later Sprint 1 screen.">
+                <span class="module-icon" aria-hidden="true">RE</span>
+                <span><strong>Reports</strong><small>Shared business reporting</small></span>
+                <span class="module-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+            <div class="empty-state" id="no-modules-state" hidden>
+              <span class="empty-icon" aria-hidden="true">—</span>
+              <h3>No modules assigned</h3>
+              <p>Ask an administrator to review your account rights.</p>
+              <button class="secondary-button" type="button" id="restore-module-access">Restore preview modules</button>
+            </div>
+          </section>
+
+          <aside class="content-card utility-card" aria-labelledby="utility-title">
+            <div class="card-heading">
+              <div>
+                <p class="eyebrow">QUICK ACTIONS</p>
+                <h2 id="utility-title">Needs your attention</h2>
+              </div>
+            </div>
+            <div class="utility-item">
+              <span class="utility-count">04</span>
+              <span><strong>Pending user approvals</strong><small>Review new account requests</small></span>
+              <button class="row-arrow" type="button" data-view="users" aria-label="Review pending users">→</button>
+            </div>
+            <div class="utility-item">
+              <span class="utility-count utility-neutral">02</span>
+              <span><strong>Recent access changes</strong><small>Rights updated this week</small></span>
+              <button class="row-arrow" type="button" data-toast="Access history preview">→</button>
+            </div>
+            <div class="system-status">
+              <span class="system-status-dot" aria-hidden="true"></span>
+              <span><strong>Workspace status</strong><small>Data and permissions are up to date</small></span>
+            </div>
+            <button class="primary-button full-button" type="button" data-view="users">Manage users <span aria-hidden="true">→</span></button>
+          </aside>
+        </div>
+        <p class="prototype-note">Wireframe preview · sample content only · actions do not change production data</p>
+      </section>
+
+      <section class="view-panel" id="users-view" aria-labelledby="users-title" hidden>
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">WORKSPACE / ADMINISTRATION</p>
+            <h1 id="users-title">User management</h1>
+            <p class="subheading">Review account status and manage access for your organization.</p>
+          </div>
+          <button class="primary-button" type="button" data-toast="Add User is a visual action preview.">+ Add User</button>
+        </div>
+
+        <section class="content-card user-list-card" aria-label="User list">
+          <div class="list-summary">
+            <div>
+              <strong id="result-count">Users</strong>
+              <span class="list-hint">Manage account status and module rights</span>
+            </div>
+            <div class="preview-tools" aria-label="Preview list states">
+              <button class="text-button" type="button" id="preview-loading">Preview loading</button>
+              <button class="text-button" type="button" id="preview-empty">Preview empty</button>
+              <button class="text-button" type="button" id="reset-list">Reset list</button>
+            </div>
+          </div>
+
+          <div class="status-tabs" role="group" aria-label="Filter users by status">
+            <button class="status-tab is-selected" type="button" data-status="all" aria-pressed="true">All <span>8</span></button>
+            <button class="status-tab" type="button" data-status="pending" aria-pressed="false">Pending <span>1</span></button>
+            <button class="status-tab" type="button" data-status="active" aria-pressed="false">Active <span>5</span></button>
+            <button class="status-tab" type="button" data-status="blocked" aria-pressed="false">Blocked <span>2</span></button>
+          </div>
+
+          <div class="filter-row">
+            <label class="search-field">
+              <span class="sr-only">Search users</span>
+              <span aria-hidden="true">⌕</span>
+              <input id="user-search" type="search" placeholder="Search name or email">
+            </label>
+            <label class="filter-control">Role
+              <select id="role-filter">
+                <option value="all">All roles</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="superadmin">Superadmin</option>
+              </select>
+            </label>
+            <label class="filter-control">Sort by
+              <select id="sort-order">
+                <option value="name">Name A–Z</option>
+                <option value="recent">Recently added</option>
+                <option value="role">Role</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="sr-only">Organization user accounts</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Last active</th>
+                  <th scope="col"><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="user-table-body"></tbody>
+            </table>
+            <div class="empty-state list-empty-state" id="list-empty-state" hidden>
+              <span class="empty-icon" aria-hidden="true">⌕</span>
+              <h3>No users found</h3>
+              <p id="empty-message">Try another search or clear the selected filters.</p>
+              <button class="secondary-button" type="button" id="clear-filters">Clear filters</button>
+            </div>
+            <div class="loading-state" id="list-loading-state" hidden role="status" aria-live="polite">
+              <span class="loading-spinner" aria-hidden="true"></span>
+              <span>Loading users…</span>
+              <span class="loading-line"></span>
+            </div>
+          </div>
+
+          <div class="table-footer">
+            <label class="page-size">Rows per page
+              <select id="page-size">
+                <option value="5">5</option>
+                <option value="10">10</option>
+              </select>
+            </label>
+            <span id="pagination-summary">Showing 1–5 of 8 users</span>
+            <nav class="pagination" id="pagination" aria-label="User list pages"></nav>
+          </div>
+          <p class="scope-note" id="scope-note">Superadmins can manage all accounts. Admins see standard User accounts only; Admin and Superadmin accounts are excluded.</p>
+        </section>
+        <p class="prototype-note">Wireframe preview · user rows and changes are local sample data only</p>
+      </section>
+    </main>
+
+    <dialog class="rights-dialog" id="rights-dialog" aria-labelledby="rights-title">
+      <form method="dialog" class="dialog-shell">
+        <header class="dialog-header">
+          <div>
+            <p class="eyebrow">USER ACCESS</p>
+            <h2 id="rights-title">Manage rights</h2>
+            <p class="dialog-user-context" id="rights-user-context">Rights for selected user</p>
+          </div>
+          <button class="icon-button dialog-close" type="button" aria-label="Close rights dialog" data-close-dialog>×</button>
+        </header>
+
+        <div class="rights-toolbar">
+          <span><strong>Module permissions</strong><small>Choose the actions this user can perform.</small></span>
+          <div class="toolbar-actions">
+            <button class="text-button" type="button" id="select-all-rights">Select all</button>
+            <button class="text-button" type="button" id="clear-all-rights">Clear all</button>
+            <button class="text-button" type="button" id="reset-rights">Reset</button>
+          </div>
+        </div>
+        <div class="permission-groups" id="permission-groups"></div>
+        <div class="guardrail-notes" id="rights-guardrails">
+          <strong>Access guardrails</strong>
+          <ul>
+            <li>Admins can manage standard User accounts only; Admin and Superadmin accounts are not editable.</li>
+            <li>Pending or blocked accounts cannot use module access until active.</li>
+            <li>Zero assigned rights is allowed; the user sees a no-modules message.</li>
+            <li>Every saved change should be attributed to the acting manager in the audit log.</li>
+          </ul>
+          <p class="rights-validation" id="rights-validation" role="status" aria-live="polite"></p>
+        </div>
+        <footer class="dialog-actions">
+          <button class="secondary-button" type="button" data-close-dialog>Cancel</button>
+          <button class="primary-button" type="button" id="save-rights">Save rights</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <footer class="site-footer">
+      <span>HOPE ERP · Sprint 1 wireframe S1-UIX-03</span>
+      <span>Prototype only — no authentication, persistence, or permissions are enforced here.</span>
+    </footer>
+  </body>
+</html>
