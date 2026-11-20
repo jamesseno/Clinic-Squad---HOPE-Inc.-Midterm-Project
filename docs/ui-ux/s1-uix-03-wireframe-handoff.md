@@ -36,6 +36,8 @@ The permission groups show 36 illustrative action labels across Customers, Produ
 
 - [x] Deliverable files are linked above and provide all three requested views.
 - [x] Interaction preview covers navigation, filtering, search, sorting, pagination, list empty/loading states, no-module state, permission toggles, reset, cancel, and save feedback.
+- [x] Browser-checked: Admin preview contains only standard User rows; no-match search and loading previews render; Cancel preserves the saved rights; Select all checks all 36 rights and Save shows prototype-only feedback.
+- [x] `npm run typecheck`, `npm run lint` (one existing font warning), and `node --check UI/UX/wireframes/s1-uix-03.js` pass.
 - [ ] Teammate review and approval on the linked, non-trivial PR.
 - [ ] PR merged into `main` after approval.
 
