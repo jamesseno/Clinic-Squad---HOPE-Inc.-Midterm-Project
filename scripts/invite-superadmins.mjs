@@ -114,6 +114,7 @@ for (const member of roster) {
     data: {
       first_name: member.first_name.trim(),
       last_name: member.last_name.trim(),
+      password_setup_required: true,
     },
   });
 
