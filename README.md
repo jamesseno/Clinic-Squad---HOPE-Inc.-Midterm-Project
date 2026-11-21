@@ -63,4 +63,29 @@ duplicates and unauthorized status changes are rejected, then removes the test
 account. Verification evidence for S1-DEV-02 is in
 [`docs/dev/s1-dev-02-verification.md`](./docs/dev/s1-dev-02-verification.md).
 
+### Authentication API
+
+- `POST /api/auth/login` accepts `{ email, password, remember? }`, verifies that
+  the matching `public.app_user` row is active and not blocked, then creates a
+  Supabase Auth session in HTTP-only cookies. Pending, blocked, and unknown
+  accounts are rejected.
+- `GET /api/auth/session` returns the current user only when the Auth session is
+  valid and the profile is still active and unblocked. `proxy.ts` applies the
+  same rule to every request and clears sessions when a user is blocked.
+- `POST /api/auth/logout` ends the session and clears its cookies.
+- `POST /api/auth/set-password` requires an active session, validates the new
+  password, updates it through Supabase Auth (so it is hashed server-side), and
+  clears the one-time `password_setup_required` flag.
+
+With the dev server running:
+
+```powershell
+npm run verify:auth
+```
+
+The script creates throwaway users, checks login/logout/session behavior,
+confirms blocked and pending users are denied, verifies first-password setup,
+and removes the test accounts. Verification evidence for S1-DEV-03 is in
+[`docs/dev/s1-dev-03-verification.md`](./docs/dev/s1-dev-03-verification.md).
+
 Database migrations and team Supabase setup instructions are in [`supabase/README.md`](./supabase/README.md). Do not push migrations to the hosted database without team review and approval.

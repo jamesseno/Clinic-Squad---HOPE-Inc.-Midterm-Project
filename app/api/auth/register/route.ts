@@ -89,6 +89,7 @@ export async function POST(request: Request) {
       first_name: firstName,
       last_name: lastName,
       full_name: `${firstName} ${lastName}`,
+      password_setup_required: false,
       ...(phone ? { phone } : {}),
     },
   });
