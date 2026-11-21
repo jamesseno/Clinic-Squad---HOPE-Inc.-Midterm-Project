@@ -88,4 +88,29 @@ confirms blocked and pending users are denied, verifies first-password setup,
 and removes the test accounts. Verification evidence for S1-DEV-03 is in
 [`docs/dev/s1-dev-03-verification.md`](./docs/dev/s1-dev-03-verification.md).
 
+### Password reset API
+
+- `POST /api/auth/reset/request` accepts `{ email }`. Active, unblocked accounts
+  receive a single-use token stored only as a SHA-256 hash in
+  `public.password_reset_token`; Supabase Auth emails a recovery link containing
+  the token. Unknown, pending, and blocked accounts receive the same generic
+  response and no token.
+- `GET /api/auth/reset/verify?token=...` checks that a token exists, is unused,
+  and has not expired.
+- `POST /api/auth/reset/confirm` accepts `{ token, password, confirmPassword }`,
+  validates the password, updates it through Supabase Auth (so it is hashed
+  server-side), and marks the token used. Reused, expired, malformed, and
+  unknown tokens are rejected.
+
+The emailed link opens the existing `/set-password` screen; no existing UI file
+was changed. With the dev server running:
+
+```powershell
+npm run verify:reset
+```
+
+The script checks request/verify/confirm behavior, expiry, reuse, revocation by
+a newer request, and blocked/pending denial. Verification evidence for
+S1-DEV-04 is in [`docs/dev/s1-dev-04-verification.md`](./docs/dev/s1-dev-04-verification.md).
+
 Database migrations and team Supabase setup instructions are in [`supabase/README.md`](./supabase/README.md). Do not push migrations to the hosted database without team review and approval.
