@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
 
 type Theme = "light" | "dark";
@@ -285,6 +286,7 @@ function DashboardPreview() {
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const [theme, setTheme] = useState<Theme>("light");
   const [authView, setAuthView] = useState<AuthView>("login");
   const [showPassword, setShowPassword] = useState<Record<PasswordField, boolean>>({
@@ -310,7 +312,7 @@ export default function HomePage() {
     });
   }
 
-  function submitPrototypeForm(
+  async function submitPrototypeForm(
     event: FormEvent<HTMLFormElement>,
     view: "login" | "register" | "reset" | "set-password",
   ) {
@@ -347,10 +349,32 @@ export default function HomePage() {
       return;
     }
 
+    if (view === "login") {
+      const email = form.elements.namedItem("email");
+      const password = form.elements.namedItem("password");
+      if (!(email instanceof HTMLInputElement) || !(password instanceof HTMLInputElement)) return;
+
+      setFormMessage("Signing in...");
+      try {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email.value, password: password.value }),
+        });
+        const body = (await response.json()) as { error?: string };
+        if (!response.ok) {
+          setFormMessage(body.error ?? "Sign-in failed. Please try again.");
+          return;
+        }
+        router.push("/dashboard");
+      } catch {
+        setFormMessage("Could not reach the sign-in service.");
+      }
+      return;
+    }
+
     setFormMessage(
-      view === "login"
-        ? "Prototype only: sign-in isn’t connected, so these credentials weren’t checked."
-        : "Prototype only: your account request hasn’t been sent.",
+      "Prototype only: your account request hasn’t been sent.",
     );
   }
 

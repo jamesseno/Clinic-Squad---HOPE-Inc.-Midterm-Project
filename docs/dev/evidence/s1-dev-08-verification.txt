@@ -1,0 +1,8 @@
+S1-DEV-08 verification
+
+- npm.cmd run typecheck: passed
+- npm.cmd run lint: passed for the implementation; repository retains existing warnings in app/layout.tsx and app/users/page.tsx
+- npm.cmd run build: passed; Next.js generated /dashboard and /api/dashboard
+- Local route smoke check:
+  - GET /dashboard returned HTTP 200 and rendered the loading shell
+  - GET /api/dashboard requires the configured Supabase service-role environment
