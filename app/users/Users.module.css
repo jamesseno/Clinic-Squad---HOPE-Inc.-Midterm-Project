@@ -53,6 +53,8 @@
 .primary,
 .secondary,
 .danger,
+.approve,
+.approveAdmin,
 .linkButton {
   border: 0;
   border-radius: 8px;
@@ -82,6 +84,30 @@
   color: #a62c35;
 }
 
+.approve {
+  padding: 7px 11px;
+  background: #e9f8ef;
+  color: #237347;
+}
+
+.approveAdmin {
+  padding: 7px 11px;
+  background: #f0edff;
+  color: #4f45b8;
+}
+
+.protected {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #fff5e2;
+  color: #9a6410;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .linkButton {
   padding: 7px 9px;
   background: transparent;
@@ -91,13 +117,17 @@
 .primary:hover,
 .secondary:hover,
 .danger:hover,
+.approve:hover,
+.approveAdmin:hover,
 .linkButton:hover {
   transform: translateY(-1px);
 }
 
 .primary:disabled,
 .secondary:disabled,
-.danger:disabled {
+.danger:disabled,
+.approve:disabled,
+.approveAdmin:disabled {
   cursor: not-allowed;
   opacity: 0.55;
   transform: none;
@@ -369,6 +399,12 @@
 
 .fieldError {
   color: #a62c35;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.fieldNote {
+  color: #9a6410;
   font-size: 11px;
   font-weight: 500;
 }

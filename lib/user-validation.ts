@@ -111,6 +111,50 @@ export function validateAddUser(
   };
 }
 
+export interface ValidApproveUser {
+  role?: "user" | "admin";
+}
+
+export type ApproveUserValidation =
+  | { ok: true; value: ValidApproveUser }
+  | { ok: false; error: string; fieldErrors: UserFieldErrors };
+
+/**
+ * Approval payloads may optionally designate the new account as an Admin.
+ * Approval status and server-owned fields are never accepted from the browser.
+ */
+export function validateApproveUser(payload: unknown): ApproveUserValidation {
+  if (payload === undefined) return { ok: true, value: {} };
+
+  if (!isRecord(payload)) {
+    return {
+      ok: false,
+      error: "Request body must be a JSON object.",
+      fieldErrors: { form: "Request body must be a JSON object." },
+    };
+  }
+
+  const extras = unknownKeys(payload, ["role"]);
+  if (extras.length > 0) {
+    return {
+      ok: false,
+      error: `Field(s) ${extras.join(", ")} cannot be set when approving a user.`,
+      fieldErrors: { form: "Unexpected fields were submitted." },
+    };
+  }
+
+  if (payload.role === undefined) return { ok: true, value: {} };
+  if (payload.role !== "user" && payload.role !== "admin") {
+    return {
+      ok: false,
+      error: "Approvals may designate only User or Admin.",
+      fieldErrors: { role: "Choose User or Admin." },
+    };
+  }
+
+  return { ok: true, value: { role: payload.role } };
+}
+
 export function validateEditUser(
   payload: unknown,
   allowedRoles: readonly ManagedRole[],

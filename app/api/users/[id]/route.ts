@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import {
+  getLastActiveSuperadminId,
   getManagerContext,
   isLastActiveSuperadmin,
   resolveRoleId,
@@ -23,6 +24,62 @@ function fail(error: string, status: number, fieldErrors?: Record<string, string
 
 interface RouteContext {
   params: Promise<{ id: string }>;
+}
+
+/**
+ * Account deletion is intentionally unsupported: blocking preserves history.
+ * This handler also makes the last-Superadmin removal guard explicit instead
+ * of relying on a generic 405 from the framework.
+ */
+export async function DELETE(_request: Request, context: RouteContext) {
+  const { id: targetId } = await context.params;
+
+  let supabase: Awaited<ReturnType<typeof createClient>>;
+  let admin: ReturnType<typeof createAdminClient>;
+  try {
+    supabase = await createClient();
+    admin = createAdminClient();
+  } catch (configError) {
+    console.error("User management configuration error:", configError);
+    return fail("User management is not configured on the server.", 500);
+  }
+
+  const access = await getManagerContext(supabase, admin);
+  if (!access.ok) return fail(access.error, access.status);
+
+  const { data: target, error: targetError } = await admin
+    .from("app_user")
+    .select("id, role_id, account_status, is_blocked")
+    .eq("id", targetId)
+    .maybeSingle();
+
+  if (targetError) {
+    console.error("Delete target lookup failed:", targetError.message);
+    return fail("Could not look up that user.", 500);
+  }
+  if (!target) return fail("User not found.", 404);
+
+  const { data: targetRole } = await admin
+    .from("app_role")
+    .select("role_code")
+    .eq("role_id", target.role_id)
+    .maybeSingle();
+  const targetRoleCode = (targetRole?.role_code ?? "user") as ManagedRole;
+
+  if (access.context.roleCode === "admin" && targetRoleCode !== "user") {
+    return fail("User not found.", 404);
+  }
+
+  if (
+    targetRoleCode === "superadmin" &&
+    target.account_status === "active" &&
+    !target.is_blocked &&
+    (await getLastActiveSuperadminId(admin)) === targetId
+  ) {
+    return fail("The last active Superadmin cannot be removed.", 409);
+  }
+
+  return fail("Deleting accounts is not supported. Block the account instead.", 405);
 }
 
 export async function PATCH(request: Request, context: RouteContext) {

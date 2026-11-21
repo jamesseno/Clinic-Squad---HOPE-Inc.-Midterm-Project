@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import {
+  getLastActiveSuperadminId,
   getManagerContext,
   resolveRoleId,
   type ManagedRole,
@@ -70,6 +71,9 @@ export async function GET() {
     return fail("Could not load users.", 500);
   }
 
+  const protectedSuperadminId =
+    access.context.roleCode === "superadmin" ? await getLastActiveSuperadminId(admin) : null;
+
   return NextResponse.json(
     {
       role: access.context.roleCode,
@@ -83,6 +87,7 @@ export async function GET() {
         isBlocked: user.is_blocked,
         createdAt: user.created_at,
         updatedAt: user.updated_at,
+        protected: user.id === protectedSuperadminId,
       })),
     },
     { status: 200, headers: noStore },
