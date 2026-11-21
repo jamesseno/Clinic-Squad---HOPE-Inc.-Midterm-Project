@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
+import RightsDialog from "./RightsDialog";
 import styles from "./Users.module.css";
 
 type Role = "superadmin" | "admin" | "user";
@@ -28,6 +29,7 @@ interface FieldErrors {
 type ModalState =
   | { mode: "add" }
   | { mode: "edit"; user: ManagedUser }
+  | { mode: "rights"; user: ManagedUser }
   | null;
 
 interface FormState {
@@ -68,6 +70,7 @@ export default function UsersPage() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [busy, setBusy] = useState(false);
+  const [rightsDialogUser, setRightsDialogUser] = useState<ManagedUser | null>(null);
 
   const loadUsers = useCallback(async () => {
     try {
@@ -289,6 +292,16 @@ export default function UsersPage() {
     }
   }
 
+  function openRightsDialog(user: ManagedUser) {
+    setRightsDialogUser(user);
+  }
+
+  function openRights(user: ManagedUser) {
+    setError(null);
+    setNotice(null);
+    setModal({ mode: "rights", user });
+  }
+
   if (loading) {
     return (
       <main className={styles.page}>
@@ -494,6 +507,16 @@ export default function UsersPage() {
                           {user.isBlocked ? "Unblock" : "Block"}
                         </button>
                       )}
+                      {user.role === "user" && user.accountStatus === "active" && !user.isBlocked ? (
+                        <button
+                          className={styles.linkButton}
+                          type="button"
+                          disabled={busy}
+                          onClick={() => openRights(user)}
+                        >
+                          Rights
+                        </button>
+                      ) : null}
                     </div>
                   </td>
                 </tr>
@@ -527,7 +550,23 @@ export default function UsersPage() {
         </div>
       </section>
 
-      {modal ? (
+      {modal?.mode === "rights" ? (
+        <RightsDialog
+          user={{
+            id: modal.user.id,
+            email: modal.user.email,
+            firstName: modal.user.firstName,
+            lastName: modal.user.lastName,
+          }}
+          onClose={() => setModal(null)}
+          onSaved={(summary) => {
+            setModal(null);
+            setNotice(
+              `Rights updated: ${summary.granted} granted, ${summary.revoked} revoked, ${summary.total} total.`,
+            );
+          }}
+        />
+      ) : modal ? (
         <div className={styles.overlay} role="presentation" onMouseDown={() => setModal(null)}>
           <section
             className={styles.modal}

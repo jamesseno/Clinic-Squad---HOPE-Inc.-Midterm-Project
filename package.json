@@ -13,7 +13,8 @@
     "verify:auth": "node --env-file=.env.local scripts/verify-auth.mjs",
     "verify:reset": "node --env-file=.env.local scripts/verify-reset-password.mjs",
     "verify:users": "node --env-file=.env.local scripts/verify-user-management.mjs",
-    "verify:approval": "node --env-file=.env.local scripts/verify-user-approval.mjs"
+    "verify:approval": "node --env-file=.env.local scripts/verify-user-approval.mjs",
+    "verify:rights": "node --env-file=.env.local scripts/verify-user-rights.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
