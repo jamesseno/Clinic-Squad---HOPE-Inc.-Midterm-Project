@@ -14,7 +14,8 @@
     "verify:reset": "node --env-file=.env.local scripts/verify-reset-password.mjs",
     "verify:users": "node --env-file=.env.local scripts/verify-user-management.mjs",
     "verify:approval": "node --env-file=.env.local scripts/verify-user-approval.mjs",
-    "verify:rights": "node --env-file=.env.local scripts/verify-user-rights.mjs"
+    "verify:rights": "node --env-file=.env.local scripts/verify-user-rights.mjs",
+    "test:smoke": "node --env-file=.env.local scripts/smoke-login-dashboard.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
