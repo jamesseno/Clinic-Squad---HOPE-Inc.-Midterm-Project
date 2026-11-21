@@ -44,3 +44,35 @@ npx --yes supabase@latest db push --remote
 Both commands change the hosted database. Do not run them until migrations have been reviewed and approved.
 
 Never commit access tokens, database passwords, or other credentials.
+
+## Running the database tests
+
+The SQL tests in `supabase/tests/` are self-verifying: each one runs inside a
+transaction that is rolled back, prints PASS/FAIL per case, and raises an
+exception if anything failed.
+
+Open the **SQL Editor** in the Supabase dashboard, paste the file, and press
+**Run**. To run it from a terminal instead, use any Postgres client with the
+database connection string:
+
+```bash
+psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f supabase/tests/s1_dba_06_audit_user_test.sql
+```
+
+| Test file | Covers |
+|---|---|
+| `s1_dba_06_audit_user_test.sql` | `audit_user()` / `audit_log.action_by` record the logged-in user (S1-DBA-06) |
+
+## How the audit trail identifies the user
+
+`audit_user()` is the single place that decides who gets written to
+`audit_log.action_by` and to the `stamp` column. It resolves, in order:
+
+1. `app.username`, but only for trusted SQL sessions (never for the `anon` or
+   `authenticated` API roles, so a browser client cannot spoof the actor).
+2. `app_user.username` for the JWT subject, once that table exists.
+3. The JWT `email` claim of the logged-in Supabase Auth user.
+4. The JWT `sub` claim (the auth user id).
+5. `session_user`, for psql, migrations, and the service role.
+
+The result is capped at 50 characters to fit `audit_log.action_by`.
