@@ -96,20 +96,20 @@ export async function resolveRoleId(
 }
 
 /**
- * The last active, unblocked Superadmin must remain available. Returns true
- * only when `userId` is that account.
+ * Returns the single active, unblocked Superadmin id when exactly one exists.
+ * Used both by the write guards and by the list response so the UI can mark
+ * that row as protected.
  */
-export async function isLastActiveSuperadmin(
+export async function getLastActiveSuperadminId(
   admin: SupabaseClient,
-  userId: string,
-): Promise<boolean> {
+): Promise<string | null> {
   const { data: role, error: roleError } = await admin
     .from("app_role")
     .select("role_id")
     .eq("role_code", "superadmin")
     .maybeSingle();
 
-  if (roleError || !role) return false;
+  if (roleError || !role) return null;
 
   const { data: admins, error } = await admin
     .from("app_user")
@@ -120,8 +120,19 @@ export async function isLastActiveSuperadmin(
 
   if (error) {
     console.error("Superadmin guard lookup failed:", error.message);
-    return false;
+    return null;
   }
 
-  return admins?.length === 1 && admins[0]?.id === userId;
+  return admins?.length === 1 ? (admins[0]?.id ?? null) : null;
+}
+
+/**
+ * The last active, unblocked Superadmin must remain available. Returns true
+ * only when `userId` is that account.
+ */
+export async function isLastActiveSuperadmin(
+  admin: SupabaseClient,
+  userId: string,
+): Promise<boolean> {
+  return (await getLastActiveSuperadminId(admin)) === userId;
 }

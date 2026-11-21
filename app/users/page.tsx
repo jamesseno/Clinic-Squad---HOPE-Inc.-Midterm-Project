@@ -18,6 +18,7 @@ interface ManagedUser {
   isBlocked: boolean;
   createdAt: string;
   updatedAt: string;
+  protected: boolean;
 }
 
 interface FieldErrors {
@@ -166,6 +167,15 @@ export default function UsersPage() {
     event.preventDefault();
     if (!modal) return;
 
+    if (
+      modal.mode === "edit" &&
+      modal.user.protected &&
+      form.role !== modal.user.role
+    ) {
+      setError("The last active Superadmin cannot be demoted.");
+      return;
+    }
+
     setBusy(true);
     setNotice(null);
     setError(null);
@@ -240,6 +250,37 @@ export default function UsersPage() {
       }
 
       setNotice(action === "block" ? "User blocked." : "User unblocked.");
+      await refreshUsers();
+    } catch {
+      setError("Could not reach the user management service.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function approveUser(user: ManagedUser, role: "user" | "admin") {
+    setBusy(true);
+    setNotice(null);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/users/${encodeURIComponent(user.id)}/approve`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role }),
+      });
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        setError(result.error ?? "Could not approve that user.");
+        return;
+      }
+
+      setNotice(
+        role === "admin"
+          ? `${user.firstName} approved as Admin.`
+          : `${user.firstName} approved and can now sign in.`,
+      );
       await refreshUsers();
     } catch {
       setError("Could not reach the user management service.");
@@ -411,17 +452,48 @@ export default function UsersPage() {
                   <td>{formatDate(user.updatedAt)}</td>
                   <td>
                     <div className={styles.actions}>
+                      {managerRole === "superadmin" &&
+                      user.accountStatus === "pending" &&
+                      !user.isBlocked ? (
+                        <>
+                          <button
+                            className={styles.approve}
+                            type="button"
+                            disabled={busy}
+                            onClick={() => void approveUser(user, "user")}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            className={styles.approveAdmin}
+                            type="button"
+                            disabled={busy}
+                            onClick={() => void approveUser(user, "admin")}
+                          >
+                            Approve as Admin
+                          </button>
+                        </>
+                      ) : null}
                       <button className={styles.linkButton} type="button" onClick={() => openEdit(user)}>
                         Edit
                       </button>
-                      <button
-                        className={user.isBlocked ? styles.secondary : styles.danger}
-                        type="button"
-                        disabled={busy}
-                        onClick={() => void changeBlockState(user)}
-                      >
-                        {user.isBlocked ? "Unblock" : "Block"}
-                      </button>
+                      {user.protected ? (
+                        <span
+                          className={styles.protected}
+                          title="The last active Superadmin cannot be blocked or demoted."
+                        >
+                          Protected
+                        </span>
+                      ) : (
+                        <button
+                          className={user.isBlocked ? styles.secondary : styles.danger}
+                          type="button"
+                          disabled={busy}
+                          onClick={() => void changeBlockState(user)}
+                        >
+                          {user.isBlocked ? "Unblock" : "Block"}
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -451,7 +523,7 @@ export default function UsersPage() {
           <span>
             Showing {visibleUsers.length} of {users.length} users
           </span>
-          <span>Role and status changes are enforced on the server.</span>
+          <span>Approval, role, and status changes are enforced on the server.</span>
         </div>
       </section>
 
@@ -506,20 +578,30 @@ export default function UsersPage() {
                   </label>
                 ) : null}
                 {managerRole === "superadmin" ? (
-                  <label className={styles.field}>
-                    Role
-                    <select
-                      value={form.role}
-                      onChange={(event) => setForm({ ...form, role: event.target.value as Role })}
-                    >
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
-                      <option value="superadmin">Superadmin</option>
-                    </select>
-                    {fieldErrors.role ? (
-                      <span className={styles.fieldError}>{fieldErrors.role}</span>
-                    ) : null}
-                  </label>
+                  modal.mode === "edit" && modal.user.protected ? (
+                    <div className={styles.field}>
+                      Role
+                      <input value="Superadmin" readOnly />
+                      <span className={styles.fieldNote}>
+                        The last active Superadmin cannot be demoted.
+                      </span>
+                    </div>
+                  ) : (
+                    <label className={styles.field}>
+                      Role
+                      <select
+                        value={form.role}
+                        onChange={(event) => setForm({ ...form, role: event.target.value as Role })}
+                      >
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                        <option value="superadmin">Superadmin</option>
+                      </select>
+                      {fieldErrors.role ? (
+                        <span className={styles.fieldError}>{fieldErrors.role}</span>
+                      ) : null}
+                    </label>
+                  )
                 ) : (
                   <div className={styles.field}>
                     Role
