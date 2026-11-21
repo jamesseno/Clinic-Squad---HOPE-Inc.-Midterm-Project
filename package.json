@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "verify:seed": "node scripts/verify-seed.mjs",
     "verify:registration": "node --env-file=.env.local scripts/verify-registration.mjs",
-    "verify:auth": "node --env-file=.env.local scripts/verify-auth.mjs"
+    "verify:auth": "node --env-file=.env.local scripts/verify-auth.mjs",
+    "verify:reset": "node --env-file=.env.local scripts/verify-reset-password.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
