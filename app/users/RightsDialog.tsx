@@ -51,6 +51,7 @@ export default function RightsDialog({ user, onClose, onSaved }: RightsDialogPro
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
 
   const loadRights = useCallback(async () => {
     setLoading(true);
@@ -83,15 +84,6 @@ export default function RightsDialog({ user, onClose, onSaved }: RightsDialogPro
     void loadRights();
   }, [loadRights]);
 
-  useEffect(() => {
-    closeRef.current?.focus();
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape" && !saving) onClose();
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose, saving]);
-
   const dirty = useMemo(() => {
     if (draft.size !== saved.size) return true;
     for (const id of draft) {
@@ -99,6 +91,42 @@ export default function RightsDialog({ user, onClose, onSaved }: RightsDialogPro
     }
     return false;
   }, [draft, saved]);
+
+  const closeSafely = useCallback(() => {
+    if (saving) return;
+    if (dirty && !window.confirm("Discard unsaved rights changes?")) return;
+    onClose();
+  }, [dirty, onClose, saving]);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeSafely();
+        return;
+      }
+
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), input:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => element.offsetParent !== null);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [closeSafely]);
 
   function toggleRight(rightId: number) {
     setDraft((current) => {
@@ -163,8 +191,9 @@ export default function RightsDialog({ user, onClose, onSaved }: RightsDialogPro
   const totalRights = modules.reduce((sum, module) => sum + module.rights.length, 0);
 
   return (
-    <div className={styles.overlay} role="presentation" onMouseDown={() => !saving && onClose()}>
+    <div className={styles.overlay} role="presentation" onMouseDown={closeSafely}>
       <section
+        ref={dialogRef}
         className={`${styles.modal} ${styles.modalWide}`}
         role="dialog"
         aria-modal="true"
@@ -184,7 +213,7 @@ export default function RightsDialog({ user, onClose, onSaved }: RightsDialogPro
             className={styles.iconButton}
             type="button"
             aria-label="Close rights dialog"
-            onClick={onClose}
+            onClick={closeSafely}
             disabled={saving}
           >
             ×
@@ -331,7 +360,7 @@ export default function RightsDialog({ user, onClose, onSaved }: RightsDialogPro
             {dirty ? " · unsaved changes" : ""}
           </span>
           <div className={styles.modalActions}>
-            <button className={styles.secondary} type="button" onClick={onClose} disabled={saving}>
+            <button className={styles.secondary} type="button" onClick={closeSafely} disabled={saving}>
               Cancel
             </button>
             <button

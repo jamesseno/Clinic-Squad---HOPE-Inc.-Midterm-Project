@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import styles from "./SetPassword.module.css";
 
 export default function SetPasswordPage() {
   const [ready, setReady] = useState(false);
@@ -49,39 +50,43 @@ export default function SetPasswordPage() {
   }
 
   return (
-    <main>
-      <h1>Set your password</h1>
-      <p>This invitation is for one-time account setup. Choose a password of at least 12 characters.</p>
-      {ready ? (
-        <form onSubmit={handleSubmit}>
-          <label>
-            New password
-            <input
-              autoComplete="new-password"
-              minLength={12}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-              type="password"
-              value={password}
-            />
-          </label>
-          <label>
-            Confirm password
-            <input
-              autoComplete="new-password"
-              minLength={12}
-              onChange={(event) => setConfirmation(event.target.value)}
-              required
-              type="password"
-              value={confirmation}
-            />
-          </label>
-          <button disabled={submitting} type="submit">
-            {submitting ? "Saving..." : "Set password"}
-          </button>
-        </form>
-      ) : null}
-      {message ? <p role="status">{message}</p> : null}
+    <main className={styles.page}>
+      <section className={styles.card} aria-labelledby="set-password-title">
+        <h1 id="set-password-title">Set your password</h1>
+        <p className={styles.intro}>
+          This invitation is for one-time account setup. Choose a password of at least 12 characters.
+        </p>
+        {ready ? (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <label className={styles.field}>
+              New password
+              <input
+                autoComplete="new-password"
+                minLength={12}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+                type="password"
+                value={password}
+              />
+            </label>
+            <label className={styles.field}>
+              Confirm password
+              <input
+                autoComplete="new-password"
+                minLength={12}
+                onChange={(event) => setConfirmation(event.target.value)}
+                required
+                type="password"
+                value={confirmation}
+              />
+            </label>
+            <button className={styles.submit} disabled={submitting} type="submit">
+              {submitting ? "Saving..." : "Set password"}
+            </button>
+          </form>
+        ) : null}
+        {message ? <p className={styles.message} role="status" aria-live="polite">{message}</p> : null}
+      </section>
     </main>
   );
 }

@@ -281,7 +281,11 @@
   padding: 12px;
   border: 1px solid #e7e4ec;
   border-radius: 8px;
+  background: #fff;
   color: #25232d;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
   text-decoration: none;
   transition: 160ms ease;
 }
@@ -313,6 +317,16 @@
 .moduleTile small {
   margin-top: 3px;
   color: #777283;
+  font-size: 12px;
+}
+
+.moduleNotice {
+  margin: 0 0 12px;
+  border: 1px solid #dcd8f6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #f7f5ff;
+  color: #4f45b8;
   font-size: 12px;
 }
 

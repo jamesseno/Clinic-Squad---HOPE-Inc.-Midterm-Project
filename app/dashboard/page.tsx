@@ -45,6 +45,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [data, setData] = useState<DashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [moduleNotice, setModuleNotice] = useState<string | null>(null);
 
   const loadDashboard = useCallback(async () => {
     try {
@@ -96,10 +97,15 @@ export default function DashboardPage() {
             Overview
           </Link>
           {data.modules.map((module) => (
-            <Link className={styles.navLink} href="/dashboard" key={module.id}>
+            <button
+              className={styles.navButton}
+              type="button"
+              key={module.id}
+              onClick={() => setModuleNotice(`${module.name} is available once its module screen is implemented.`)}
+            >
               <span className={styles.navIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
               {module.name}
-            </Link>
+            </button>
           ))}
 
           {isManager && (
@@ -165,18 +171,28 @@ export default function DashboardPage() {
               </div>
               <span className={styles.badge}>Rights-aware</span>
             </div>
+            {moduleNotice ? (
+              <p className={styles.moduleNotice} role="status" aria-live="polite">
+                {moduleNotice}
+              </p>
+            ) : null}
 
             {data.modules.length > 0 ? (
               <div className={styles.moduleGrid}>
                 {data.modules.map((module) => (
-                  <Link className={styles.moduleTile} href="/dashboard" key={module.id}>
+                  <button
+                    className={styles.moduleTile}
+                    type="button"
+                    key={module.id}
+                    onClick={() => setModuleNotice(`${module.name} is available once its module screen is implemented.`)}
+                  >
                     <span className={styles.moduleIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
                     <span>
                       <strong>{module.name}</strong>
                       <small>{module.description ?? "Workspace module"}</small>
                     </span>
                     <span aria-hidden="true">→</span>
-                  </Link>
+                  </button>
                 ))}
               </div>
             ) : (
