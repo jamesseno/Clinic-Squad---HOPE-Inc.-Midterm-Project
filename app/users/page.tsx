@@ -70,7 +70,6 @@ export default function UsersPage() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [busy, setBusy] = useState(false);
-  const [rightsDialogUser, setRightsDialogUser] = useState<ManagedUser | null>(null);
 
   const loadUsers = useCallback(async () => {
     try {
@@ -290,10 +289,6 @@ export default function UsersPage() {
     } finally {
       setBusy(false);
     }
-  }
-
-  function openRightsDialog(user: ManagedUser) {
-    setRightsDialogUser(user);
   }
 
   function openRights(user: ManagedUser) {
