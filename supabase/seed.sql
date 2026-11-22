@@ -1,7 +1,7 @@
 INSERT INTO public.app_role (role_code, role_name, description)
 VALUES
     ('superadmin', 'Superadmin', 'Full access to all modules and actions.'),
-    ('admin', 'Admin', 'Manages users; module rights are granted per user.'),
+    ('admin', 'Admin', 'Manages users and has full Customer, Product, and Price access.'),
     ('user', 'User', 'Standard account; module rights are granted per user.')
 ON CONFLICT (role_code) DO UPDATE
 SET role_name = EXCLUDED.role_name,
@@ -95,18 +95,37 @@ SET right_name = EXCLUDED.right_name,
     display_order = EXCLUDED.display_order,
     is_active = EXCLUDED.is_active;
 
--- The guide does not enumerate a default Admin/User role-to-right matrix.
--- Module rights are assigned per user through the Rights dialog, so only the
--- Superadmin default grant is seeded. Prune stale non-Superadmin default grants
--- on rerun; individual user_permission rows are never touched by this seed.
+-- Sprint 2 grants Admin the full Customer, Product, and Price action set.
+-- Other Admin/User module rights remain individually assigned. Individual
+-- user_permission rows are never touched by this seed.
 DELETE FROM public.role_permission AS rp
 USING public.app_role AS r
 WHERE rp.role_id = r.role_id
-  AND r.role_code <> 'superadmin';
+  AND r.role_code NOT IN ('superadmin', 'admin');
+
+DELETE FROM public.role_permission AS rp
+USING public.app_role AS r,
+      public.rights_catalog AS rc,
+      public.module AS m
+WHERE rp.role_id = r.role_id
+  AND rp.right_id = rc.right_id
+  AND rc.module_id = m.module_id
+  AND r.role_code = 'admin'
+  AND m.module_code NOT IN ('customer', 'product');
 
 INSERT INTO public.role_permission (role_id, right_id)
 SELECT r.role_id, rc.right_id
 FROM public.app_role AS r
 CROSS JOIN public.rights_catalog AS rc
 WHERE r.role_code = 'superadmin'
+ON CONFLICT (role_id, right_id) DO NOTHING;
+
+INSERT INTO public.role_permission (role_id, right_id)
+SELECT r.role_id, rc.right_id
+FROM public.app_role AS r
+JOIN public.module AS m
+  ON m.module_code IN ('customer', 'product')
+JOIN public.rights_catalog AS rc
+  ON rc.module_id = m.module_id
+WHERE r.role_code = 'admin'
 ON CONFLICT (role_id, right_id) DO NOTHING;

@@ -1,4 +1,4 @@
--- Read-only verification for S1-DBA-05.
+-- Read-only verification for the seeded role and rights catalogue.
 -- Run after the migrations and supabase/seed.sql have been applied to an authorized database.
 -- It raises an exception on any mismatch and reports profile counts for roster review.
 
@@ -68,47 +68,36 @@ BEGIN
         RAISE EXCEPTION 'Expected 36 rights, found %', actual_right_count;
     END IF;
 
-    -- Guide 3.8 enumerates rights, not a default Admin/User role matrix.
-    -- Seed default: Superadmin has all 36; Admin and User have no module rights
-    -- until rights are granted per user through the Rights dialog.
+    -- Sprint 2 default: Superadmin has all 36; Admin has the 9 Customer,
+    -- Product, and Price rights; User has no role-level module rights.
     IF EXISTS (
-        WITH expected_rights(module_code, right_code) AS (
-            SELECT catalogue.module_code, action.right_code
-            FROM (
-                VALUES
-                    ('customer', ARRAY['add_customer', 'edit_customer', 'delete_customer']),
-                    ('product', ARRAY['add_product', 'edit_product', 'delete_product', 'add_price', 'edit_price', 'delete_price']),
-                    ('human_resources', ARRAY['add_job', 'edit_job', 'delete_job', 'add_department', 'edit_department', 'delete_department', 'add_employee', 'edit_employee', 'delete_employee', 'view_job_history', 'add_job_history', 'edit_job_history', 'delete_job_history']),
-                    ('sales', ARRAY['add_sale', 'edit_sale', 'delete_sale', 'view_sale_detail', 'add_sale_detail', 'edit_sale_detail', 'delete_sale_detail']),
-                    ('reports', ARRAY['top_customers', 'product_master_list', 'top_products', 'active_employees', 'all_employees', 'employee_job_history', 'top_sales'])
-            ) AS catalogue(module_code, right_codes)
-            CROSS JOIN LATERAL unnest(catalogue.right_codes) AS action(right_code)
-        ),
-        expected(role_code, right_code) AS (
-            SELECT r.role_code, er.right_code
-            FROM public.app_role AS r
-            CROSS JOIN expected_rights AS er
-            WHERE r.role_code = 'superadmin'
+        WITH expected(role_code, right_id) AS (
+            SELECT 'superadmin', rc.right_id
+            FROM public.rights_catalog AS rc
+            UNION ALL
+            SELECT 'admin', rc.right_id
+            FROM public.rights_catalog AS rc
+            JOIN public.module AS m USING (module_id)
+            WHERE m.module_code IN ('customer', 'product')
         ),
         actual AS (
-            SELECT r.role_code, rc.right_code
+            SELECT r.role_code, rp.right_id
             FROM public.role_permission AS rp
             JOIN public.app_role AS r USING (role_id)
-            JOIN public.rights_catalog AS rc USING (right_id)
         )
-        SELECT role_code, right_code FROM (
-            SELECT role_code, right_code FROM expected
+        SELECT role_code, right_id FROM (
+            SELECT role_code, right_id FROM expected
             EXCEPT
-            SELECT role_code, right_code FROM actual
+            SELECT role_code, right_id FROM actual
         ) AS missing
         UNION ALL
-        SELECT role_code, right_code FROM (
-            SELECT role_code, right_code FROM actual
+        SELECT role_code, right_id FROM (
+            SELECT role_code, right_id FROM actual
             EXCEPT
-            SELECT role_code, right_code FROM expected
+            SELECT role_code, right_id FROM expected
         ) AS extra
     ) THEN
-        RAISE EXCEPTION 'Default role permissions do not match the seeded Superadmin-only matrix';
+        RAISE EXCEPTION 'Default role permissions do not match the Sprint 2 matrix';
     END IF;
 END $$;
 
