@@ -1,4 +1,4 @@
-# S2-SM-04: Update velocity and burndown
+﻿# S2-SM-04: Update velocity and burndown
 
 Issue: #125
 
