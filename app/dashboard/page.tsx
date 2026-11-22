@@ -97,15 +97,26 @@ export default function DashboardPage() {
             Overview
           </Link>
           {data.modules.map((module) => (
-            <button
-              className={styles.navButton}
-              type="button"
-              key={module.id}
-              onClick={() => setModuleNotice(`${module.name} is available once its module screen is implemented.`)}
-            >
-              <span className={styles.navIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
-              {module.name}
-            </button>
+            module.code === "customer" || module.code === "product" ? (
+              <Link
+                className={styles.navLink}
+                href={module.code === "customer" ? "/customers" : "/products"}
+                key={module.id}
+              >
+                <span className={styles.navIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
+                {module.name}
+              </Link>
+            ) : (
+              <button
+                className={styles.navButton}
+                type="button"
+                key={module.id}
+                onClick={() => setModuleNotice(`${module.name} is available once its module screen is implemented.`)}
+              >
+                <span className={styles.navIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
+                {module.name}
+              </button>
+            )
           ))}
 
           {isManager && (
@@ -180,19 +191,34 @@ export default function DashboardPage() {
             {data.modules.length > 0 ? (
               <div className={styles.moduleGrid}>
                 {data.modules.map((module) => (
-                  <button
-                    className={styles.moduleTile}
-                    type="button"
-                    key={module.id}
-                    onClick={() => setModuleNotice(`${module.name} is available once its module screen is implemented.`)}
-                  >
-                    <span className={styles.moduleIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
-                    <span>
-                      <strong>{module.name}</strong>
-                      <small>{module.description ?? "Workspace module"}</small>
-                    </span>
-                    <span aria-hidden="true">→</span>
-                  </button>
+                  module.code === "customer" || module.code === "product" ? (
+                    <Link
+                      className={styles.moduleTile}
+                      href={module.code === "customer" ? "/customers" : "/products"}
+                      key={module.id}
+                    >
+                      <span className={styles.moduleIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
+                      <span>
+                        <strong>{module.name}</strong>
+                        <small>{module.description ?? "Workspace module"}</small>
+                      </span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  ) : (
+                    <button
+                      className={styles.moduleTile}
+                      type="button"
+                      key={module.id}
+                      onClick={() => setModuleNotice(`${module.name} is available once its module screen is implemented.`)}
+                    >
+                      <span className={styles.moduleIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
+                      <span>
+                        <strong>{module.name}</strong>
+                        <small>{module.description ?? "Workspace module"}</small>
+                      </span>
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  )
                 ))}
               </div>
             ) : (

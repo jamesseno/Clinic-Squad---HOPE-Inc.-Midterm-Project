@@ -15,10 +15,11 @@ Supabase migration files are in `supabase/migrations/` and are applied in timest
 - `20261119084800_app_user_roles_modules_and_permissions.sql` creates auth-linked user profiles, roles, modules, the rights catalogue, and soft-deletable user permissions. It enables Row Level Security on these tables.
 - `20261121002205_password_reset_token.sql` adds server-managed, hashed password reset tokens linked to application users.
 - `20261121005600_role_permission_mapping.sql` adds the role-to-right mapping table.
+- `20261122130000_sprint2_customer_product_access.sql` adds Customer/Product/Price row-level access policies, action guards, an as-of price lookup, and supporting indexes.
 
 `seed.sql` is configured as the Supabase seed file. It converges on rerun: it upserts the five core modules, three default roles, and the exact 36-right catalogue, then prunes stale default-role grants. Individual `user_permission` rows are never modified by the seed.
 
-The action names come from the *HOPE Sprint 1 From-Scratch Guide*, section 3.8 (printed pages 12-13): Customer 3, Product 6, Human Resources 13, Sales 7, Reports 7. The guide does not enumerate a default Admin/User role-to-right matrix. The seed therefore grants all 36 rights to Superadmin and no module rights to Admin or User by default; module rights are assigned per user through the Rights dialog. That role-default decision should still be confirmed by the team.
+The action names come from the *HOPE Sprint 1 From-Scratch Guide*, section 3.8 (printed pages 12-13): Customer 3, Product 6, Human Resources 13, Sales 7, Reports 7. Sprint 2 grants Admin all 9 Customer, Product, and Price rights as approved for this work; Superadmin retains all 36 rights, and User has no module rights by default. Other module rights can be assigned per user through the Rights dialog.
 
 The supplied guide requires deliberately provisioned team Superadmins and one-time password setup, while keeping public signup behavior a separate decision. The team roster has been supplied separately and should be provided to the trusted provisioning script at runtime rather than committed to seed files. Do not put credentials, token values, or service-role keys in seed files or source control.
 
@@ -92,7 +93,7 @@ ORDER BY r.role_code;
 SELECT count(*) AS total_rights FROM public.rights_catalog;
 ```
 
-Expected counts are 36 total rights, 36 for Superadmin, 0 for Admin, and 0 for User by default. Only run this against a database you are authorized to modify; `db push --remote` targets the linked database and can change production.
+Expected counts are 36 total rights, 36 for Superadmin, 9 for Admin, and 0 for User by default. Only run this against a database you are authorized to modify; `db push --remote` targets the linked database and can change production.
 
 ## Offline verification
 
@@ -104,7 +105,7 @@ npm run verify:seed
 npm run typecheck
 ```
 
-`verify:seed` parses `supabase/seed.sql` and confirms the three roles, five modules, 36 rights, derived role counts, absence of roster/credential material, and the presence of the stale-grant cleanup. It prints `S1-DBA-05 seed verification: PASS` when all checks succeed. See `docs/dba/s1-dba-05-verification.md` for the recorded results of this check.
+`verify:seed` parses `supabase/seed.sql` and confirms the three roles, five modules, 36 rights, Sprint 2 role defaults, absence of roster/credential material, and the presence of stale-grant cleanup. It prints `Sprint 2 seed verification: PASS` when all checks succeed. The S1 verification record captures the earlier seed state.
 
 ## First-time setup
 

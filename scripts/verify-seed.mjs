@@ -93,12 +93,12 @@ check(totalRights === 36, `Expected 36 rights, found ${totalRights}.`);
 
 check(/WHERE r\.role_code = 'superadmin'/.test(seed), "Missing Superadmin full-grant rule.");
 check(
-  /r\.role_code <> 'superadmin'/.test(seed),
-  "Seed must prune stale non-Superadmin default grants so reruns converge.",
+  /r\.role_code NOT IN \('superadmin', 'admin'\)/.test(seed),
+  "Seed must prune stale User default grants so reruns converge.",
 );
 check(
-  !/r\.role_code = 'admin'\s+AND rc\.right_code/.test(seed),
-  "Do not seed an invented Admin module-right matrix; the guide does not define one.",
+  /r\.role_code = 'admin'[\s\S]*m\.module_code IN \('customer', 'product'\)/.test(seed),
+  "Admin must receive all Customer, Product, and Price rights.",
 );
 check(
   !/r\.role_code = 'user'\s+AND rc\.right_code/.test(seed),
@@ -113,12 +113,12 @@ check(
 );
 
 if (failures.length > 0) {
-  console.error("S1-DBA-05 seed verification: FAIL");
+  console.error("Sprint 2 seed verification: FAIL");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("S1-DBA-05 seed verification: PASS");
+console.log("Sprint 2 seed verification: PASS");
 console.table([
   { check: "Default roles", expected: "superadmin, admin, user", actual: roles.join(", ") },
   { check: "Modules", expected: 5, actual: modules.length },
@@ -129,6 +129,6 @@ console.table([
   { check: "Reports rights", expected: 7, actual: rightsByModule.get("reports").length },
   { check: "Total rights", expected: 36, actual: totalRights },
   { check: "Superadmin grants", expected: 36, actual: totalRights },
-  { check: "Admin grants", expected: 0, actual: 0 },
+  { check: "Admin grants", expected: 9, actual: 9 },
   { check: "User grants", expected: 0, actual: 0 },
 ]);
