@@ -15,7 +15,8 @@
     "verify:users": "node --env-file=.env.local scripts/verify-user-management.mjs",
     "verify:approval": "node --env-file=.env.local scripts/verify-user-approval.mjs",
     "verify:rights": "node --env-file=.env.local scripts/verify-user-rights.mjs",
-    "test:smoke": "node --env-file=.env.local scripts/smoke-login-dashboard.mjs"
+    "test:smoke": "node --env-file=.env.local scripts/smoke-login-dashboard.mjs",
+    "db:bundle": "node scripts/bundle-supabase-setup.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
