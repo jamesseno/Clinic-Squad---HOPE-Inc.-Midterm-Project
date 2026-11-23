@@ -174,8 +174,13 @@ export function validatePriceInput(payload: unknown): ValidationResult<PriceInpu
   }
   if (typeof unitprice !== "number" || !Number.isFinite(unitprice) || unitprice <= 0 || unitprice > 99999999.99) {
     fieldErrors.unitprice = "Enter a price greater than 0 and no greater than 99,999,999.99.";
-  } else if (Math.round(unitprice * 100) !== unitprice * 100) {
-    fieldErrors.unitprice = "Price can have no more than 2 decimal places.";
+  } else {
+    // Compare in cents with a tolerance: 19.99 * 100 is 1998.9999999999998 in
+    // binary floating point, so a strict equality check rejects valid prices.
+    const cents = Math.round(unitprice * 100);
+    if (Math.abs(unitprice * 100 - cents) > 1e-6) {
+      fieldErrors.unitprice = "Price can have no more than 2 decimal places.";
+    }
   }
   if (Object.keys(fieldErrors).length > 0) return failure(fieldErrors);
 

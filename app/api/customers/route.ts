@@ -23,8 +23,8 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const includeDeleted = url.searchParams.get("includeDeleted") === "true";
-  if (includeDeleted && context.access.roleCode === "user") {
-    return fail("Only Admins can view deleted customers.", 403);
+  if (includeDeleted && !hasRight(context, "delete_customer")) {
+    return fail("You need the delete-customer right to view deleted customers.", 403);
   }
 
   const { data, error } = await context.admin
@@ -53,7 +53,7 @@ export async function GET(request: Request) {
         add: hasRight(context, "add_customer"),
         edit: hasRight(context, "edit_customer"),
         delete: hasRight(context, "delete_customer"),
-        canViewDeleted: context.access.roleCode !== "user",
+        canViewDeleted: hasRight(context, "delete_customer"),
         canRestore: hasRight(context, "delete_customer") && includeDeleted,
       },
     },

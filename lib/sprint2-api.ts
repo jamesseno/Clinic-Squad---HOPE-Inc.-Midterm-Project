@@ -62,6 +62,19 @@ export function mapBusinessDatabaseError(
   error: { code?: string; message?: string },
   operation: string,
 ) {
+  // PostgREST returns PGRST205 when a table is not in its schema cache. That
+  // means the database has not had the business migrations applied yet, which
+  // is an environment problem rather than a bad request.
+  if (error.code === "PGRST205") {
+    console.error(
+      `Sprint 2 ${operation} failed: a required table is missing. Apply the Supabase migrations (see supabase/README.md).`,
+    );
+    return {
+      status: 503,
+      error:
+        "The database is not ready. Apply the Supabase migrations, then try again.",
+    };
+  }
   if (error.code === "42501") {
     return { status: 403, error: "You do not have permission to perform this action." };
   }

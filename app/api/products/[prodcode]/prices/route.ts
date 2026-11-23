@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { canReadPrices, getSprint2ApiContext, hasRight, isManager, mapBusinessDatabaseError } from "@/lib/sprint2-api";
+import { canReadPrices, getSprint2ApiContext, hasRight, mapBusinessDatabaseError } from "@/lib/sprint2-api";
 import { validatePriceInput } from "@/lib/sprint2-validation";
 
 export const runtime = "nodejs";
@@ -25,8 +25,8 @@ export async function GET(request: Request, route: RouteContext) {
   if (!canReadPrices(context.access)) return fail("You do not have Price access.", 403);
 
   const includeDeleted = new URL(request.url).searchParams.get("includeDeleted") === "true";
-  if (includeDeleted && !isManager(context.access)) {
-    return fail("Only Admins can view deleted prices.", 403);
+  if (includeDeleted && !hasRight(context, "delete_price")) {
+    return fail("You need the delete-price right to view deleted prices.", 403);
   }
 
   const { data: product, error: productError } = await context.admin
