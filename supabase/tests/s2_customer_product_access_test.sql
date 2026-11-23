@@ -65,7 +65,7 @@ SET LOCAL request.jwt.claims =
 SET LOCAL ROLE authenticated;
 
 INSERT INTO public.customer (custno, custname, address, payterm)
-VALUES ('Z9901', 'Sprint Test Customer', 'Temporary test address', '30D');
+VALUES ('Z9901', 'Sprint Test Cust', 'Temporary test address', '30D');
 INSERT INTO public.product (prodcode, description, unit)
 VALUES ('ZZ9901', 'Sprint Test Product', 'ea');
 INSERT INTO public.pricehist (prodcode, effdate, unitprice)
@@ -92,7 +92,7 @@ SELECT set_config(
 );
 
 UPDATE public.customer
-SET custname = 'Updated Sprint Customer'
+SET custname = 'Updated Sprint Cust'
 WHERE custno = 'Z9901';
 
 UPDATE public.pricehist
@@ -115,7 +115,7 @@ WHERE custno = 'Z9901';
 SELECT set_config(
     's2_test.admin_edit',
     (
-        (SELECT custname FROM public.customer WHERE custno = 'Z9901') = 'Updated Sprint Customer'
+        (SELECT custname FROM public.customer WHERE custno = 'Z9901') = 'Updated Sprint Cust'
         AND (SELECT unitprice FROM public.pricehist
              WHERE prodcode = 'ZZ9901' AND effdate = '2026-02-01') = 13.00
     )::text,
@@ -179,7 +179,7 @@ DO $$
 BEGIN
     BEGIN
         INSERT INTO public.customer (custno, custname, address, payterm)
-        VALUES ('Z9902', 'Unauthorized Customer', 'Should not persist', 'COD');
+        VALUES ('Z9902', 'Unauthorized Cust', 'Should not persist', 'COD');
         RAISE EXCEPTION 'Expected RLS to reject unauthorized customer creation.';
     EXCEPTION
         WHEN insufficient_privilege THEN

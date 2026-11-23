@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { hasAnyBusinessRight } from "@/lib/business-access";
-import { canReadPrices, canReadProducts, getSprint2ApiContext, hasRight, isManager, mapBusinessDatabaseError } from "@/lib/sprint2-api";
+import { canReadPrices, canReadProducts, getSprint2ApiContext, hasRight, mapBusinessDatabaseError } from "@/lib/sprint2-api";
 import { validateProductInput } from "@/lib/sprint2-validation";
 
 export const runtime = "nodejs";
@@ -33,8 +33,8 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const includeDeleted = url.searchParams.get("includeDeleted") === "true";
-  if (includeDeleted && !isManager(context.access)) {
-    return fail("Only Admins can view deleted products.", 403);
+  if (includeDeleted && !hasRight(context, "delete_product")) {
+    return fail("You need the delete-product right to view deleted products.", 403);
   }
 
   const rawAsOf = url.searchParams.get("asOf") ?? new Date().toISOString().slice(0, 10);
@@ -92,7 +92,7 @@ export async function GET(request: Request) {
         add: hasRight(context, "add_product"),
         edit: hasRight(context, "edit_product"),
         delete: hasRight(context, "delete_product"),
-        canViewDeleted: isManager(context.access),
+        canViewDeleted: hasRight(context, "delete_product"),
         canViewPrices: canReadPrices(context.access),
         addPrice: hasRight(context, "add_price"),
         editPrice: hasRight(context, "edit_price"),
