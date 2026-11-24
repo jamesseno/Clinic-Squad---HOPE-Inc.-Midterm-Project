@@ -1,6 +1,6 @@
 -- Sprint 4: Sales, Payments, Reports and Audit access control and views.
 
--- Ensure soft-delete columns exist on sales tables (base migration adds them, but be safe).
+-- Ensure soft-delete columns exist on sales tables.
 DO $$
 BEGIN
   FOR r IN SELECT unnest(ARRAY['sales','salesdetail','payment']) AS t LOOP
@@ -69,27 +69,41 @@ DROP POLICY IF EXISTS sales_read ON public.sales;
 CREATE POLICY sales_read ON public.sales FOR SELECT TO authenticated
   USING ((app_private.has_right('view_sale') OR app_private.has_right('add_sale') OR app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'))
          AND (NOT is_deleted OR app_private.has_right('delete_sale')));
-DROP POLICY IF EXISTS sales_add ON public.sales FOR INSERT TO authenticated
+
+DROP POLICY IF EXISTS sales_add ON public.sales;
+CREATE POLICY sales_add ON public.sales FOR INSERT TO authenticated
   WITH CHECK (app_private.has_right('add_sale'));
-DROP POLICY IF EXISTS sales_update ON public.sales FOR UPDATE TO authenticated
+
+DROP POLICY IF EXISTS sales_update ON public.sales;
+CREATE POLICY sales_update ON public.sales FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'))
   WITH CHECK (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'));
 
 -- Salesdetail RLS.
-DROP POLICY IF EXISTS salesdetail_read ON public.salesdetail FOR SELECT TO authenticated
+DROP POLICY IF EXISTS salesdetail_read ON public.salesdetail;
+CREATE POLICY salesdetail_read ON public.salesdetail FOR SELECT TO authenticated
   USING (app_private.has_right('view_sale') OR app_private.has_right('add_sale') OR app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'));
-DROP POLICY IF EXISTS salesdetail_add ON public.salesdetail FOR INSERT TO authenticated
+
+DROP POLICY IF EXISTS salesdetail_add ON public.salesdetail;
+CREATE POLICY salesdetail_add ON public.salesdetail FOR INSERT TO authenticated
   WITH CHECK (app_private.has_right('add_sale'));
-DROP POLICY IF EXISTS salesdetail_update ON public.salesdetail FOR UPDATE TO authenticated
+
+DROP POLICY IF EXISTS salesdetail_update ON public.salesdetail;
+CREATE POLICY salesdetail_update ON public.salesdetail FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'))
   WITH CHECK (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'));
 
 -- Payment RLS.
-DROP POLICY IF EXISTS payment_read ON public.payment FOR SELECT TO authenticated
+DROP POLICY IF EXISTS payment_read ON public.payment;
+CREATE POLICY payment_read ON public.payment FOR SELECT TO authenticated
   USING (app_private.has_right('view_payment') OR app_private.has_right('add_payment') OR app_private.has_right('edit_payment') OR app_private.has_right('delete_payment'));
-DROP POLICY IF EXISTS payment_add ON public.payment FOR INSERT TO authenticated
+
+DROP POLICY IF EXISTS payment_add ON public.payment;
+CREATE POLICY payment_add ON public.payment FOR INSERT TO authenticated
   WITH CHECK (app_private.has_right('add_payment'));
-DROP POLICY IF EXISTS payment_update ON public.payment FOR UPDATE TO authenticated
+
+DROP POLICY IF EXISTS payment_update ON public.payment;
+CREATE POLICY payment_update ON public.payment FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_payment') OR app_private.has_right('delete_payment'))
   WITH CHECK (app_private.has_right('edit_payment') OR app_private.has_right('delete_payment'));
 
@@ -167,6 +181,3 @@ CREATE INDEX IF NOT EXISTS sales_empno_idx ON public.sales(empno);
 CREATE INDEX IF NOT EXISTS sales_salesdate_idx ON public.sales(salesdate);
 CREATE INDEX IF NOT EXISTS salesdetail_transno_idx ON public.salesdetail(transno);
 CREATE INDEX IF NOT EXISTS payment_transno_idx ON public.payment(transno);
-
--- Child-delete guard: sales with details or payments cannot be soft-deleted.
--- (Already handled by base migration's trg_check_children for 'sales'.)
