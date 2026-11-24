@@ -23,7 +23,7 @@ export type BusinessRight =
   | "add_employee"
   | "edit_employee"
   | "delete_employee"
-  | "view_sale"
+| "view_sale"
   | "add_sale"
   | "edit_sale"
   | "delete_sale"
@@ -32,7 +32,12 @@ export type BusinessRight =
   | "edit_payment"
   | "delete_payment"
   | "view_report"
-  | "view_audit_log";
+  | "view_audit_log"
+  | "view_job_history"
+  | "add_job_history"
+  | "edit_job_history"
+  | "delete_job_history";
+>>>>>>> s3/issue-86-user-employee-link
 
 export interface BusinessAccess {
   userId: string;
