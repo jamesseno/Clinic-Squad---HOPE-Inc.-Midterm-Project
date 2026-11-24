@@ -312,7 +312,7 @@ export default function HomePage() {
     });
   }
 
-  async function submitPrototypeForm(
+  async function submitAuthForm(
     event: FormEvent<HTMLFormElement>,
     view: "login" | "register" | "reset" | "set-password",
   ) {
@@ -341,7 +341,24 @@ export default function HomePage() {
     }
 
     if (view === "reset") {
-      showAuthView("reset-sent");
+      const email = form.elements.namedItem("email");
+      if (!(email instanceof HTMLInputElement)) return;
+      setFormMessage("Sending reset link...");
+      try {
+        const response = await fetch("/api/auth/reset/request", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email.value }),
+        });
+        const body = (await response.json()) as { message?: string; error?: string };
+        if (!response.ok) {
+          setFormMessage(body.error ?? "Reset request failed. Please try again.");
+          return;
+        }
+        showAuthView("reset-sent");
+      } catch {
+        setFormMessage("Could not reach the reset service.");
+      }
       return;
     }
     if (view === "set-password") {
@@ -373,9 +390,45 @@ export default function HomePage() {
       return;
     }
 
-    setFormMessage(
-      "Prototype only: your account request hasn’t been sent.",
-    );
+    // Register
+    const nameField = form.elements.namedItem("name");
+    const emailField = form.elements.namedItem("email");
+    const phoneField = form.elements.namedItem("phone");
+    const passwordField = form.elements.namedItem("password");
+    if (
+      !(nameField instanceof HTMLInputElement) ||
+      !(emailField instanceof HTMLInputElement) ||
+      !(passwordField instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+    const nameParts = nameField.value.trim().split(/\s+/);
+    const firstName = nameParts[0] ?? "";
+    const lastName = nameParts.slice(1).join(" ") || firstName;
+    setFormMessage("Creating account...");
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: emailField.value,
+          phone: phoneField instanceof HTMLInputElement ? phoneField.value : null,
+          password: passwordField.value,
+        }),
+      });
+      const body = (await response.json()) as { message?: string; error?: string };
+      if (!response.ok) {
+        setFormMessage(body.error ?? "Registration failed. Please try again.");
+        return;
+      }
+      setFormMessage(body.message ?? "Account created. Pending admin approval.");
+      form.reset();
+    } catch {
+      setFormMessage("Could not reach the registration service.");
+    }
+    return;
   }
 
   function togglePassword(field: PasswordField) {
@@ -569,7 +622,7 @@ export default function HomePage() {
             <section className="auth-view" aria-labelledby="auth-title" hidden={authView !== "login"}>
               <h3 id="auth-title" tabIndex={-1}>Sign in to Hope</h3>
               <p className="auth-intro">Welcome back. Let’s get you to work.</p>
-              <form className="auth-form" noValidate onSubmit={(event) => submitPrototypeForm(event, "login")} onInput={() => setFormMessage("")}>
+              <form className="auth-form" noValidate onSubmit={(event) => submitAuthForm(event, "login")} onInput={() => setFormMessage("")}>
                 <label className="field-label" htmlFor="login-email">Email address or username</label>
                 <div className="input-wrap">
                   <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2" /><path d="m3.5 5.5 6.5 5 6.5-5" /></svg>
@@ -600,7 +653,7 @@ export default function HomePage() {
             <section className="auth-view" aria-labelledby="register-title" hidden={authView !== "register"}>
               <h3 id="register-title" tabIndex={-1}>Create your account</h3>
               <p className="auth-intro">Start with your details. Your organization will confirm access.</p>
-              <form className="auth-form" noValidate onSubmit={(event) => submitPrototypeForm(event, "register")} onInput={(event) => {
+              <form className="auth-form" noValidate onSubmit={(event) => submitAuthForm(event, "register")} onInput={(event) => {
                 const form = event.currentTarget;
                 const password = form.elements.namedItem("password");
                 const confirmation = form.elements.namedItem("confirmPassword");
@@ -654,7 +707,7 @@ export default function HomePage() {
             <section className="auth-view" aria-labelledby="reset-title" hidden={authView !== "reset"}>
               <h3 id="reset-title" tabIndex={-1}>Reset your password</h3>
               <p className="auth-intro">Enter your email and we’ll send instructions to reset your password.</p>
-              <form className="auth-form reset-form" noValidate onSubmit={(event) => submitPrototypeForm(event, "reset")} onInput={() => setFormMessage("")}>
+              <form className="auth-form reset-form" noValidate onSubmit={(event) => submitAuthForm(event, "reset")} onInput={() => setFormMessage("")}>
                 <label className="field-label" htmlFor="reset-email">Email address</label>
                 <div className="input-wrap">
                   <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="2" /><path d="m3.5 5.5 6.5 5 6.5-5" /></svg>
@@ -669,8 +722,6 @@ export default function HomePage() {
             <section className="auth-view" aria-labelledby="reset-sent-title" hidden={authView !== "reset-sent"}>
               <h3 id="reset-sent-title" tabIndex={-1}>Check your email</h3>
               <p className="auth-intro">If an account matches that email, reset instructions are on the way. Check your inbox.</p>
-              <p className="form-message is-visible" role="status">Prototype only: no email has been sent.</p>
-              <button className="button button-primary auth-submit prototype-action" type="button" onClick={() => showAuthView("set-password")}>Preview set password screen <span aria-hidden="true">→</span></button>
               <p className="auth-switch"><button type="button" onClick={() => showAuthView("reset")}>Request another link</button></p>
               <p className="auth-switch"><button type="button" onClick={() => showAuthView("login")}>← Back to Log In</button></p>
             </section>
@@ -678,7 +729,7 @@ export default function HomePage() {
             <section className="auth-view" aria-labelledby="set-password-title" hidden={authView !== "set-password"}>
               <h3 id="set-password-title" tabIndex={-1}>Create a new password</h3>
               <p className="auth-intro">Choose a new password for your account.</p>
-              <form className="auth-form" noValidate onSubmit={(event) => submitPrototypeForm(event, "set-password")} onInput={(event) => {
+              <form className="auth-form" noValidate onSubmit={(event) => submitAuthForm(event, "set-password")} onInput={(event) => {
                 const form = event.currentTarget;
                 const password = form.elements.namedItem("newPassword");
                 const confirmation = form.elements.namedItem("confirmNewPassword");
@@ -710,8 +761,8 @@ export default function HomePage() {
             <section className="auth-view" aria-labelledby="password-updated-title" hidden={authView !== "password-updated"}>
               <h3 id="password-updated-title" tabIndex={-1}>Password update confirmation</h3>
               <p className="auth-intro">In the connected version, your new password will be ready to use.</p>
-              <p className="form-message is-visible" role="status">Prototype only: your password hasn’t been changed.</p>
-              <button className="button button-primary auth-submit prototype-action" type="button" onClick={() => showAuthView("login")}>Back to Log In <span aria-hidden="true">→</span></button>
+              <p className="form-message is-visible" role="status">Your password has been updated. You can now sign in.</p>
+              <button className="button button-primary auth-submit" type="button" onClick={() => showAuthView("login")}>Back to Log In <span aria-hidden="true">→</span></button>
             </section>
 
             <p className="auth-footnote"><span aria-hidden="true">◈</span> Secure access for your organization</p>
