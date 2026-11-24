@@ -10,7 +10,29 @@ export type BusinessRight =
   | "delete_product"
   | "add_price"
   | "edit_price"
-  | "delete_price";
+  | "delete_price"
+  | "view_department"
+  | "add_department"
+  | "edit_department"
+  | "delete_department"
+  | "view_job"
+  | "add_job"
+  | "edit_job"
+  | "delete_job"
+  | "view_employee"
+  | "add_employee"
+  | "edit_employee"
+  | "delete_employee"
+  | "view_sale"
+  | "add_sale"
+  | "edit_sale"
+  | "delete_sale"
+  | "view_payment"
+  | "add_payment"
+  | "edit_payment"
+  | "delete_payment"
+  | "view_report"
+  | "view_audit_log";
 
 export interface BusinessAccess {
   userId: string;
