@@ -97,10 +97,10 @@ export default function DashboardPage() {
             Overview
           </Link>
           {data.modules.map((module) => (
-            module.code === "customer" || module.code === "product" ? (
+            module.code === "customer" || module.code === "product" || module.code === "human_resources" ? (
               <Link
                 className={styles.navLink}
-                href={module.code === "customer" ? "/customers" : "/products"}
+                href={module.code === "customer" ? "/customers" : module.code === "product" ? "/products" : "/employees"}
                 key={module.id}
               >
                 <span className={styles.navIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
@@ -191,10 +191,10 @@ export default function DashboardPage() {
             {data.modules.length > 0 ? (
               <div className={styles.moduleGrid}>
                 {data.modules.map((module) => (
-                  module.code === "customer" || module.code === "product" ? (
+                  module.code === "customer" || module.code === "product" || module.code === "human_resources" ? (
                     <Link
                       className={styles.moduleTile}
-                      href={module.code === "customer" ? "/customers" : "/products"}
+                      href={module.code === "customer" ? "/customers" : module.code === "product" ? "/products" : "/employees"}
                       key={module.id}
                     >
                       <span className={styles.moduleIcon} aria-hidden="true">{moduleInitials(module.code)}</span>
