@@ -1,30 +1,22 @@
 -- Sprint 3: Human Resources access control, views, and indexes.
--- Follows the Sprint 2 pattern: per-right RLS on department, job, employee,
--- jobhistory; soft-delete gating by the matching delete right; supporting
--- views for the current job and department roster.
 
--- Ensure soft-delete columns exist (base migration already adds them, but be safe).
+-- Ensure soft-delete columns exist.
 DO $$
 BEGIN
-  FOR r IN
-    SELECT unnest(ARRAY['department','job','employee','jobhistory']) AS t
-  LOOP
-    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
-                   WHERE table_schema='public' AND table_name=r.t AND column_name='is_deleted') THEN
+  FOR r IN SELECT unnest(ARRAY['department','job','employee','jobhistory']) AS t LOOP
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name=r.t AND column_name='is_deleted') THEN
       EXECUTE format('ALTER TABLE public.%I ADD COLUMN is_deleted BOOLEAN NOT NULL DEFAULT FALSE', r.t);
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM information_schema.columns
-                   WHERE table_schema='public' AND table_name=r.t AND column_name='stamp') THEN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name=r.t AND column_name='stamp') THEN
       EXECUTE format('ALTER TABLE public.%I ADD COLUMN stamp VARCHAR(100)', r.t);
     END IF;
   END LOOP;
 END $$;
 
--- Link app_user to employee (S3-DBA-03).
+-- Link app_user to employee.
 DO $$
 BEGIN
-  IF NOT EXISTS (SELECT 1 FROM information_schema.columns
-                 WHERE table_schema='public' AND table_name='app_user' AND column_name='empno') THEN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name='app_user' AND column_name='empno') THEN
     ALTER TABLE public.app_user ADD COLUMN empno VARCHAR(5) REFERENCES public.employee(empno) ON DELETE SET NULL;
   END IF;
 END $$;
@@ -44,39 +36,58 @@ DROP POLICY IF EXISTS department_read ON public.department;
 CREATE POLICY department_read ON public.department FOR SELECT TO authenticated
   USING (app_private.has_right('view_department') OR app_private.has_right('add_department')
          OR app_private.has_right('edit_department') OR app_private.has_right('delete_department'));
-DROP POLICY IF EXISTS department_add ON public.department FOR INSERT TO authenticated
+
+DROP POLICY IF EXISTS department_add ON public.department;
+CREATE POLICY department_add ON public.department FOR INSERT TO authenticated
   WITH CHECK (app_private.has_right('add_department'));
-DROP POLICY IF EXISTS department_update ON public.department FOR UPDATE TO authenticated
+
+DROP POLICY IF EXISTS department_update ON public.department;
+CREATE POLICY department_update ON public.department FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_department') OR app_private.has_right('delete_department'))
   WITH CHECK (app_private.has_right('edit_department') OR app_private.has_right('delete_department'));
 
 -- Job policies.
-DROP POLICY IF EXISTS job_read ON public.job FOR SELECT TO authenticated
+DROP POLICY IF EXISTS job_read ON public.job;
+CREATE POLICY job_read ON public.job FOR SELECT TO authenticated
   USING (app_private.has_right('view_job') OR app_private.has_right('add_job')
          OR app_private.has_right('edit_job') OR app_private.has_right('delete_job'));
-DROP POLICY IF EXISTS job_add ON public.job FOR INSERT TO authenticated
+
+DROP POLICY IF EXISTS job_add ON public.job;
+CREATE POLICY job_add ON public.job FOR INSERT TO authenticated
   WITH CHECK (app_private.has_right('add_job'));
-DROP POLICY IF EXISTS job_update ON public.job FOR UPDATE TO authenticated
+
+DROP POLICY IF EXISTS job_update ON public.job;
+CREATE POLICY job_update ON public.job FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_job') OR app_private.has_right('delete_job'))
   WITH CHECK (app_private.has_right('edit_job') OR app_private.has_right('delete_job'));
 
--- Employee policies (salary visible only with view_job_history).
-DROP POLICY IF EXISTS employee_read ON public.employee FOR SELECT TO authenticated
+-- Employee policies.
+DROP POLICY IF EXISTS employee_read ON public.employee;
+CREATE POLICY employee_read ON public.employee FOR SELECT TO authenticated
   USING (app_private.has_right('view_employee') OR app_private.has_right('add_employee')
          OR app_private.has_right('edit_employee') OR app_private.has_right('delete_employee'));
-DROP POLICY IF EXISTS employee_add ON public.employee FOR INSERT TO authenticated
+
+DROP POLICY IF EXISTS employee_add ON public.employee;
+CREATE POLICY employee_add ON public.employee FOR INSERT TO authenticated
   WITH CHECK (app_private.has_right('add_employee'));
-DROP POLICY IF EXISTS employee_update ON public.employee FOR UPDATE TO authenticated
+
+DROP POLICY IF EXISTS employee_update ON public.employee;
+CREATE POLICY employee_update ON public.employee FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_employee') OR app_private.has_right('delete_employee'))
   WITH CHECK (app_private.has_right('edit_employee') OR app_private.has_right('delete_employee'));
 
--- Job history policies (salary visible only with view_job_history right).
-DROP POLICY IF EXISTS jobhistory_read ON public.jobhistory FOR SELECT TO authenticated
+-- Job history policies.
+DROP POLICY IF EXISTS jobhistory_read ON public.jobhistory;
+CREATE POLICY jobhistory_read ON public.jobhistory FOR SELECT TO authenticated
   USING (app_private.has_right('view_job_history') OR app_private.has_right('add_job_history')
          OR app_private.has_right('edit_job_history') OR app_private.has_right('delete_job_history'));
-DROP POLICY IF EXISTS jobhistory_add ON public.jobhistory FOR INSERT TO authenticated
+
+DROP POLICY IF EXISTS jobhistory_add ON public.jobhistory;
+CREATE POLICY jobhistory_add ON public.jobhistory FOR INSERT TO authenticated
   WITH CHECK (app_private.has_right('add_job_history'));
-DROP POLICY IF EXISTS jobhistory_update ON public.jobhistory FOR UPDATE TO authenticated
+
+DROP POLICY IF EXISTS jobhistory_update ON public.jobhistory;
+CREATE POLICY jobhistory_update ON public.jobhistory FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_job_history') OR app_private.has_right('delete_job_history'))
   WITH CHECK (app_private.has_right('edit_job_history') OR app_private.has_right('delete_job_history'));
 
@@ -153,17 +164,7 @@ CREATE INDEX IF NOT EXISTS jobhistory_empno_effdate_idx ON public.jobhistory(emp
 CREATE INDEX IF NOT EXISTS jobhistory_deptcode_idx ON public.jobhistory(deptcode);
 CREATE INDEX IF NOT EXISTS employee_name_idx ON public.employee(lastname, firstname);
 
--- Grant HR rights to roles.
--- Superadmin gets all; Admin gets all HR rights (consistent with customer/product).
-INSERT INTO public.role_permission (role_id, right_id)
-SELECT r.role_id, rc.right_id
-FROM public.app_role r
-CROSS JOIN public.rights_catalog rc
-JOIN public.module m ON m.module_id = rc.module_id
-WHERE m.module_code = 'human_resources'
-  AND r.role_code IN ('superadmin', 'admin')
-  AND NOT EXISTS (SELECT 1 FROM public.role_permission rp WHERE rp.role_id=r.role_id AND rp.right_id=rc.right_id)
-ON CONFLICT DO NOTHING;
+-- No duplicate effective dates per employee.
 CREATE OR REPLACE FUNCTION app_private.check_jobhistory_no_dup_effdate()
 RETURNS trigger
 LANGUAGE plpgsql
@@ -171,8 +172,8 @@ SET search_path = ''
 AS $$
 BEGIN
   IF EXISTS (SELECT 1 FROM public.jobhistory
-             WHERE empno=NEW.empno AND effdate=NEW.effdate AND (empno,jobcode,effdate) IS DISTINCT FROM (OLD.empno,OLD.jobcode,OLD.effdate)
-             AND NOT is_deleted) THEN
+             WHERE empno=NEW.empno AND effdate=NEW.effdate AND NOT is_deleted
+             AND (empno, jobcode, effdate) IS DISTINCT FROM (OLD.empno, OLD.jobcode, OLD.effdate)) THEN
     RAISE EXCEPTION 'Duplicate effective date for this employee.' USING ERRCODE='23505';
   END IF;
   RETURN NEW;
@@ -183,7 +184,7 @@ CREATE TRIGGER jobhistory_no_dup_effdate
   BEFORE INSERT OR UPDATE ON public.jobhistory
   FOR EACH ROW EXECUTE FUNCTION app_private.check_jobhistory_no_dup_effdate();
 
--- Rights for HR module (add to rights_catalog if not present).
+-- Rights for HR module.
 INSERT INTO public.rights_catalog (module_id, right_code, right_name, display_order, is_active)
 SELECT m.module_id, v.code, v.name, v.ord, true
 FROM public.module m
@@ -207,4 +208,15 @@ CROSS JOIN (VALUES
 ) AS v(code, name, ord)
 WHERE m.module_code = 'human_resources'
   AND NOT EXISTS (SELECT 1 FROM public.rights_catalog rc WHERE rc.right_code = v.code)
+ON CONFLICT DO NOTHING;
+
+-- Grant HR rights to roles.
+INSERT INTO public.role_permission (role_id, right_id)
+SELECT r.role_id, rc.right_id
+FROM public.app_role r
+CROSS JOIN public.rights_catalog rc
+JOIN public.module m ON m.module_id = rc.module_id
+WHERE m.module_code = 'human_resources'
+  AND r.role_code IN ('superadmin', 'admin')
+  AND NOT EXISTS (SELECT 1 FROM public.role_permission rp WHERE rp.role_id=r.role_id AND rp.right_id=rc.right_id)
 ON CONFLICT DO NOTHING;
