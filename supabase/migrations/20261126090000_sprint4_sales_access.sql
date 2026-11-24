@@ -1,28 +1,26 @@
 -- Sprint 4: Sales, Payments, Reports and Audit access control and views.
 
--- Ensure soft-delete columns exist on sales tables.
 DO $$
+DECLARE
+  t text;
 BEGIN
-  FOR r IN SELECT unnest(ARRAY['sales','salesdetail','payment']) AS t LOOP
-    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name=r.t AND column_name='is_deleted') THEN
-      EXECUTE format('ALTER TABLE public.%I ADD COLUMN is_deleted BOOLEAN NOT NULL DEFAULT FALSE', r.t);
+  FOREACH t IN ARRAY ARRAY['sales','salesdetail','payment'] LOOP
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name=t AND column_name='is_deleted') THEN
+      EXECUTE format('ALTER TABLE public.%I ADD COLUMN is_deleted BOOLEAN NOT NULL DEFAULT FALSE', t);
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name=r.t AND column_name='stamp') THEN
-      EXECUTE format('ALTER TABLE public.%I ADD COLUMN stamp VARCHAR(100)', r.t);
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name=t AND column_name='stamp') THEN
+      EXECUTE format('ALTER TABLE public.%I ADD COLUMN stamp VARCHAR(100)', t);
     END IF;
   END LOOP;
 END $$;
 
--- RLS enable.
 ALTER TABLE public.sales ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.salesdetail ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.payment ENABLE ROW LEVEL SECURITY;
 
--- Grants.
 GRANT SELECT, INSERT, UPDATE ON public.sales, public.salesdetail, public.payment TO authenticated;
 REVOKE DELETE ON public.sales, public.salesdetail, public.payment FROM anon, authenticated;
 
--- Rights for sales module (add to rights_catalog if not present).
 INSERT INTO public.rights_catalog (module_id, right_code, right_name, display_order, is_active)
 SELECT m.module_id, v.code, v.name, v.ord, true
 FROM public.module m
@@ -42,7 +40,6 @@ WHERE m.module_code = 'sales'
   AND NOT EXISTS (SELECT 1 FROM public.rights_catalog rc WHERE rc.right_code = v.code)
 ON CONFLICT DO NOTHING;
 
--- Also add report rights to reports module.
 INSERT INTO public.rights_catalog (module_id, right_code, right_name, display_order, is_active)
 SELECT m.module_id, v.code, v.name, v.ord, true
 FROM public.module m
@@ -53,7 +50,6 @@ WHERE m.module_code = 'reports'
   AND NOT EXISTS (SELECT 1 FROM public.rights_catalog rc WHERE rc.right_code = v.code)
 ON CONFLICT DO NOTHING;
 
--- Grant sales rights to roles.
 INSERT INTO public.role_permission (role_id, right_id)
 SELECT r.role_id, rc.right_id
 FROM public.app_role r
@@ -64,7 +60,6 @@ WHERE m.module_code IN ('sales', 'reports')
   AND NOT EXISTS (SELECT 1 FROM public.role_permission rp WHERE rp.role_id=r.role_id AND rp.right_id=rc.right_id)
 ON CONFLICT DO NOTHING;
 
--- Sales RLS policies.
 DROP POLICY IF EXISTS sales_read ON public.sales;
 CREATE POLICY sales_read ON public.sales FOR SELECT TO authenticated
   USING ((app_private.has_right('view_sale') OR app_private.has_right('add_sale') OR app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'))
@@ -79,7 +74,6 @@ CREATE POLICY sales_update ON public.sales FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'))
   WITH CHECK (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'));
 
--- Salesdetail RLS.
 DROP POLICY IF EXISTS salesdetail_read ON public.salesdetail;
 CREATE POLICY salesdetail_read ON public.salesdetail FOR SELECT TO authenticated
   USING (app_private.has_right('view_sale') OR app_private.has_right('add_sale') OR app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'));
@@ -93,7 +87,6 @@ CREATE POLICY salesdetail_update ON public.salesdetail FOR UPDATE TO authenticat
   USING (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'))
   WITH CHECK (app_private.has_right('edit_sale') OR app_private.has_right('delete_sale'));
 
--- Payment RLS.
 DROP POLICY IF EXISTS payment_read ON public.payment;
 CREATE POLICY payment_read ON public.payment FOR SELECT TO authenticated
   USING (app_private.has_right('view_payment') OR app_private.has_right('add_payment') OR app_private.has_right('edit_payment') OR app_private.has_right('delete_payment'));
@@ -107,7 +100,6 @@ CREATE POLICY payment_update ON public.payment FOR UPDATE TO authenticated
   USING (app_private.has_right('edit_payment') OR app_private.has_right('delete_payment'))
   WITH CHECK (app_private.has_right('edit_payment') OR app_private.has_right('delete_payment'));
 
--- Guard trigger for sales tables.
 CREATE OR REPLACE FUNCTION app_private.guard_sales_action()
 RETURNS trigger
 LANGUAGE plpgsql
@@ -143,7 +135,6 @@ CREATE TRIGGER salesdetail_guard BEFORE INSERT OR UPDATE ON public.salesdetail F
 DROP TRIGGER IF EXISTS payment_guard ON public.payment;
 CREATE TRIGGER payment_guard BEFORE INSERT OR UPDATE ON public.payment FOR EACH ROW EXECUTE FUNCTION app_private.guard_sales_action();
 
--- View: payment balance per transaction.
 CREATE OR REPLACE VIEW public.sales_balance AS
 SELECT s.transno, s.salesdate, s.custno, s.empno,
   COALESCE((SELECT sum(sd.quantity * ph.unitprice)
@@ -162,7 +153,6 @@ SELECT s.transno, s.salesdate, s.custno, s.empno,
 FROM public.sales s
 WHERE NOT s.is_deleted;
 
--- View: sales totals by product.
 CREATE OR REPLACE VIEW public.sales_by_product AS
 SELECT sd.prodcode, p.description,
   sum(sd.quantity) AS total_qty,
@@ -175,7 +165,6 @@ JOIN public.pricehist ph ON ph.prodcode = sd.prodcode
 WHERE NOT sd.is_deleted AND NOT p.is_deleted
 GROUP BY sd.prodcode, p.description;
 
--- Indexes.
 CREATE INDEX IF NOT EXISTS sales_custno_idx ON public.sales(custno);
 CREATE INDEX IF NOT EXISTS sales_empno_idx ON public.sales(empno);
 CREATE INDEX IF NOT EXISTS sales_salesdate_idx ON public.sales(salesdate);
