@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 860" role="img" aria-labelledby="title desc">
+  <title id="title">Payment entry and balance mockup</title>
+  <desc id="desc">Proposed sale-context payment screen with total, paid and remaining balance summary, receipt number, payment date and amount fields, payment history, and permission-dependent controls.</desc>
+  <defs><style>
+    text{font-family:"DM Sans","Segoe UI",sans-serif;fill:#342a39}.heading{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}.muted{fill:#786f7b}.small{font-size:12px}.tiny{font-size:10px}.body{font-size:14px}.label{font-size:12px;font-weight:700}.line{stroke:#e9e2dd}
+  </style></defs>
+  <rect width="1280" height="860" fill="#faf8f3"/><rect width="1280" height="68" fill="#fffefa"/><path d="M0 67.5H1280" class="line"/>
+  <rect x="24" y="15" width="38" height="38" rx="12" fill="#f1eaf2"/><path d="M34 43l9-19 9 19m-14-6h10" fill="none" stroke="#695172" stroke-width="2"/>
+  <text x="72" y="43" class="heading" font-size="25">HOPE <tspan fill="#b88d53">·</tspan> SALES</text><text x="1084" y="40" class="small muted">Payment view · permission scoped</text>
+  <text x="52" y="108" class="small" fill="#695172">← Back to Sales</text>
+  <text x="52" y="151" class="heading" font-size="34">Sale TX-1042</text>
+  <text x="52" y="178" class="small muted">Customer: Northside Clinic　·　Sale date: Oct 14, 2026　·　Status: Active</text>
+  <rect x="52" y="206" width="1176" height="150" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="80" y="244" class="heading" font-size="22">Balance summary</text>
+  <path d="M450 260V328M838 260V328" class="line"/>
+  <text x="80" y="283" class="tiny muted" font-weight="700">SALE TOTAL</text><text x="80" y="322" class="heading" font-size="30">$ 1,250.00</text>
+  <text x="490" y="283" class="tiny muted" font-weight="700">PAID</text><text x="490" y="322" class="heading" font-size="30">$ 500.00</text>
+  <text x="878" y="283" class="tiny muted" font-weight="700">REMAINING</text><text x="878" y="322" class="heading" font-size="30" fill="#695172">$ 750.00</text>
+  <rect x="52" y="378" width="1176" height="266" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="80" y="417" class="heading" font-size="22">Record payment</text><text x="80" y="440" class="small muted">Payment is linked to TX-1042. Amount cannot exceed the remaining balance.</text>
+  <text x="80" y="480" class="label">OR / receipt number *</text><rect x="80" y="491" width="300" height="44" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="96" y="519" class="body muted">Enter receipt number</text>
+  <text x="410" y="480" class="label">Payment date *</text><rect x="410" y="491" width="300" height="44" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="426" y="519" class="body muted">YYYY-MM-DD</text>
+  <text x="740" y="480" class="label">Amount *</text><rect x="740" y="491" width="220" height="44" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="756" y="519" class="body muted">$ 0.00</text>
+  <rect x="990" y="493" width="208" height="42" rx="8" fill="#695172"/><text x="1094" y="519" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">Record payment</text>
+  <text x="80" y="574" class="small muted">View-only users see the summary and history; the entry form is omitted.</text>
+  <rect x="52" y="668" width="1176" height="150" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="80" y="706" class="heading" font-size="21">Payment history</text>
+  <rect x="80" y="723" width="1120" height="28" rx="5" fill="#faf8f3"/><text x="96" y="743" class="tiny muted" font-weight="700">OR NO.</text><text x="360" y="743" class="tiny muted" font-weight="700">PAYMENT DATE</text><text x="640" y="743" class="tiny muted" font-weight="700">AMOUNT</text><text x="900" y="743" class="tiny muted" font-weight="700">STATUS</text><text x="1084" y="743" class="tiny muted" font-weight="700">ACTIONS</text>
+  <text x="96" y="785" class="body">OR-218　·　Restricted to payment viewers</text><text x="360" y="785" class="body">Oct 20, 2026</text><text x="640" y="785" class="body">$ 500.00</text><text x="900" y="785" class="small" fill="#32735b">Active</text><text x="1084" y="785" class="small" fill="#a64e4e">Delete*</text>
+  <text x="52" y="844" class="tiny muted">Payment and balance fields are omitted entirely without payment-view permission; service/RLS remains authoritative.</text>
+</svg>
