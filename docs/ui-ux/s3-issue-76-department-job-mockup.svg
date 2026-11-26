@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" role="img" aria-labelledby="title desc">
+  <title id="title">Department and Job catalog screen mockup</title>
+  <desc id="desc">Proposed Hope HR desktop screen with catalog navigation, Active, Inactive and All filters, department rows, status badges, permission-dependent actions, and a department form.</desc>
+  <defs>
+    <style>
+      text{font-family:"DM Sans","Segoe UI",sans-serif;fill:#342a39}.heading{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}.muted{fill:#786f7b}.small{font-size:12px}.tiny{font-size:10px}.body{font-size:14px}.label{font-size:12px;font-weight:700}.line{stroke:#e9e2dd}.purple{fill:#695172}.white{fill:#fffefa}.green{fill:#32735b}.danger{fill:#a64e4e}
+    </style>
+  </defs>
+  <rect width="1280" height="820" fill="#faf8f3"/>
+  <rect width="1280" height="72" fill="#fffefa"/>
+  <path d="M0 71.5H1280" class="line"/>
+  <rect x="22" y="16" width="38" height="38" rx="12" fill="#f1eaf2"/>
+  <path d="M32 43l9-19 9 19m-14-6h10" fill="none" stroke="#695172" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="70" y="42" class="heading" font-size="25">HOPE <tspan fill="#b88d53">·</tspan> HR</text>
+  <text x="1000" y="34" class="small muted">Signed in as</text>
+  <text x="1000" y="51" class="label">Admin</text>
+  <circle cx="1224" cy="36" r="18" fill="#f1eaf2"/><text x="1224" y="41" text-anchor="middle" class="label" fill="#695172">A</text>
+  <rect x="0" y="72" width="204" height="748" fill="#fffefa"/>
+  <path d="M203.5 72V820" class="line"/>
+  <text x="26" y="112" class="tiny muted" letter-spacing="1.5">HUMAN RESOURCES</text>
+  <rect x="14" y="128" width="176" height="38" rx="8" fill="#f1eaf2"/>
+  <circle cx="34" cy="147" r="5" fill="#695172"/><text x="49" y="152" class="body" font-weight="700">Departments</text>
+  <text x="49" y="195" class="body muted">Jobs</text>
+  <text x="49" y="233" class="body muted">Employees</text>
+  <text x="232" y="112" class="small muted">Human Resources　/　Catalogs</text>
+  <text x="232" y="154" class="heading" font-size="34">Departments &amp; Jobs</text>
+  <text x="232" y="179" class="small muted">Manage active reference records. Inactive records are retained for history.</text>
+  <rect x="232" y="202" width="1016" height="54" rx="10" fill="#fffefa" stroke="#e9e2dd"/>
+  <rect x="248" y="213" width="280" height="32" rx="7" fill="#fffefa" stroke="#e9e2dd"/>
+  <circle cx="263" cy="229" r="5" fill="none" stroke="#786f7b"/><path d="M267 233l4 4" stroke="#786f7b"/>
+  <text x="280" y="234" class="small muted">Search code or name</text>
+  <text x="550" y="234" class="label">Status</text>
+  <rect x="598" y="212" width="242" height="34" rx="8" fill="#faf8f3" stroke="#e9e2dd"/>
+  <rect x="601" y="215" width="78" height="28" rx="6" fill="#695172"/>
+  <text x="640" y="234" text-anchor="middle" class="tiny white" font-weight="700">Active</text>
+  <text x="720" y="234" text-anchor="middle" class="tiny muted">Inactive</text>
+  <text x="800" y="234" text-anchor="middle" class="tiny muted">All</text>
+  <rect x="1067" y="212" width="164" height="34" rx="8" fill="#695172"/>
+  <text x="1149" y="234" text-anchor="middle" class="small white" font-weight="700">＋ Add department</text>
+  <rect x="232" y="274" width="646" height="510" rx="12" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="256" y="310" class="heading" font-size="23">Department catalog</text>
+  <text x="256" y="333" class="small muted">3 active departments</text>
+  <rect x="248" y="350" width="614" height="38" rx="6" fill="#faf8f3"/>
+  <text x="264" y="374" class="tiny muted" font-weight="700">CODE</text><text x="358" y="374" class="tiny muted" font-weight="700">NAME</text><text x="592" y="374" class="tiny muted" font-weight="700">STATUS</text><text x="718" y="374" class="tiny muted" font-weight="700">ACTIONS</text>
+  <g class="body">
+    <text x="264" y="420" font-weight="700">FIN</text><text x="358" y="420">Finance</text>
+    <rect x="584" y="402" width="60" height="22" rx="11" fill="#e9f4ed"/><text x="614" y="417" text-anchor="middle" class="tiny green" font-weight="700">Active</text>
+    <text x="718" y="420" class="small" fill="#695172">Edit</text><text x="764" y="420" class="small danger">Archive</text>
+    <path d="M248 440H862" class="line"/>
+    <text x="264" y="472" font-weight="700">HR</text><text x="358" y="472">People &amp; Culture</text>
+    <rect x="584" y="454" width="60" height="22" rx="11" fill="#e9f4ed"/><text x="614" y="469" text-anchor="middle" class="tiny green" font-weight="700">Active</text>
+    <text x="718" y="472" class="small" fill="#695172">Edit</text><text x="764" y="472" class="small danger">Archive</text>
+    <path d="M248 492H862" class="line"/>
+    <text x="264" y="524" font-weight="700">OPS</text><text x="358" y="524">Operations</text>
+    <rect x="584" y="506" width="60" height="22" rx="11" fill="#e9f4ed"/><text x="614" y="521" text-anchor="middle" class="tiny green" font-weight="700">Active</text>
+    <text x="718" y="524" class="small" fill="#695172">Edit</text><text x="764" y="524" class="small danger">Archive</text>
+  </g>
+  <rect x="248" y="556" width="614" height="1" fill="#e9e2dd"/>
+  <text x="256" y="594" class="heading" font-size="21">Jobs</text>
+  <text x="256" y="617" class="small muted">Switch catalog</text>
+  <rect x="248" y="638" width="614" height="112" rx="8" fill="#faf8f3"/>
+  <text x="268" y="669" class="label">Job catalog preview</text>
+  <text x="268" y="694" class="small muted">Job code · Description · Active status · Edit / Archive</text>
+  <text x="268" y="721" class="small" fill="#695172">Open Jobs catalog →</text>
+  <rect x="898" y="274" width="350" height="510" rx="12" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="924" y="311" class="heading" font-size="23">Add department</text>
+  <text x="924" y="336" class="small muted">Fields marked * are required.</text>
+  <text x="924" y="378" class="label">Department code *</text>
+  <rect x="924" y="389" width="298" height="42" rx="7" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="940" y="415" class="small muted">e.g. FIN</text>
+  <text x="924" y="463" class="label">Department name *</text>
+  <rect x="924" y="474" width="298" height="42" rx="7" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="940" y="500" class="small muted">e.g. Finance</text>
+  <rect x="924" y="548" width="298" height="58" rx="8" fill="#fbf3dd"/>
+  <text x="940" y="572" class="tiny" fill="#8a641c" font-weight="700">ADMIN VIEW</text>
+  <text x="940" y="590" class="tiny" fill="#5e5362">Status / Stamp details stay restricted.</text>
+  <rect x="924" y="712" width="112" height="40" rx="8" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="980" y="737" text-anchor="middle" class="small">Cancel</text>
+  <rect x="1046" y="712" width="176" height="40" rx="8" fill="#695172"/>
+  <text x="1134" y="737" text-anchor="middle" class="small white" font-weight="700">Save department</text>
+</svg>
