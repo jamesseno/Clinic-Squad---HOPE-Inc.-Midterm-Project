@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 900" role="img" aria-labelledby="title desc">
+  <title id="title">Sales header and line item screen mockup</title>
+  <desc id="desc">Proposed Hope Sales desktop screen showing sales list context, a new sale header with a generated transaction number, customer and employee selectors, and a product quantity line-item editor.</desc>
+  <defs><style>
+    text{font-family:"DM Sans","Segoe UI",sans-serif;fill:#342a39}.heading{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}.muted{fill:#786f7b}.small{font-size:12px}.tiny{font-size:10px}.body{font-size:14px}.label{font-size:12px;font-weight:700}.line{stroke:#e9e2dd}
+  </style></defs>
+  <rect width="1360" height="900" fill="#faf8f3"/><rect width="1360" height="68" fill="#fffefa"/><path d="M0 67.5H1360" class="line"/>
+  <rect x="24" y="15" width="38" height="38" rx="12" fill="#f1eaf2"/><path d="M34 43l9-19 9 19m-14-6h10" fill="none" stroke="#695172" stroke-width="2"/>
+  <text x="72" y="43" class="heading" font-size="25">HOPE <tspan fill="#b88d53">·</tspan> SALES</text><text x="1112" y="40" class="small muted">Sales entry　·　Admin</text>
+  <text x="48" y="108" class="small muted">Sales　/　New sale</text><text x="48" y="150" class="heading" font-size="34">Create sale</text>
+  <text x="48" y="176" class="small muted">Create the transaction header, then add its priced product lines.</text>
+  <rect x="48" y="197" width="1264" height="217" rx="13" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="76" y="234" class="heading" font-size="22">Sale header</text><text x="76" y="257" class="small muted">Select existing active records. Required fields are marked.</text>
+  <text x="76" y="296" class="label">Transaction No.</text>
+  <rect x="76" y="307" width="260" height="45" rx="8" fill="#faf8f3" stroke="#e9e2dd"/>
+  <text x="92" y="335" class="body">Assigned when saved</text>
+  <rect x="246" y="315" width="76" height="25" rx="12" fill="#f1eaf2"/><text x="284" y="332" text-anchor="middle" class="tiny" fill="#695172" font-weight="700">SYSTEM</text>
+  <text x="366" y="296" class="label">Sales date *</text><rect x="366" y="307" width="226" height="45" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="382" y="335" class="body muted">YYYY-MM-DD</text>
+  <text x="622" y="296" class="label">Customer *</text><rect x="622" y="307" width="294" height="45" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="638" y="335" class="body muted">Select active customer ▾</text>
+  <text x="946" y="296" class="label">Employee *</text><rect x="946" y="307" width="338" height="45" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="962" y="335" class="body muted">Select active employee ▾</text>
+  <rect x="48" y="434" width="1264" height="370" rx="13" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="76" y="474" class="heading" font-size="22">Line items</text><text x="76" y="497" class="small muted">Unit price is resolved from the selected product and sale date.</text>
+  <rect x="76" y="516" width="1190" height="74" rx="10" fill="#faf8f3"/>
+  <text x="94" y="540" class="label">Product *</text><rect x="94" y="548" width="346" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="108" y="570" class="small muted">Select active, priced product ▾</text>
+  <text x="462" y="540" class="label">Quantity *</text><rect x="462" y="548" width="124" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="476" y="570" class="small">1</text>
+  <text x="608" y="540" class="label">Unit price at sale</text><text x="608" y="570" class="body muted">Shown after product selection</text>
+  <rect x="1067" y="545" width="176" height="39" rx="8" fill="#695172"/><text x="1155" y="570" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">＋ Add line</text>
+  <rect x="76" y="610" width="1190" height="32" rx="5" fill="#faf8f3"/>
+  <text x="94" y="631" class="tiny muted" font-weight="700">PRODUCT</text><text x="488" y="631" class="tiny muted" font-weight="700">UNIT PRICE</text><text x="730" y="631" class="tiny muted" font-weight="700">QTY</text><text x="862" y="631" class="tiny muted" font-weight="700">LINE TOTAL</text><text x="1120" y="631" class="tiny muted" font-weight="700">ACTIONS</text>
+  <text x="94" y="676" class="body" font-weight="700">PRD-014 · Product description</text><text x="488" y="676" class="body">$ 24.00</text><text x="730" y="676" class="body">2</text><text x="862" y="676" class="body" font-weight="700">$ 48.00</text><text x="1120" y="676" class="small" fill="#a64e4e">Remove</text>
+  <path d="M76 692H1266" class="line"/>
+  <text x="920" y="735" class="small muted">Subtotal</text><text x="1192" y="735" text-anchor="end" class="body">$ 48.00</text>
+  <text x="920" y="770" class="body" font-weight="700">Total</text><text x="1192" y="770" text-anchor="end" class="heading" font-size="24">$ 48.00</text>
+  <rect x="48" y="826" width="104" height="42" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="100" y="852" text-anchor="middle" class="small">Cancel</text>
+  <rect x="164" y="826" width="190" height="42" rx="8" fill="#695172"/><text x="259" y="852" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">Create sale</text>
+  <text x="384" y="852" class="small muted">After header creation, continue in Sale Detail to manage lines.</text>
+  <text x="48" y="888" class="tiny muted">Design assumption: transaction number is generated by trusted application logic; current UI asks for manual entry.</text>
+</svg>
