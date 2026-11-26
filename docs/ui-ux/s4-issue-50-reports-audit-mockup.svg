@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1060" role="img" aria-labelledby="title desc">
+  <title id="title">Reports catalog, report results, and audit viewer mockup</title>
+  <desc id="desc">Proposed Hope report screen with seven report cards and report filters/results, plus a separate Superadmin-only read-only audit viewer with filters and expandable changes.</desc>
+  <defs><style>
+    text{font-family:"DM Sans","Segoe UI",sans-serif;fill:#342a39}.heading{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}.muted{fill:#786f7b}.small{font-size:12px}.tiny{font-size:10px}.body{font-size:13px}.label{font-size:12px;font-weight:700}.line{stroke:#e9e2dd}
+  </style></defs>
+  <rect width="1440" height="1060" fill="#faf8f3"/><rect width="1440" height="68" fill="#fffefa"/><path d="M0 67.5H1440" class="line"/>
+  <rect x="24" y="15" width="38" height="38" rx="12" fill="#f1eaf2"/><path d="M34 43l9-19 9 19m-14-6h10" fill="none" stroke="#695172" stroke-width="2"/>
+  <text x="72" y="43" class="heading" font-size="25">HOPE <tspan fill="#b88d53">·</tspan> INSIGHTS</text><text x="1150" y="40" class="small muted">Report access is permission-scoped</text>
+  <text x="48" y="109" class="small muted">Workspace　/　Reports</text><text x="48" y="149" class="heading" font-size="33">Reports</text><text x="48" y="174" class="small muted">Choose a read-only report. Available cards depend on assigned report rights.</text>
+  <g>
+    <rect x="48" y="198" width="320" height="92" rx="11" fill="#fffefa" stroke="#e9e2dd"/><text x="68" y="229" class="heading" font-size="20">Top Customers</text><text x="68" y="252" class="small muted">From / To · Top N</text><text x="68" y="274" class="small" fill="#695172">Open report →</text>
+    <rect x="384" y="198" width="320" height="92" rx="11" fill="#fffefa" stroke="#e9e2dd"/><text x="404" y="229" class="heading" font-size="20">Product Master List</text><text x="404" y="252" class="small muted">As-of date</text><text x="404" y="274" class="small" fill="#695172">Open report →</text>
+    <rect x="720" y="198" width="320" height="92" rx="11" fill="#fffefa" stroke="#e9e2dd"/><text x="740" y="229" class="heading" font-size="20">Top Products</text><text x="740" y="252" class="small muted">From / To · Top N</text><text x="740" y="274" class="small" fill="#695172">Open report →</text>
+    <rect x="1056" y="198" width="336" height="92" rx="11" fill="#fffefa" stroke="#e9e2dd"/><text x="1076" y="229" class="heading" font-size="20">Active Employees</text><text x="1076" y="252" class="small muted">As-of date</text><text x="1076" y="274" class="small" fill="#695172">Open report →</text>
+    <rect x="48" y="304" width="320" height="92" rx="11" fill="#fffefa" stroke="#e9e2dd"/><text x="68" y="335" class="heading" font-size="20">All Employees</text><text x="68" y="358" class="small muted">As-of date · Admin report right</text><text x="68" y="380" class="small" fill="#695172">Open report →</text>
+    <rect x="384" y="304" width="320" height="92" rx="11" fill="#fffefa" stroke="#e9e2dd"/><text x="404" y="335" class="heading" font-size="20">Employee Job History</text><text x="404" y="358" class="small muted">Employee selector · date range</text><text x="404" y="380" class="small" fill="#695172">Open report →</text>
+    <rect x="720" y="304" width="320" height="92" rx="11" fill="#fffefa" stroke="#e9e2dd"/><text x="740" y="335" class="heading" font-size="20">Top Sales</text><text x="740" y="358" class="small muted">From / To · Top N</text><text x="740" y="380" class="small" fill="#695172">Open report →</text>
+  </g>
+  <rect x="48" y="420" width="1344" height="266" rx="13" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="72" y="457" class="heading" font-size="23">Employee Job History</text><text x="72" y="479" class="small muted">Read-only result · salary is shown only when explicitly authorized</text>
+  <text x="72" y="518" class="label">Employee</text><rect x="72" y="528" width="245" height="38" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="86" y="553" class="small muted">Select employee ▾</text>
+  <text x="334" y="518" class="label">From</text><rect x="334" y="528" width="170" height="38" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="348" y="553" class="small muted">YYYY-MM-DD</text>
+  <text x="522" y="518" class="label">To</text><rect x="522" y="528" width="170" height="38" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="536" y="553" class="small muted">YYYY-MM-DD</text>
+  <rect x="710" y="529" width="124" height="36" rx="8" fill="#695172"/><text x="772" y="552" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">Apply</text>
+  <rect x="1130" y="529" width="114" height="36" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="1187" y="552" text-anchor="middle" class="small">Print</text>
+  <rect x="1254" y="529" width="114" height="36" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="1311" y="552" text-anchor="middle" class="small">Save PDF</text>
+  <rect x="72" y="588" width="1296" height="30" rx="5" fill="#faf8f3"/><text x="88" y="608" class="tiny muted" font-weight="700">EFFECTIVE DATE</text><text x="290" y="608" class="tiny muted" font-weight="700">JOB</text><text x="570" y="608" class="tiny muted" font-weight="700">DEPARTMENT</text><text x="874" y="608" class="tiny muted" font-weight="700">SALARY</text>
+  <text x="88" y="649" class="body">Jan 15, 2025</text><text x="290" y="649" class="body">Coordinator</text><text x="570" y="649" class="body">Operations</text><text x="874" y="649" class="body muted">Restricted unless salary right allows</text>
+  <rect x="48" y="712" width="1344" height="300" rx="13" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="72" y="750" class="heading" font-size="23">Audit history</text><rect x="1120" y="730" width="248" height="30" rx="15" fill="#fbf3dd"/><text x="1244" y="750" text-anchor="middle" class="tiny" fill="#8a641c" font-weight="700">SUPERADMIN ONLY · READ ONLY</text>
+  <text x="72" y="783" class="small muted">Date, actor, action and table filters · details are expandable and policy-redacted</text>
+  <text x="72" y="819" class="tiny muted" font-weight="700">FROM / TO</text><rect x="72" y="829" width="220" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="86" y="851" class="small muted">Date range</text>
+  <text x="310" y="819" class="tiny muted" font-weight="700">ACTION</text><rect x="310" y="829" width="170" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="324" y="851" class="small">All actions ▾</text>
+  <text x="498" y="819" class="tiny muted" font-weight="700">TABLE</text><rect x="498" y="829" width="170" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="512" y="851" class="small muted">Any table</text>
+  <text x="686" y="819" class="tiny muted" font-weight="700">ACTOR</text><rect x="686" y="829" width="220" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="700" y="851" class="small muted">Search actor</text>
+  <rect x="922" y="828" width="142" height="36" rx="8" fill="#695172"/><text x="993" y="851" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">Apply filters</text>
+  <rect x="72" y="884" width="1296" height="28" rx="5" fill="#faf8f3"/><text x="88" y="903" class="tiny muted" font-weight="700">WHEN</text><text x="270" y="903" class="tiny muted" font-weight="700">TABLE / ACTION</text><text x="650" y="903" class="tiny muted" font-weight="700">RECORD</text><text x="904" y="903" class="tiny muted" font-weight="700">ACTOR</text><text x="1160" y="903" class="tiny muted" font-weight="700">DETAIL</text>
+  <text x="88" y="943" class="small">Oct 22, 2026</text><text x="270" y="943" class="small">employees · EDIT</text><text x="650" y="943" class="small">E001</text><text x="904" y="943" class="small">admin@example</text><text x="1160" y="943" class="small" fill="#695172">Show changes ▸</text>
+  <text x="48" y="1040" class="tiny muted">Mockup actions are illustrative; report access, salary redaction and audit restrictions require trusted API/RLS enforcement.</text>
+</svg>
