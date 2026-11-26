@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 860" role="img" aria-labelledby="title desc">
+  <title id="title">Employee job history timeline mockup</title>
+  <desc id="desc">Proposed employee history screen with current position, reverse chronological past assignments, separately restricted salary, and an authorized Add Entry panel.</desc>
+  <defs><style>
+    text{font-family:"DM Sans","Segoe UI",sans-serif;fill:#342a39}.heading{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}.muted{fill:#786f7b}.small{font-size:12px}.tiny{font-size:10px}.body{font-size:14px}.label{font-size:12px;font-weight:700}.line{stroke:#e9e2dd}
+  </style></defs>
+  <rect width="1280" height="860" fill="#faf8f3"/><rect width="1280" height="68" fill="#fffefa"/><path d="M0 67.5H1280" class="line"/>
+  <rect x="24" y="15" width="38" height="38" rx="12" fill="#f1eaf2"/><path d="M34 43l9-19 9 19m-14-6h10" fill="none" stroke="#695172" stroke-width="2"/>
+  <text x="72" y="43" class="heading" font-size="25">HOPE <tspan fill="#b88d53">·</tspan> PEOPLE</text><text x="1082" y="40" class="small muted">Admin · HR</text>
+  <text x="54" y="111" class="small muted">Human Resources　/　Employees　/　Morgan Lee</text>
+  <text x="54" y="153" class="heading" font-size="34">Job history</text>
+  <text x="54" y="178" class="small muted">Morgan Lee · Employee E001 · newest effective date first</text>
+  <rect x="54" y="203" width="806" height="600" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="82" y="242" class="heading" font-size="23">Assignments</text>
+  <rect x="686" y="220" width="148" height="38" rx="8" fill="#695172"/><text x="760" y="244" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">＋ Add entry</text>
+  <rect x="82" y="267" width="750" height="82" rx="10" fill="#f1eaf2"/>
+  <rect x="99" y="285" width="96" height="22" rx="11" fill="#695172"/><text x="147" y="300" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">CURRENT</text>
+  <text x="213" y="299" class="body" font-weight="700">Coordinator</text><text x="213" y="324" class="small muted">Operations　·　Effective Jan 15, 2025</text>
+  <text x="694" y="299" class="tiny muted">SALARY</text><text x="694" y="324" class="body muted">Restricted</text>
+  <path d="M112 365V720" stroke="#d8cadd" stroke-width="2"/>
+  <circle cx="112" cy="389" r="7" fill="#695172"/><text x="142" y="388" class="tiny muted">JUN 01, 2023</text>
+  <text x="142" y="413" class="body" font-weight="700">HR Assistant</text><text x="142" y="436" class="small muted">People &amp; Culture</text>
+  <text x="694" y="413" class="tiny muted">SALARY</text><text x="694" y="436" class="body muted">••••••　Restricted</text>
+  <rect x="82" y="453" width="750" height="1" fill="#e9e2dd"/>
+  <circle cx="112" cy="481" r="7" fill="#b88d53"/><text x="142" y="480" class="tiny muted">MAR 12, 2022</text>
+  <text x="142" y="505" class="body" font-weight="700">Administrative Associate</text><text x="142" y="528" class="small muted">Operations</text>
+  <text x="694" y="505" class="tiny muted">SALARY</text><text x="694" y="528" class="body muted">••••••　Restricted</text>
+  <rect x="82" y="546" width="750" height="1" fill="#e9e2dd"/>
+  <text x="82" y="589" class="heading" font-size="19">History controls</text>
+  <text x="82" y="615" class="small muted">Read access is controlled by View Job History.</text>
+  <text x="82" y="641" class="small muted">Salary is independently hidden without salary-view permission.</text>
+  <text x="82" y="667" class="small muted">Edit/archive controls appear only for authorized history managers.</text>
+  <rect x="888" y="203" width="338" height="600" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="914" y="241" class="heading" font-size="23">Add history entry</text>
+  <text x="914" y="266" class="small muted">Fields marked * are required.</text>
+  <text x="914" y="309" class="label">Job *</text><rect x="914" y="319" width="286" height="42" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="930" y="345" class="small muted">Select active job ▾</text>
+  <text x="914" y="393" class="label">Department</text><rect x="914" y="403" width="286" height="42" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="930" y="429" class="small muted">Select department ▾</text>
+  <text x="914" y="477" class="label">Effective date *</text><rect x="914" y="487" width="286" height="42" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="930" y="513" class="small muted">YYYY-MM-DD</text>
+  <text x="914" y="561" class="label">Salary <tspan fill="#8a641c">· Restricted field</tspan></text><rect x="914" y="571" width="286" height="42" rx="7" fill="#faf8f3" stroke="#e9e2dd"/><text x="930" y="597" class="small muted">Visible only with salary right</text>
+  <rect x="914" y="639" width="286" height="65" rx="9" fill="#fbf3dd"/>
+  <text x="930" y="664" class="tiny" fill="#8a641c" font-weight="700">SERVER VALIDATES</text><text x="930" y="685" class="tiny" fill="#5e5362">Dates, duplicates and effective order</text>
+  <rect x="914" y="737" width="98" height="40" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="963" y="762" text-anchor="middle" class="small">Cancel</text>
+  <rect x="1022" y="737" width="178" height="40" rx="8" fill="#695172"/><text x="1111" y="762" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">Save entry</text>
+  <text x="54" y="832" class="tiny muted">Proposed presentation. Salary must be omitted from unauthorized data responses, not merely masked here.</text>
+</svg>
