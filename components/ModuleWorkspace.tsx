@@ -87,7 +87,13 @@ export default function ModuleWorkspace({ section, children }: ModuleWorkspacePr
               ? "/customers"
               : module.code === "product"
                 ? "/products"
-                : null;
+                : module.code === "human_resources"
+                  ? "/employees"
+                  : module.code === "sales"
+                    ? "/sales"
+                    : module.code === "reports"
+                      ? "/reports"
+                      : null;
             return href ? (
               <Link
                 className={`${styles.navLink} ${section === module.name ? styles.navLinkActive : ""}`}
@@ -100,6 +106,15 @@ export default function ModuleWorkspace({ section, children }: ModuleWorkspacePr
               </Link>
             ) : null;
           })}
+          {data.role === "superadmin" && (
+            <>
+              <p className={styles.navLabel}>SECURITY</p>
+              <Link className={styles.navLink} href="/audit">
+                <span className={styles.navIcon} aria-hidden="true">AU</span>
+                Audit history
+              </Link>
+            </>
+          )}
           {isManager && (
             <>
               <p className={styles.navLabel}>ADMINISTRATION</p>
