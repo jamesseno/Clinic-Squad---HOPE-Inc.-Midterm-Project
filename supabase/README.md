@@ -16,6 +16,7 @@ Supabase migration files are in `supabase/migrations/` and are applied in timest
 - `20261121002205_password_reset_token.sql` adds server-managed, hashed password reset tokens linked to application users.
 - `20261121005600_role_permission_mapping.sql` adds the role-to-right mapping table.
 - `20261122130000_sprint2_customer_product_access.sql` adds Customer/Product/Price row-level access policies, action guards, an as-of price lookup, and supporting indexes.
+- `20261125100000_s3_job_history_effective_date_unique.sql` prevents duplicate active job-history rows for the same employee and effective date.
 - `20261121_audit_user_jwt_actor.sql` attributes audit rows to the signed-in Supabase Auth user.
 
 ## Applying everything through the SQL Editor
@@ -183,6 +184,7 @@ psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f supabase/tests/s1_dba_06_audit_user_t
 | `s1_dba_06_audit_user_test.sql` | `audit_user()` / `audit_log.action_by` record the logged-in user (S1-DBA-06) |
 | `s1_dev_07_user_rights_audit_test.sql` | Per-user rights grants, revocations, restores, and their audit rows (S1-DEV-07) |
 | `s2_customer_product_access_test.sql` | Customer/Product/Price rights, RLS denial, soft delete and restore, price-as-of (Sprint 2) |
+| `s3_job_history_effective_date_test.sql` | Unique active employee/effective-date pairs while retaining out-of-order historical entries (Sprint 3) |
 
 ## How the audit trail identifies the user
 

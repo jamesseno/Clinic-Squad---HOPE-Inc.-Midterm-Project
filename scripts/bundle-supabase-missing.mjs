@@ -13,6 +13,7 @@ const needed = [
   "20261121130000_user_rights_audit_and_rpc.sql",
   "20261122130000_sprint2_customer_product_access.sql",
   "20261124090000_sprint2_deleted_view_rights.sql",
+  "20261125100000_s3_job_history_effective_date_unique.sql",
 ];
 
 const parts = [
