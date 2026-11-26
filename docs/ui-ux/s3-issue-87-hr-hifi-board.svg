@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1040" role="img" aria-labelledby="title desc">
+  <title id="title">HR high-fidelity screen set</title>
+  <desc id="desc">A cohesive Hope HR mockup board showing catalog list, employee list and profile, job history, and a labeled employee form with role and privacy cues.</desc>
+  <defs><style>
+    text{font-family:"DM Sans","Segoe UI",sans-serif;fill:#342a39}.heading{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}.muted{fill:#786f7b}.small{font-size:12px}.tiny{font-size:10px}.body{font-size:13px}.label{font-size:12px;font-weight:700}.line{stroke:#e9e2dd}
+  </style></defs>
+  <rect width="1440" height="1040" fill="#faf8f3"/>
+  <text x="42" y="55" class="heading" font-size="35">HOPE Human Resources</text>
+  <text x="42" y="82" class="small muted">High-fidelity handoff board · shared navigation, typography, surfaces, focus and status vocabulary</text>
+  <rect x="1180" y="31" width="218" height="34" rx="17" fill="#f1eaf2"/><text x="1289" y="53" text-anchor="middle" class="small" fill="#695172" font-weight="700">ADMIN VIEW · RIGHTS APPLY</text>
+  <rect x="36" y="112" width="668" height="408" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="60" y="148" class="heading" font-size="23">Departments &amp; Jobs</text><text x="60" y="170" class="small muted">Human Resources / Catalogs</text>
+  <rect x="60" y="189" width="220" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="74" y="211" class="small muted">Search code or name</text>
+  <rect x="292" y="189" width="228" height="34" rx="7" fill="#faf8f3" stroke="#e9e2dd"/><text x="308" y="211" class="small">Active　 Inactive　 All</text>
+  <rect x="530" y="189" width="150" height="34" rx="8" fill="#695172"/><text x="605" y="211" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">＋ Add department</text>
+  <rect x="60" y="238" width="620" height="28" rx="5" fill="#faf8f3"/><text x="72" y="257" class="tiny muted" font-weight="700">CODE</text><text x="152" y="257" class="tiny muted" font-weight="700">NAME</text><text x="412" y="257" class="tiny muted" font-weight="700">STATUS</text><text x="520" y="257" class="tiny muted" font-weight="700">ACTIONS</text>
+  <text x="72" y="292" class="body">FIN</text><text x="152" y="292" class="body">Finance</text><rect x="408" y="276" width="58" height="20" rx="10" fill="#e9f4ed"/><text x="437" y="290" class="tiny" text-anchor="middle" fill="#32735b">Active</text><text x="520" y="292" class="small" fill="#695172">Edit　 Archive</text>
+  <path d="M60 310H680" class="line"/>
+  <text x="72" y="338" class="body">OPS</text><text x="152" y="338" class="body">Operations</text><rect x="408" y="322" width="58" height="20" rx="10" fill="#e9f4ed"/><text x="437" y="336" class="tiny" text-anchor="middle" fill="#32735b">Active</text><text x="520" y="338" class="small" fill="#695172">Edit　 Archive</text>
+  <rect x="60" y="376" width="620" height="104" rx="9" fill="#faf8f3"/><text x="78" y="404" class="label">Jobs uses the same catalog pattern</text><text x="78" y="429" class="small muted">Job code · Description · status · rights-dependent actions</text><text x="78" y="455" class="small" fill="#695172">Open Jobs →</text>
+  <rect x="736" y="112" width="668" height="408" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="760" y="148" class="heading" font-size="23">Employees</text><text x="760" y="170" class="small muted">Search · Gender · Admin-only status scope</text>
+  <rect x="760" y="189" width="300" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="774" y="211" class="small muted">Search employee no. or name</text>
+  <rect x="1072" y="189" width="120" height="34" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="1084" y="211" class="small">Gender ▾</text>
+  <rect x="1204" y="189" width="176" height="34" rx="8" fill="#695172"/><text x="1292" y="211" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">＋ Add employee</text>
+  <rect x="760" y="238" width="620" height="28" rx="5" fill="#faf8f3"/><text x="772" y="257" class="tiny muted" font-weight="700">EMPLOYEE</text><text x="978" y="257" class="tiny muted" font-weight="700">CURRENT ROLE</text><text x="1160" y="257" class="tiny muted" font-weight="700">STATUS</text><text x="1260" y="257" class="tiny muted" font-weight="700">ACTIONS</text>
+  <text x="772" y="292" class="body" font-weight="700">Morgan Lee</text><text x="978" y="292" class="body">Coordinator</text><text x="1160" y="292" class="small" fill="#32735b">Active</text><text x="1260" y="292" class="small" fill="#695172">Profile</text>
+  <path d="M760 310H1380" class="line"/>
+  <text x="772" y="338" class="body" font-weight="700">Taylor Rivera</text><text x="978" y="338" class="body">Analyst</text><text x="1160" y="338" class="small" fill="#32735b">Active</text><text x="1260" y="338" class="small" fill="#695172">Profile</text>
+  <rect x="760" y="376" width="620" height="104" rx="9" fill="#fbf3dd"/><text x="778" y="405" class="label" fill="#8a641c">SENSITIVE FIELDS</text><text x="778" y="431" class="small">Birth date and salary stay out of list summaries.</text><text x="778" y="455" class="small muted">Admin status/Stamp metadata is not shown to standard Users.</text>
+  <rect x="36" y="544" width="668" height="446" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="60" y="580" class="heading" font-size="23">Employee profile</text><text x="60" y="602" class="small muted">Morgan Lee · E001 · Active</text>
+  <text x="60" y="643" class="tiny muted">EMPLOYMENT</text><text x="60" y="666" class="body">Hire date　Mar 12, 2022</text><text x="60" y="692" class="body">Separation　Not separated</text>
+  <rect x="60" y="712" width="620" height="55" rx="9" fill="#fbf3dd"/><text x="78" y="736" class="small" fill="#8a641c" font-weight="700">Birth date · Sensitive</text><text x="78" y="755" class="tiny muted">Only returned and displayed when authorized.</text>
+  <text x="60" y="804" class="heading" font-size="19">Current assignment</text><rect x="60" y="817" width="620" height="55" rx="8" fill="#f1eaf2"/><text x="78" y="841" class="body" font-weight="700">Coordinator · Operations</text><text x="78" y="860" class="tiny muted">Effective Jan 15, 2025</text>
+  <rect x="60" y="895" width="220" height="38" rx="8" fill="#695172"/><text x="170" y="919" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">View job history →</text>
+  <text x="298" y="919" class="tiny muted">Control hidden without specific right</text>
+  <rect x="736" y="544" width="668" height="446" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="760" y="580" class="heading" font-size="23">Job History</text><text x="760" y="602" class="small muted">Current assignment first · past entries newest to oldest</text>
+  <rect x="1240" y="563" width="140" height="34" rx="8" fill="#695172"/><text x="1310" y="585" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">＋ Add entry</text>
+  <rect x="760" y="624" width="620" height="72" rx="9" fill="#f1eaf2"/><rect x="778" y="641" width="78" height="20" rx="10" fill="#695172"/><text x="817" y="655" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">CURRENT</text><text x="872" y="652" class="body" font-weight="700">Coordinator</text><text x="872" y="677" class="small muted">Operations · Jan 15, 2025</text><text x="1255" y="652" class="tiny muted">SALARY</text><text x="1255" y="676" class="small muted">Restricted</text>
+  <circle cx="790" cy="735" r="6" fill="#695172"/><text x="812" y="735" class="tiny muted">JUN 01, 2023</text><text x="812" y="758" class="body">HR Assistant · People &amp; Culture</text><text x="1255" y="758" class="small muted">•••• Restricted</text>
+  <path d="M812 778H1380" class="line"/>
+  <circle cx="790" cy="810" r="6" fill="#b88d53"/><text x="812" y="810" class="tiny muted">MAR 12, 2022</text><text x="812" y="833" class="body">Administrative Associate · Operations</text><text x="1255" y="833" class="small muted">•••• Restricted</text>
+  <rect x="760" y="865" width="620" height="65" rx="9" fill="#faf8f3"/><text x="778" y="890" class="small" font-weight="700">Role-aware design</text><text x="778" y="911" class="tiny muted">History and salary are independently permission-gated; server/RLS must enforce.</text>
+</svg>
