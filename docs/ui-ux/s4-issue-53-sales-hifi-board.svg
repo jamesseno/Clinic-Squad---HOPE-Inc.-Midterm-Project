@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1180" role="img" aria-labelledby="title desc">
+  <title id="title">Sales, payment, reports, and audit high-fidelity mockup board</title>
+  <desc id="desc">Cohesive Hope application screen board with Sales and line items, payment and balance, report catalog/results, and Superadmin audit viewer. Sensitive values and actions have permission notes.</desc>
+  <defs><style>
+    text{font-family:"DM Sans","Segoe UI",sans-serif;fill:#342a39}.heading{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}.muted{fill:#786f7b}.small{font-size:12px}.tiny{font-size:10px}.body{font-size:13px}.label{font-size:12px;font-weight:700}.line{stroke:#e9e2dd}
+  </style></defs>
+  <rect width="1600" height="1180" fill="#faf8f3"/>
+  <text x="44" y="57" class="heading" font-size="37">HOPE · Sales, Payments &amp; Insights</text>
+  <text x="44" y="86" class="small muted">High-fidelity handoff board · shared surfaces, typography, focus, status and permission vocabulary</text>
+  <rect x="1310" y="34" width="244" height="34" rx="17" fill="#f1eaf2"/><text x="1432" y="56" text-anchor="middle" class="small" fill="#695172" font-weight="700">ROLE-AWARE · PROPOSED</text>
+  <!-- Sales panel -->
+  <rect x="36" y="120" width="748" height="478" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="60" y="159" class="heading" font-size="24">Sales · TX-1042</text><text x="60" y="182" class="small muted">Oct 14, 2026 · Northside Clinic · Assigned employee</text>
+  <rect x="60" y="202" width="700" height="55" rx="9" fill="#faf8f3"/>
+  <text x="78" y="225" class="tiny muted">TRANSACTION NO.</text><text x="78" y="246" class="body" font-weight="700">Generated on save*</text>
+  <text x="302" y="225" class="tiny muted">STATUS</text><text x="302" y="246" class="small" fill="#32735b">Active</text>
+  <text x="430" y="225" class="tiny muted">CUSTOMER</text><text x="430" y="246" class="small">Northside Clinic</text>
+  <text x="60" y="291" class="heading" font-size="20">Line items</text>
+  <rect x="60" y="306" width="700" height="64" rx="8" fill="#f1eaf2"/>
+  <text x="76" y="330" class="tiny muted">PRODUCT</text><text x="76" y="354" class="small">Select active priced product ▾</text>
+  <text x="384" y="330" class="tiny muted">QTY</text><text x="384" y="354" class="small">1</text>
+  <rect x="618" y="320" width="124" height="36" rx="8" fill="#695172"/><text x="680" y="343" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">＋ Add item</text>
+  <rect x="60" y="388" width="700" height="28" rx="5" fill="#faf8f3"/><text x="74" y="407" class="tiny muted" font-weight="700">PRODUCT</text><text x="430" y="407" class="tiny muted" font-weight="700">PRICE AT SALE</text><text x="570" y="407" class="tiny muted" font-weight="700">QTY</text><text x="650" y="407" class="tiny muted" font-weight="700">TOTAL</text>
+  <text x="74" y="447" class="small">PRD-014 · Product description</text><text x="430" y="447" class="small">$24.00</text><text x="570" y="447" class="small">2</text><text x="650" y="447" class="small" font-weight="700">$48.00</text>
+  <path d="M60 463H760" class="line"/><text x="560" y="500" class="small muted">Sale total</text><text x="742" y="500" text-anchor="end" class="body" font-weight="700">$48.00</text>
+  <text x="60" y="543" class="tiny muted">*Generated number is a design assumption; confirm with API owner. Rights control each action.</text>
+  <!-- Payment panel -->
+  <rect x="816" y="120" width="748" height="478" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="840" y="159" class="heading" font-size="24">Payment · Sale TX-1042</text><text x="840" y="182" class="small muted">Northside Clinic · record only when payment right permits</text>
+  <rect x="840" y="202" width="700" height="100" rx="10" fill="#f1eaf2"/>
+  <text x="860" y="229" class="tiny muted">TOTAL</text><text x="860" y="270" class="heading" font-size="26">$1,250.00</text>
+  <text x="1080" y="229" class="tiny muted">PAID</text><text x="1080" y="270" class="heading" font-size="26">$500.00</text>
+  <text x="1300" y="229" class="tiny muted">REMAINING</text><text x="1300" y="270" class="heading" font-size="26" fill="#695172">$750.00</text>
+  <text x="840" y="338" class="heading" font-size="20">Record payment</text>
+  <text x="840" y="369" class="label">OR No. *</text><rect x="840" y="378" width="200" height="40" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="854" y="403" class="small muted">Receipt number</text>
+  <text x="1054" y="369" class="label">Date *</text><rect x="1054" y="378" width="200" height="40" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="1068" y="403" class="small muted">YYYY-MM-DD</text>
+  <text x="1268" y="369" class="label">Amount *</text><rect x="1268" y="378" width="128" height="40" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="1282" y="403" class="small muted">$0.00</text>
+  <rect x="1408" y="378" width="112" height="40" rx="8" fill="#695172"/><text x="1464" y="403" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">Save</text>
+  <text x="840" y="460" class="heading" font-size="19">Payment history</text><text x="840" y="489" class="small">OR-218　·　Oct 20, 2026　·　$500.00　·　Active</text>
+  <rect x="840" y="520" width="700" height="46" rx="8" fill="#fbf3dd"/><text x="858" y="540" class="tiny" fill="#8a641c" font-weight="700">NO PAYMENT VIEW RIGHT</text><text x="858" y="557" class="tiny muted">Hide this section and all balance/receipt data.</text>
+  <!-- Reports panel -->
+  <rect x="36" y="620" width="748" height="488" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="60" y="659" class="heading" font-size="24">Reports · Top Products</text><text x="60" y="682" class="small muted">Seven available report cards are independently permission-scoped.</text>
+  <rect x="60" y="704" width="700" height="96" rx="10" fill="#faf8f3"/>
+  <text x="78" y="731" class="tiny muted" font-weight="700">FILTERS</text><text x="78" y="759" class="small">From [date]　 To [date]　 Top N [10]</text>
+  <rect x="568" y="730" width="84" height="38" rx="8" fill="#695172"/><text x="610" y="754" text-anchor="middle" class="tiny" fill="#fffefa" font-weight="700">Apply</text>
+  <rect x="660" y="730" width="82" height="38" rx="8" fill="#fffefa" stroke="#e9e2dd"/><text x="701" y="754" text-anchor="middle" class="tiny">Print</text>
+  <rect x="60" y="820" width="700" height="30" rx="5" fill="#faf8f3"/><text x="76" y="840" class="tiny muted" font-weight="700">PRODUCT</text><text x="460" y="840" class="tiny muted" font-weight="700">QUANTITY</text><text x="630" y="840" class="tiny muted" font-weight="700">TOTAL</text>
+  <text x="76" y="879" class="small">Product example</text><text x="460" y="879" class="small">24</text><text x="630" y="879" class="small">$576.00</text>
+  <rect x="60" y="910" width="700" height="94" rx="9" fill="#fbf3dd"/><text x="78" y="936" class="tiny" fill="#8a641c" font-weight="700">EMPLOYEE JOB HISTORY</text><text x="78" y="959" class="small">Employee selector · date range · salary only with separate right</text><text x="78" y="982" class="tiny muted">Print/PDF output follows the same field access rules.</text>
+  <!-- Audit panel -->
+  <rect x="816" y="620" width="748" height="488" rx="14" fill="#fffefa" stroke="#e9e2dd"/>
+  <text x="840" y="659" class="heading" font-size="24">Audit history</text>
+  <rect x="1284" y="636" width="256" height="30" rx="15" fill="#fbf3dd"/><text x="1412" y="656" text-anchor="middle" class="tiny" fill="#8a641c" font-weight="700">SUPERADMIN ONLY · READ ONLY</text>
+  <text x="840" y="687" class="small muted">Filter date, action, table and actor · expandable policy-redacted changes</text>
+  <rect x="840" y="710" width="180" height="38" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="854" y="734" class="small muted">Date range</text>
+  <rect x="1032" y="710" width="142" height="38" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="1046" y="734" class="small">Action ▾</text>
+  <rect x="1186" y="710" width="142" height="38" rx="7" fill="#fffefa" stroke="#e9e2dd"/><text x="1200" y="734" class="small muted">Table</text>
+  <rect x="1340" y="710" width="180" height="38" rx="7" fill="#695172"/><text x="1430" y="734" text-anchor="middle" class="small" fill="#fffefa" font-weight="700">Apply filters</text>
+  <rect x="840" y="776" width="680" height="32" rx="5" fill="#faf8f3"/><text x="854" y="797" class="tiny muted" font-weight="700">WHEN</text><text x="1010" y="797" class="tiny muted" font-weight="700">ACTION</text><text x="1184" y="797" class="tiny muted" font-weight="700">RECORD</text><text x="1324" y="797" class="tiny muted" font-weight="700">DETAIL</text>
+  <text x="854" y="840" class="small">Oct 22</text><text x="1010" y="840" class="small">EDIT · employees</text><text x="1184" y="840" class="small">E001</text><text x="1324" y="840" class="small" fill="#695172">Show changes ▸</text>
+  <path d="M840 858H1520" class="line"/>
+  <text x="854" y="890" class="small">Oct 21</text><text x="1010" y="890" class="small">ADD · payments</text><text x="1184" y="890" class="small">OR-218</text><text x="1324" y="890" class="small" fill="#695172">Show changes ▸</text>
+  <rect x="840" y="930" width="680" height="74" rx="9" fill="#faf8f3"/><text x="858" y="955" class="tiny" font-weight="700">PRIVACY / RIGHTS</text><text x="858" y="978" class="tiny muted">Hide unauthorized fields in responses, not just in this screen.</text>
+  <text x="36" y="1147" class="tiny muted">Proposed static mockup board. Verify transaction generation, report columns, business rules and role rights with the API/data owners.</text>
+</svg>
